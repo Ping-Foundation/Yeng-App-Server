@@ -1,2 +1,2 @@
-# Yengg-App-Server
-This is the Server Module for Yengg App.
+# Yeng-App-Server
+This is the Server Module for Yeng App.
