@@ -1,0 +1,17 @@
+//
+   Created by navina on 11/10/16.
+extends layout
+block content
+    h1 Userhome
+    h2= name
+    p Email: #{email}
+        h3 Actions
+        ul
+            li
+                a(href="/project/new") Add News & Updates
+            li
+                a(href="/user/edit") View News & Updates
+            li
+                a(href="/user/delete") Add New Admin
+            li
+                a(href="/logout") View Admins
