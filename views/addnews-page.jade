@@ -1,0 +1,32 @@
+//
+   Created by navina on 11/10/16.
+extends layout
+block content
+    h1 Add News And Updates
+    form(id="addnewsandupdates",method="post",action="/news/add")
+      table
+          tr
+            td
+                label(for="Tittle") Tittle
+                td
+                    input(type="text", name="Tittle", id="Tittle")
+          tr
+            td
+                label(for="News") News
+                td
+                    textarea(type="text", name="News", id="News")
+          tr
+            td
+                label(for="DisplayDate") DisplayDate
+                td
+                    input(type="text", name="DisplayDate", id="DisplayDate")
+          tr
+            td
+                label(for="EndDate") EndDate
+                td
+                    input(type="text", name="EndDate", id="EndDate")
+          tr
+            td
+                input(type="submit", value="Submit")
+
+

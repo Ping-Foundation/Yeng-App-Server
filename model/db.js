@@ -35,7 +35,7 @@ var adminSchema = new mongoose.Schema({
     ModifiedOn: Date,
     LastLogin: Date
 });
-var newsandupdateSchema = new mongoose.Schema({
+var newsSchema = new mongoose.Schema({
     Tittle: String,
     News:String,
     CreatedOn: { type: Date, default: Date.now },
@@ -46,4 +46,4 @@ var newsandupdateSchema = new mongoose.Schema({
 
 
 mongoose.model( 'admin', adminSchema );
-mongoose.model( 'newsandupdateSchema', newsandupdateSchema);
+mongoose.model( 'news', newsSchema);
