@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var db=require('./model/db');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
@@ -26,8 +26,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', admin.login);//first load login page
 app.use('/users', users);
-
-
+app.post('/login',admin.doLogin);
+app.get('/adminhome', admin.index);
 
 
 
