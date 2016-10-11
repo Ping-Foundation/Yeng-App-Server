@@ -2,19 +2,19 @@
  * Created by navina on 11/10/16.
  */
 var mongoose=require('mongoose');
-var Admin=mongoose.model('admin');
+var admin=mongoose.model('admin');
 
 
 
 
 // GET login page
 exports.login = function (req, res) {
-    res.render('login-page', {title: 'Log in'})
+    res.render('login-page', {title: 'Log in'});
 };
 exports.doLogin=function (req,res) {
     console.log("entered into doLogin");
     if(req.body.Email){
-        Admin.findOne(
+        admin.findOne(
             {'Email' : req.body.Email,'Password':req.body.Password},
             function (err,admin) {
                 if (!err) {
@@ -24,7 +24,7 @@ exports.doLogin=function (req,res) {
                     }else{
                         console.log("found admin");
                         req.session.admin = {
-                            "email": admin.email,
+                            "email": admin.Email,
                             "_id": admin._id
                         };
                         req.session.loggedIn=true;
