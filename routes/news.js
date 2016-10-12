@@ -41,8 +41,13 @@ exports.doAdd=function (req,res) {
 };
 exports.view=function (req,res) {
     news.find(function(err, news) {
+        keys=Object.keys(news);
+        l=keys.length;
+        console.log(keys);
+        console.log(l);
         res.render('viewnews-page', {
-            news: news
+            news: news,
+            l:l
             // Tittle:news.Tittle,
             // Content:news.News
 

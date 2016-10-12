@@ -10,4 +10,11 @@
 block content
     h1 News And Updates
     form(id="NewsAndUpdates", method="get", action="")
-        li=news
+        label=news[0].Tittle
+        - for (var i = 0; i < "#{l}"; ++i)
+            li=news[i].Tittle
+
+        //i=Object.keys(news).length;
+        //li=news[0].Tittle
+        //li=news[1].Tittle
+
