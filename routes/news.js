@@ -3,7 +3,7 @@
  */
 var mongoose=require('mongoose');
 var news=mongoose.model('news');
-var dbURI='mongodb://localhost/Yeng';
+
 
 
 var collections = ['news'];
@@ -40,9 +40,10 @@ exports.doAdd=function (req,res) {
     })
 };
 exports.view=function (req,res) {
-    dbURI.find(function(err, news) {
+    news.find(function(err, news) {
         res.render('viewnews-page', {
             news: news
+
         })
     })
 
