@@ -43,6 +43,8 @@ exports.view=function (req,res) {
     news.find(function(err, news) {
         res.render('viewnews-page', {
             news: news
+            // Tittle:news.Tittle,
+            // Content:news.News
 
         })
     })

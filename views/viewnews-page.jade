@@ -1,9 +1,13 @@
 //
    Created by navina on 11/10/16.
 
-for news in news
-    .row
-        .twelve.columns
-            .panel
-                li= news.text
-
+//for news in news
+//    .row
+//        .twelve.columns
+//            .panel
+//                li= news.title
+//
+block content
+    h1 News And Updates
+    form(id="NewsAndUpdates", method="get", action="")
+        li=news
