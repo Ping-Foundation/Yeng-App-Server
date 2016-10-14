@@ -1,0 +1,13 @@
+//
+   Created by navina on 14/10/16.
+extends layout
+block content
+    h1= title
+    form(id="frmAdminProfile",method="post",action="/admin/new")
+        label(for="Email") Email
+        input(type="email", name="Email", id="Email")
+        label(for="Password") Password
+        input(type="Password", name="Password", id="Password")
+        label(for="RePassword") Re-Enter Password
+        input(type="Password", name="RePassword", id="RePassword")
+        input(type="submit", value="#{buttonText}")

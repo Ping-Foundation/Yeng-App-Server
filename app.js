@@ -32,6 +32,12 @@ app.get('/news/add',news.add);
 app.post('/news/add',news.doAdd);
 app.get('/news/view',news.view);
 app.get('/news/detailedview/:id',news.detailedview);
+// Add admin profile
+app.get('/admin/new', admin.create);
+// Create new user form
+app.post('/admin/new', admin.doCreate);
+
+
 
 
 // catch 404 and forward to error handler

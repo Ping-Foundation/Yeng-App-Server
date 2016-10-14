@@ -61,4 +61,32 @@ exports.index = function (req, res,next) {
         res.redirect('/');
     }
 };
+exports.create= function (req,res) {
+    res.render('addadmin', {
+        title: 'Create admin',
+        buttonText: "Add"
+    });
+};
+exports.doCreate=function (req,res) {
+    admin.create({
+        Email: req.body.Email,
+        Password:req.body.Password,
+        ModifiedOn: Date.now(),
+        LastLogin: Date.now()
+    },function (err,admin) {
+        if (err){
+            console.log(err);
+            if(err.code===11000){
+                res.redirect( '/admin/new?exists=true' );
+            }else{
+                res.redirect('/?error=true');
+            }
+        }else {
+            //sucess
+            console.log("admin created and saved: " + admin);
+            res.redirect( '/adminhome' );
+        }
 
+    })
+
+};
