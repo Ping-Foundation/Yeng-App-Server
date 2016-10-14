@@ -31,6 +31,7 @@ app.get('/adminhome', admin.index);
 app.get('/news/add',news.add);
 app.post('/news/add',news.doAdd);
 app.get('/news/view',news.view);
+app.get('/news/detailedview/:id',news.detailedview);
 
 
 // catch 404 and forward to error handler

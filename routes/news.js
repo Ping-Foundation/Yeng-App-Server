@@ -47,11 +47,33 @@ exports.view=function (req,res) {
         console.log(l);
         res.render('viewnews-page', {
             news: news,
-            l:l
-            // Tittle:news.Tittle,
-            // Content:news.News
-
+            keys:keys
         })
     })
+
+};
+exports.detailedview=function (req,res) {
+    console.log(req.params.id);
+    news.findOne({_id:req.params.id},function (err,news){
+        if(!err){
+            if (!news){
+                console.log("no news");
+                res.redirect('/news?404=error');
+            }else {
+                console.log("news found");
+                res.render('detailed-news-view',{
+                        "Tittle":news.Tittle,
+                        "News":news.News,
+                        "Startdate":news.DisplayDate,
+                        "Enddate":news.EndDate
+                    }
+                )
+            }
+
+        }else {
+            console.log(err);
+            res.redirect('/news?404=error');
+        }
+    });
 
 };

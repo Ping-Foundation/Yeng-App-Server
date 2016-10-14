@@ -1,0 +1,19 @@
+//Created by navina on 14/10/16.
+extends layout
+block content
+    h1 #{Tittle}
+    p #{News}
+    table
+        tr
+            td
+                label Start date:
+                label "#{Startdate}"
+        tr
+            td
+                label End date:
+                label "#{Enddate}
+        tr
+            td
+                input(type="submit", value="Edit")
+            td
+                input(type="submit", value="Delete")

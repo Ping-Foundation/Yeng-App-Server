@@ -1,20 +1,10 @@
 //
    Created by navina on 11/10/16.
 
-//for news in news
-//    .row
-//        .twelve.columns
-//            .panel
-//                li= news.title
-//
+
 block content
     h1 News And Updates
     form(id="NewsAndUpdates", method="get", action="")
-        label=news[0].Tittle
-        - for (var i = 0; i < "#{l}"; ++i)
-            li=news[i].Tittle
-
-        //i=Object.keys(news).length;
-        //li=news[0].Tittle
-        //li=news[1].Tittle
-
+        each key in keys
+            a(href="/news/detailedview/"+news[key]._id)=news[key].Tittle
+            br
