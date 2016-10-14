@@ -90,3 +90,15 @@ exports.doCreate=function (req,res) {
     })
 
 };
+exports.view=function (req,res) {
+    admin.find(function (err,admin) {
+        keys=Object.keys(admin);
+        console.log(keys);
+        res.render('viewadmin-page', {
+            admin: admin,
+            keys:keys
+        })
+
+    })
+
+};

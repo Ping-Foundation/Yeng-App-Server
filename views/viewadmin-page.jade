@@ -1,0 +1,24 @@
+//
+   Created by navina on 14/10/16
+extends layout
+block content
+    h1 Admin Details
+    form(id="NewsAndUpdates", method="get", action="")
+        each key in keys
+           br
+           label Email:
+           label= admin[key].Email
+           br
+           label Created On:
+           label= admin[key].CreatedOn
+           br
+           label Modified On:
+           label= admin[key].ModifiedOn
+           br
+           label Last Login
+           label= admin[key].LastLogin
+           br
+           input(type="submit", value=" Change Password")
+           br
+           input(type="submit", value="Delete")
+           br

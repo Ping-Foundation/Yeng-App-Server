@@ -36,6 +36,7 @@ app.get('/news/detailedview/:id',news.detailedview);
 app.get('/admin/new', admin.create);
 // Create new user form
 app.post('/admin/new', admin.doCreate);
+app.get('/admin/view',admin.view);
 
 
 
