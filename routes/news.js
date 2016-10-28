@@ -52,6 +52,19 @@ exports.view=function (req,res) {
     })
 
 };
+exports.getnews=function (req,res) {
+    news.find(function(err, news) {
+        if(!err){
+            console.log(news);
+            res.json(news);
+        }else{
+            console.log(err);
+            res.json({"status":"error", "error":"Error finding news"});
+        }
+
+    })
+
+};
 exports.detailedview=function (req,res) {
     console.log(req.params.id);
     news.findOne({_id:req.params.id},function (err,news){
@@ -76,4 +89,16 @@ exports.detailedview=function (req,res) {
         }
     });
 
+};
+exports.getspecificnews=function (req,res) {
+    news.findOne({_id:req.params.id},function (err,news) {
+        if(!err){
+            console.log(news);
+            res.json(news);
+        }else{
+            console.log(err);
+            res.json({"status":"error", "error":"Error finding news"});
+        }
+
+    })
 };

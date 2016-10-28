@@ -1,8 +1,11 @@
 //Created by navina on 14/10/16.
+
 extends layout
 block content
+    script(type='text/javascript' ,src='deletenews.js').
     h1 #{Tittle}
     p #{News}
+
     table
         tr
             td
@@ -16,4 +19,5 @@ block content
             td
                 input(type="submit", value="Edit")
             td
-                input(type="submit", value="Delete")
+
+                input(type="submit", value="Delete", onclick='deletenews()')
