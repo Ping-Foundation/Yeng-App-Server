@@ -75,6 +75,7 @@ exports.detailedview=function (req,res) {
             }else {
                 console.log("news found");
                 res.render('detailed-news-view',{
+                        "_id":news._id,
                         "Tittle":news.Tittle,
                         "News":news.News,
                         "Startdate":news.DisplayDate,
@@ -101,4 +102,19 @@ exports.getspecificnews=function (req,res) {
         }
 
     })
+};
+exports.delete=function (req,res) {
+
+     if (req.body._id){
+         User.findByIdAndRemove(req.body._id,function (err,news) {
+             if (err){
+                 console.log(err);
+                 return res.redirect('/news?error=deleting');
+             }else {
+                 console.log("news deleted");
+                 res.redirect('/news/view')
+             }
+
+         })
+    }
 };

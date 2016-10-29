@@ -3,18 +3,31 @@
  */
 
 
-function deletenews (req,res) {
-    console.log("Entered into deletenews");
-    // if (req.body._id){
-    //     User.findByIdAndRemove(req.body._id,function (err,news) {
-    //         if (err){
-    //             console.log(err);
-    //             return res.redirect('/news?error=deleting');
-    //         }else {
-    //             console.log("news deleted");
-    //             res.redirect('/news/view')
-    //         }
-    //
-    //     })
-    // }
+function deletenews () {
+    $.ajax('/news/delete/' + newsID, {
+        dataType: 'json',
+        error: function(){
+            console.log("ajax error :(");
+        },
+        success: function (data) {
+            if (data.length > 0) {
+                if (data.status && data.status === 'error'){
+                    strHTMLOutput = "<li>Error: " + data.error + "</li>";
+                } else {
+                    var intItem,
+                        totalItems = data.length,
+                        arrLI = [];
+                    for (intItem = totalItems - 1; intItem >= 0; intItem--) {
+                        arrLI.push('<a href="/project/' + data[intItem]._id + '">'
+                            + data[intItem].projectName + "</a>");
+                    }
+                    strHTMLOutput = "<li>" + arrLI.join('</li><li>') + "</li>";
+                }
+            }else{
+                strHTMLOutput = "<li>You haven't created any projects yet</li>";
+            }
+            $('#myprojects').html(strHTMLOutput);
+        }
+    });
+
 }

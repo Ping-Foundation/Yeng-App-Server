@@ -2,10 +2,13 @@
 
 extends layout
 block content
-    script(type='text/javascript' ,src='deletenews.js').
+
     h1 #{Tittle}
     p #{News}
-
+    script(type='text/javascript').
+        console.log("Entered into script");
+        var newsID = '#{_id}';
+    script(src='/javascripts/deletenews.js')
     table
         tr
             td
