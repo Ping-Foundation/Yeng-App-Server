@@ -16,7 +16,7 @@ block content
                 label "#{Enddate}
         tr
             td
-                form(method='get' action='/news/edit')
+                form(method='get' action='/news/edit/#{_id}')
                     input(type='hidden' name='id' value='#{_id}')
                     input(type="submit", value="Edit")
             td

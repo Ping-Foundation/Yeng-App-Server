@@ -121,3 +121,61 @@ exports.delete=function (req,res) {
          })
     }
 };
+exports.edit = function(req, res){
+    if (req.session.loggedIn !== true){
+        res.redirect('/');
+    }else{
+        news.findOne({'_id':req.params.id}, function (err,news) {
+            if(err){
+                console.log(err);
+                return res.redirect('/user?error=findingnews');
+            }
+            else {
+                res.render('editnews', {
+                    _id:news._id,
+                    Tittle: news.Tittle,
+                    News:news.News,
+                    DisplayDate:news.DisplayDate,
+                    EndDate:news.EndDate
+                });
+            }
+        });
+
+
+    }
+};
+exports.doEdit=function (req,res) {
+    console.log(req.body.id);
+    news.findById( req.body.id,
+        function (err, news) {
+            console.log(news);
+            doEditSave (req, res, err, news);
+        }
+    );
+};
+var doEditSave = function(req, res, err, news) {
+    if(err){
+        console.log(err);
+        res.redirect( '/user?error=finding');
+    } else {
+        news.Tittle = req.body.Tittle;
+        news.News = req.body.News;
+        news.modifiedOn = Date.now();
+        news.DisplayDate=req.body.DisplayDate;
+        news.EndDate=req.body.EndDate;
+        news.save(
+            function (err, news) {
+                onEditSave (req, res, err, news);
+            }
+        );
+    }
+};
+var onEditSave = function (req, res, err, news) {
+    if(err){
+        console.log(err);
+        res.redirect( '/user?error=saving');
+    } else {
+        console.log('news updated');
+        res.redirect('/adminhome')
+    }
+};

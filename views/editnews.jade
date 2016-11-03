@@ -1,0 +1,29 @@
+//
+   Created by navina on 3/11/16.
+
+extends layout
+block content
+
+    h1  Edit News
+    form(method='post' action='/news/edit')
+        table
+            tr
+                td
+                    label Tittle
+                    input(type='hidden' name='id' value='#{_id}')
+                    input(type="text", name="Tittle", id="Tittle",value="#{Tittle}")
+            tr
+                td
+                    label News
+                    input(type="text", name="News", id="News",value="#{News}")
+            tr
+                td
+                    label DisplayDate:
+                    input(type="text", name="DisplayDate", id="DisplayDate",value="#{DisplayDate}")
+            tr
+                td
+                    label End date:
+                    input(type="text", name="EndDate", id="EndDate",value="#{EndDate}")
+            tr
+                td
+                    input(type="submit", value="Save")

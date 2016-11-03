@@ -27,6 +27,8 @@ app.use(session({secret: 'secretkey'}));
 app.get('/getnews',news.getnews);
 app.get('/getspecificnews/:id',news.getspecificnews);
 app.get('/news/delete/:id',news.delete);
+app.get('/news/edit/:id',news.edit);
+app.post('/news/edit',news.doEdit);
 
 app.get('/', admin.login);//first load login page
 app.post('/login', admin.doLogin);
