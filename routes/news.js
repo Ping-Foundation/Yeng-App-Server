@@ -19,8 +19,8 @@ exports.doAdd=function (req,res) {
         Tittle: req.body.Tittle,
         News:req.body.News,
         CreatedOn: Date.now(),
-        DisplayDate:req.body.DisplayDate,
-        EndDate:req.body.EndDate,
+        DisplayDate:Date.now(),
+        EndDate:Date.now(),
         ModifiedOn: Date.now()
     },function (err,news) {
         if(err){

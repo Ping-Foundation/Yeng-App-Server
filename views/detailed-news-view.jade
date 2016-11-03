@@ -17,9 +17,7 @@ block content
         tr
             td
                 form(method='get' action='/news/edit/#{_id}')
-                    input(type='hidden' name='id' value='#{_id}')
                     input(type="submit", value="Edit")
             td
                 form(method='get' action='/news/delete/#{_id}')
-                    input(type='hidden' name='id' value='#{_id}' )
                     input(type="submit", value="Delete")
