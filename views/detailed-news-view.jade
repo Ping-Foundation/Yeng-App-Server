@@ -5,10 +5,6 @@ block content
 
     h1 #{Tittle}
     p #{News}
-    script(type='text/javascript').
-        console.log("Entered into script");
-        var newsID = '#{_id}';
-    script(src='/javascripts/deletenews.js')
     table
         tr
             td
@@ -20,7 +16,10 @@ block content
                 label "#{Enddate}
         tr
             td
-                input(type="submit", value="Edit")
+                form(method='get' action='/news/edit')
+                    input(type='hidden' name='id' value='#{_id}')
+                    input(type="submit", value="Edit")
             td
-
-                input(type="submit", value="Delete", onclick='deletenews()')
+                form(method='get' action='/news/delete')
+                    input(type='hidden' name='id' value='#{_id}' )
+                    input(type="submit", value="Delete")

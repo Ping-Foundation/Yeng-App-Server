@@ -104,9 +104,11 @@ exports.getspecificnews=function (req,res) {
     })
 };
 exports.delete=function (req,res) {
+    console.log('delete function worked');
 
-     if (req.body._id){
-         User.findByIdAndRemove(req.body._id,function (err,news) {
+     if (req.body.id){
+         console.log('paramas'+req.body.id);
+         User.findByIdAndRemove(req.body.id,function (err,news) {
              if (err){
                  console.log(err);
                  return res.redirect('/news?error=deleting');
