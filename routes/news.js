@@ -105,10 +105,11 @@ exports.getspecificnews=function (req,res) {
 };
 exports.delete=function (req,res) {
     console.log('delete function worked');
-
-     if (req.body.id){
-         console.log('paramas'+req.body.id);
-         User.findByIdAndRemove(req.body.id,function (err,news) {
+    console.log(req.params.id);
+    if (req.params.id){
+         console.log('Entered into if');
+         console.log('paramas'+req.params.id);
+         news.findByIdAndRemove(req.params.id,function (err,news) {
              if (err){
                  console.log(err);
                  return res.redirect('/news?error=deleting');
