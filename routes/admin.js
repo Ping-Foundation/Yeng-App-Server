@@ -25,7 +25,8 @@ exports.doLogin=function (req,res) {
                         console.log("found admin");
                         req.session.admin = {
                             "email": admin.Email,
-                            "_id": admin._id
+                            "_id": admin._id,
+                            "Password":admin.Password
                         };
                         req.session.loggedIn=true;
                         console.log('Logged in admin: ' + admin);
@@ -101,4 +102,17 @@ exports.view=function (req,res) {
 
     })
 
+};
+
+exports.changepassword= function (req,res) {
+    res.render('changepassword',{
+        name:req.params.id
+    });
+};
+exports.dochangepassword=function (req,res) {
+    console.log("entered into changepassword");
+    if (req.body.upassword==req.session.admin.Password){
+        console.log("entered into loop");
+        console.log(req.body.id);
+    }
 };

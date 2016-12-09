@@ -42,8 +42,8 @@ app.get('/admin/new', admin.create);
 // Create new user form
 app.post('/admin/new', admin.doCreate);
 app.get('/admin/view',admin.view);
-
-
+app.get('/admin/changepassword/:id',admin.changepassword);
+app.post('/admin/changepassword',admin.dochangepassword);
 
 
 // catch 404 and forward to error handler

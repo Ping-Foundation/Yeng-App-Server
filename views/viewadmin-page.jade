@@ -3,7 +3,7 @@
 extends layout
 block content
     h1 Admin Details
-    form(id="NewsAndUpdates", method="get", action="")
+
         each key in keys
            br
            label Email:
@@ -17,8 +17,11 @@ block content
            br
            label Last Login
            label= admin[key].LastLogin
-           br
-           input(type="submit", value=" Change Password")
-           br
-           input(type="submit", value="Delete")
+           tr
+               td
+                   form(method='get' action='/admin/changepassword/#{admin[key].Email}')
+                     input(type="submit", value=" Change Password")
+               td
+                   form(method='get' action='/news/edit/#{_id}')
+                     input(type="submit", value="Delete")
            br
