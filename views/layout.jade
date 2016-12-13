@@ -1,8 +1,8 @@
-doctype html
-html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    script(src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js")
-  body
+extends ../node_modules/jade-bootstrap/_bootstrap
+append styles
+  link(rel='stylesheet', href='../node_modules/jade-bootstrap/css/navbar-static-top.css')
+block body
+  +navbar-static("Yeng Admin Panel","navbar","inverse")
+  .container
     block content
+
