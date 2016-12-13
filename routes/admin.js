@@ -114,5 +114,32 @@ exports.dochangepassword=function (req,res) {
     if (req.body.upassword==req.session.admin.Password){
         console.log("entered into loop");
         console.log(req.body.id);
+        if(req.body.id){
+            admin.findOne({'Email' : req.body.id},
+                function (err,admin) {
+                    if(!err){
+                        if (!admin){
+                            console.log("admin null");
+                            res.redirect('/login?404=admin');
+                        }else{
+                            console.log("found admin");
+                            console.log(admin);
+                            console.log(req.body.Password);
+                            admin.update(
+                                {_id:admin._id},
+                                { $set: {Password:req.body.Password } },
+                            function(){
+                                res.redirect( '/adminhome' );
+                            }
+                            )
+                        }
+
+                    }
+                })
+        }else {
+            res.redirect('/changepassword?404=error');
+        }
+
+
     }
 };
