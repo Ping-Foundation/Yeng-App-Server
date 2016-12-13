@@ -143,3 +143,14 @@ exports.dochangepassword=function (req,res) {
 
     }
 };
+exports.delete=function (req,res) {
+    console.log(req.params.id);
+    admin.remove({_id:req.params.id}, function(err,removed) {
+          if (!err){
+              console.log(removed);
+              res.redirect( '/adminhome' );
+          }
+    });
+
+
+};
