@@ -6,7 +6,7 @@
 var mongoose=require("mongoose");
 
 //build connection string
-var dbURI='mongodb://localhost/Yeng';
+var dbURI='mongodb://localhost/yeng';
 
 // Create the database connection
 mongoose.connect(dbURI);
