@@ -1,8 +1,39 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+#navbar-brand-c{
+  padding: 0px;
+  height: auto;
 }
+.heading{
+  text-align: center;
+  padding-right: 150px;
+  color: #ffffff;
+  font-family: 'Caveat Brush';font-size: 40px;
+  padding-top: 15px;
+}
+#navbar-c{
+  background-color: #18a39c;
+}
+.container-wrap{
+  margin-top: 100px;
+}
+.login-form .btn{
+  width: 100%;
+}
+.form-wrap{
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 40px 20px 40px 20px;
+  box-shadow: 4px 8px 12px 6px #cccccc;
+  transition: 0.3s;
+}
+.login-form input{
+  border-color: green;
+}
+.footer-wrap{
+  background-color: #18a39c;
+  text-align: center;
 
-a {
-  color: #00B7FF;
+}
+.footer-content{
+  color: #ffffff;
 }
