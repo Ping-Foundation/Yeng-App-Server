@@ -1,0 +1,33 @@
+<h2>Admin Details</h2>
+{{#each admin}}
+
+    <h4><span id="color">Email: </span>{{this.Email}}</h4>
+    <h4><span id="color"> Created On: </span>{{this.CreatedOn}}</h4>
+    <h4><span id="color">Modified On: </span> {{this.ModifiedOn}}</h4>
+    <h4><span id="color">Last login: </span> {{this.LastLogin}}</h4>
+    <form method='get' action='/admin/changepassword/{{this.Email}}' style="float:left">
+    <button type="submit" class="btn btn-primary" id="bold">Change Password</button>
+    </form>
+    <form method='get' action='/admin/delete/{{this._id}}'>
+        <button type="submit" class="btn btn-danger" id="bold" style="margin-left:100px">Delete</button>
+    </form>
+    <br>
+
+
+
+
+{{/each}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

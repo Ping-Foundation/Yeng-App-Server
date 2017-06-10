@@ -65,7 +65,7 @@ exports.index = function (req, res,next) {
 exports.create= function (req,res) {
     res.render('addadmin', {
         title: 'Create admin',
-        buttonText: "Add"
+        buttonText: "Add",layout:false
     });
 };
 exports.doCreate=function (req,res) {
@@ -95,10 +95,12 @@ exports.view=function (req,res) {
     admin.find(function (err,admin) {
         keys=Object.keys(admin);
         console.log(keys);
+
         res.render('viewadmin-page', {
             admin: admin,
-            keys:keys
-        })
+
+            keys:keys,layout:false
+        });
 
     })
 

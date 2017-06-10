@@ -12,7 +12,7 @@ var collections = ['news'];
 
 
 exports.add=function (req,res) {
-    res.render("addnews-page")
+    res.render("addnews-page",{layout:false});
 };
 exports.doAdd=function (req,res) {
     news.create({
@@ -45,10 +45,10 @@ exports.view=function (req,res) {
         l=keys.length;
         console.log(keys);
         console.log(l);
-        res.render('viewnews-page', {
+        res.render('viewnews-page',{
             news: news,
-            keys:keys
-        })
+            keys:keys,layout:false
+        });
     })
 
 };

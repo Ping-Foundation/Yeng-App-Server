@@ -51,9 +51,11 @@
   color: #ffffff;
 }
 .navi{
-  background: #18a39c;
+
   height: 500px;
   margin-top: -18px;
+  margin-left: -40px;
+
 }
 
 
@@ -64,6 +66,11 @@
   .sidebar-nav .navbar .navbar-collapse {
     padding: 0;
     max-height: none;
+  }
+  #items{
+    height: 500px;
+    border-right: solid;
+    border-color:#18a39c;
   }
   .sidebar-nav .navbar ul {
     float: none;
@@ -82,7 +89,32 @@
   transition: 2s;
   background: transparent;
   background-size: 200%;
+
 }
 #items li:hover{
   background:#18a39c;
+}
+#items a{
+  color:black;
+  font-weight: 600;
+}
+#bold{
+  font-weight: 700;
+}
+#color{
+  color:#cc0052;
+}
+.news{
+
+  color: #cc0052;
+
+
+}
+.news:hover{
+  text-decoration: none;
+}
+.news_box{
+  border: solid;
+  border-width: 2px;
+
 }

@@ -1,6 +1,17 @@
-{{#extend "news"}}sonu<h1>News & Updates</h1>{{/extend}}
-<div id="news">
-    <h1>news</h1>
+
+<h2>View News & Updates</h2>
+<div class="row">
+    <div class="col-xs-12 col-xs-6">
+        <div class="news_box">
+        <form id="NewsAndUpdates", method="get", action="" class="form-group">
+            {{#each news}}
+                <a href="/news/detailedview/{{this._id}}" class="news"><h4>{{this.Tittle}}</h4></a>
+            {{/each}}
+        </form>
+        </div>
+    </div>
+
 </div>
+
 
 
