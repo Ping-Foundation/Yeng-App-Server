@@ -151,6 +151,10 @@ $(document).ready(function(){
     });
 });
 
+function delet() {
+    confirm("Confirm Delete?");
+}
+
 
 
 
