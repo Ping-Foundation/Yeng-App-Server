@@ -114,7 +114,24 @@
   text-decoration: none;
 }
 .news_box{
-  border: solid;
-  border-width: 2px;
 
+
+}
+.input span{
+  background: #ff66a3;
+  border-radius:0;
+}
+.input div{
+  margin-bottom: 15px;
+}
+.input button{
+  border-radius:0;
+  width: 70px;
+}
+.input input{
+  border-radius: 0;
+}
+.news_list{
+  border-right:solid;
+  border-color: #18a39c;
 }

@@ -79,9 +79,9 @@ exports.detailedview=function (req,res) {
                         "Tittle":news.Tittle,
                         "News":news.News,
                         "Startdate":news.DisplayDate,
-                        "Enddate":news.EndDate
+                        "Enddate":news.EndDate,layout:false
                     }
-                )
+                );
             }
 
         }else {
@@ -115,7 +115,7 @@ exports.delete=function (req,res) {
                  return res.redirect('/news?error=deleting');
              }else {
                  console.log("news deleted");
-                 res.redirect('/news/view')
+                 res.redirect('/adminhome')
              }
 
          })
