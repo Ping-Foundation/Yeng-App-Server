@@ -9,6 +9,9 @@
     max-width:100px;
     height:auto;
   }
+  .account{
+    float: right;
+  }
 }
 
 #navbar-brand-c{
@@ -118,7 +121,7 @@
 
 }
 .input span{
-  background: #ff66a3;
+  background: #18a39c;
   border-radius:0;
 }
 .input div{
@@ -133,5 +136,23 @@
 }
 .news_list{
   border-right:solid;
+  border-color: #18a39c;
+}
+.account{
+  margin-top: 30px;
+  margin-left: 30px;
+  list-style: none;
+}
+.white{
+  color:#fff;
+}
+.admin_det_btn{
+  background-color: #18a39c;
+  border-color:#fff;
+  border-radius: 0;
+  color:#fff;
+}
+.border-left{
+  border-left:solid;
   border-color: #18a39c;
 }

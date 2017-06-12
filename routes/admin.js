@@ -108,7 +108,7 @@ exports.view=function (req,res) {
 
 exports.changepassword= function (req,res) {
     res.render('changepassword',{
-        name:req.params.id
+        name:req.params.id,layout:false
     });
 };
 exports.dochangepassword=function (req,res) {

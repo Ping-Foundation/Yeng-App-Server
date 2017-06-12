@@ -136,7 +136,7 @@ exports.edit = function(req, res){
                     Tittle: news.Tittle,
                     News:news.News,
                     DisplayDate:news.DisplayDate,
-                    EndDate:news.EndDate
+                    EndDate:news.EndDate,layout:false
                 });
             }
         });

@@ -1,23 +1,64 @@
-<h2>Admin Details</h2>
-{{#each admin}}
+<h3>Admin Details</h3>
+<div class="row">
+    <div class="col-xs-12 col-md-6">
+        {{#each admin}}
+        <table class="table">
+            <tr><td><h5><span id="color">Email:</span></h5></td><td><h5>{{this.Email}}</h5></td></tr>
+            <tr><td><h5><span id="color"> Created On: </span></h5></td><td><h5>{{this.CreatedOn}}</h5></td></tr>
+            <tr><td><h5><span id="color">Modified On: </span></h5></td><td><h5>{{this.ModifiedOn}}</h5></td></tr>
+            <tr><td><h5><span id="color">Last login: </span></h5></td><td><h5>{{this.LastLogin}}</h5></td></tr>
+        </table>
+            <button class="btn admin_det_btn" id="change{{this._id}}" style="float:left"><b>Change Password</b></button>
+            <form method='get' action='/admin/changepassword/{{this.Email}}' style="float:left">
 
-    <h4><span id="color">Email: </span>{{this.Email}}</h4>
-    <h4><span id="color"> Created On: </span>{{this.CreatedOn}}</h4>
-    <h4><span id="color">Modified On: </span> {{this.ModifiedOn}}</h4>
-    <h4><span id="color">Last login: </span> {{this.LastLogin}}</h4>
-    <form method='get' action='/admin/changepassword/{{this.Email}}' style="float:left">
-    <button type="submit" class="btn btn-primary" id="bold">Change Password</button>
-    </form>
-    <form method='get' action='/admin/delete/{{this._id}}' onsubmit="return confirm('Confirm Delete?');">
-        <button type="submit" class="btn btn-danger" id="bold" style="margin-left:100px">Delete</button>
-    </form>
+            </form>
+            <form method='get' action='/admin/delete/{{this._id}}' onsubmit="return confirm('Confirm Delete?');">
+                <button type="submit" class="btn admin_det_btn" style="margin-left:100px"><b>Delete</b></button>
+            </form>
+            <br>
+        {{/each}}
+    </div>
+    <div class="col-xs-12 col-md-6">
+        <div id="change_pswd" class="border-left">
 
-    <br>
+        </div>
+    </div>
+</div>
+<!--change password display-->
+<script type="text/javascript">
+    {{#each admin}}
+    $(document).ready(function(){
+
+        $('#change{{this._id}}').on('click', function(){
+            $.ajax({
+                url: "/admin/changepassword/{{this.Email}}",
+                method: "GET",
+                data: {
+
+                },
+
+                success: function(data, textStatus, jqXHR) {
+                    console.log("succes");
+                    console.log(data);
+                    $("#change_pswd").html(data);
+
+
+
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log("error");
+                }
+            });
+
+        });
+    });
+    {{/each}}
+
+</script>
 
 
 
 
-{{/each}}
 
 
 
