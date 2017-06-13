@@ -1,3 +1,4 @@
+
 <div class="row">
     <div class="col-xs-12 col-md-12">
         <h3>{{Tittle}}</h3>
@@ -6,16 +7,14 @@
         <p id="bold">Display Date: {{Startdate}}</p>
         <p id="bold">Ending Date :{{Enddate}}</p>
         <button class="btn admin_det_btn" id="edit{{_id}}"><b>Edit</b></button>
-        <!--<form method='get' action='#' style="float: left">
 
-        </form>-->
         <form method='get' action='/news/delete/{{_id}}' style="float: right" onsubmit="return confirm('Confirm Delete?');">
             <button type="submit" class="btn admin_det_btn"><b>Delete</b></button>
         </form>
     </div>
 
 </div>
-
+<script src="/js/sidepanel_home.js"></script>
 <!--
 edit news display-->
 <script type="text/javascript">
@@ -33,6 +32,7 @@ edit news display-->
     success: function(data, textStatus, jqXHR) {
     console.log("succes");
     console.log(data);
+    $("#news-details").show();
     $("#news-details").html(data);
 
 

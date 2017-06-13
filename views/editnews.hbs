@@ -1,14 +1,14 @@
 <div class="row">
-    <div class="col-xs-12 col-md-4 col-lg-4">
+    <div class="col-xs-6 col-md-4 col-lg-4">
         <div class="container">
 
         <h1>Edit News</h1>
         <form method='post' action='/news/edit' class="form-group">
             <input type="hidden" name="id" value="{{_id}}">
             <br>
-            <input type="text" name="Tittle" id="Tittle" value="{{Tittle}}" class="form-control" required>
+            <input type="text" name="Tittle" id="Tittle" value="{{Tittle}}" class="form-control" style="width: 45%" required>
              <br>
-            <textarea id="News" name="News" class="form-control" required>{{News}}</textarea>
+            <textarea id="News" name="News" class="form-control" style="width: 45%" required>{{News}}</textarea>
              <br>
             <input type="text" name="DisplayDate" id="DisplayDate" class="date" value="{{DisplayDate}}" required>
              <br><br>
@@ -16,10 +16,14 @@
             <br><br><button type="submit" class="btn btn-success"><b>Save</b></button>
 
 
+
         </form>
+            <button class="admin_det_btn btn" id="cancel_edit"><b>Cancel</b></button>
         </div>
     </div>
 </div>
+
+<script src="/js/sidepanel_home.js"></script>
 <script>
     $( function() {
         $( ".date" ).datepicker({ dateFormat: 'dd-mm-yy' });

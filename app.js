@@ -10,8 +10,7 @@ var admin=require('./routes/admin');
 var news=require('./routes/news');
 var hbs=require('express-handlebars');
 
-//var index = require('./routes/index');
-//var users = require('./routes/users');
+
 
 var app = express();
 

@@ -29,6 +29,7 @@
     </div>
 
 </div>
+<script src="/js/sidepanel_home.js"></script>
 
 <!--display news details-->
 <script type="text/javascript">
@@ -46,6 +47,7 @@
                 success: function(data, textStatus, jqXHR) {
                     console.log("succes");
                     console.log(data);
+                    $("#news-details").show();
                     $("#news-details").html(data);
 
 
