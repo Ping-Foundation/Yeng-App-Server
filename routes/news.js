@@ -12,7 +12,7 @@ var collections = ['news'];
 
 
 exports.add=function (req,res) {
-    res.render("addnews-page")
+    res.render("addnews-page",{layout:false});
 };
 exports.doAdd=function (req,res) {
     news.create({
@@ -45,10 +45,10 @@ exports.view=function (req,res) {
         l=keys.length;
         console.log(keys);
         console.log(l);
-        res.render('viewnews-page', {
+        res.render('viewnews-page',{
             news: news,
-            keys:keys
-        })
+            keys:keys,layout:false
+        });
     })
 
 };
@@ -79,9 +79,9 @@ exports.detailedview=function (req,res) {
                         "Tittle":news.Tittle,
                         "News":news.News,
                         "Startdate":news.DisplayDate,
-                        "Enddate":news.EndDate
+                        "Enddate":news.EndDate,layout:false
                     }
-                )
+                );
             }
 
         }else {
@@ -115,7 +115,7 @@ exports.delete=function (req,res) {
                  return res.redirect('/news?error=deleting');
              }else {
                  console.log("news deleted");
-                 res.redirect('/news/view')
+                 res.redirect('/adminhome')
              }
 
          })
@@ -136,7 +136,7 @@ exports.edit = function(req, res){
                     Tittle: news.Tittle,
                     News:news.News,
                     DisplayDate:news.DisplayDate,
-                    EndDate:news.EndDate
+                    EndDate:news.EndDate,layout:false
                 });
             }
         });

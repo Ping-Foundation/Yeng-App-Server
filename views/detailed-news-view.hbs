@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="col-xs-12 col-md-12">
+        <h3>{{Tittle}}</h3>
+        <br>
+        <p style="color: #18a39c" id="bold">{{News}}</p>
+        <p id="bold">Display Date: {{Startdate}}</p>
+        <p id="bold">Ending Date :{{Enddate}}</p>
+        <button class="btn admin_det_btn" id="edit{{_id}}"><b>Edit</b></button>
+        <!--<form method='get' action='#' style="float: left">
+
+        </form>-->
+        <form method='get' action='/news/delete/{{_id}}' style="float: right" onsubmit="return confirm('Confirm Delete?');">
+            <button type="submit" class="btn admin_det_btn"><b>Delete</b></button>
+        </form>
+    </div>
+
+</div>
+
+<!--
+edit news display-->
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+    $('#edit{{_id}}').on('click', function(){
+    $.ajax({
+    url: "/news/edit/{{_id}}",
+    method: "GET",
+    data: {
+
+    },
+
+    success: function(data, textStatus, jqXHR) {
+    console.log("succes");
+    console.log(data);
+    $("#news-details").html(data);
+
+
+
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+    console.log("error");
+    }
+    });
+
+    });
+    });
+
+</script>
+
+
+
+
