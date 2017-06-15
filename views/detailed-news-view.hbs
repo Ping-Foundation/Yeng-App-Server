@@ -22,6 +22,7 @@ edit news display-->
     $(document).ready(function(){
 
     $('#edit{{_id}}').on('click', function(){
+        $("#loading_gif").show();
     $.ajax({
     url: "/news/edit/{{_id}}",
     method: "GET",
@@ -32,6 +33,7 @@ edit news display-->
     success: function(data, textStatus, jqXHR) {
     console.log("succes");
     console.log(data);
+        $("#loading_gif").hide();
     $("#news-details").show();
     $("#news-details").html(data);
 

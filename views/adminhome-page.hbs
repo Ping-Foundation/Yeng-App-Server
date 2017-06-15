@@ -32,9 +32,8 @@
                                 <div class="col-sm-9">
 
                                     <div id="body">
-
-
-
+                                        <img src="/images/loading.gif" class="img-responsive" id="loading_gif">
+                                 <!-- div for Expand the pages by ajax-->
                                     </div>
 
                                 </div>
@@ -47,12 +46,37 @@
         </div>
     </div>
 </div>
+
 <script>
 $(document).ready(function(){
 
-$(window).on('load', function(){
-$("#view-news").click();
-console.log("loaded");
+$(window).on('load',function(){
+    $("#loading_gif").show();
+$.ajax({
+url: "/news/view",
+method: "GET",
+data: {
+
+},
+
+success: function(data, textStatus, jqXHR) {
+console.log("succes");
+console.log(data);
+    $("#loading_gif").hide();
+$("#body").html(data);
+$("#items li").css("background-color","transparent");
+$("#view-news").css("background-color","#18a39c");
+
+$("#items a").css("color","black");
+$("#view-news a").css("color","#fff");
+
+
+},
+error: function(jqXHR, textStatus, errorThrown) {
+console.log("error");
+}
+});
+
 });
 });
 </script>
