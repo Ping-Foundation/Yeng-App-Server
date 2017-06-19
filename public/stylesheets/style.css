@@ -156,3 +156,6 @@
   border-left:solid;
   border-color: #18a39c;
 }
+#loading_gif{
+  display: none;
+}

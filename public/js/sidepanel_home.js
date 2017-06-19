@@ -2,6 +2,7 @@
 $(document).ready(function(){
 
     $('#add-news').on('click', function(){
+        $("loading_gif").show();
         $.ajax({
             url: "/news/add",
             method: "GET",
@@ -10,6 +11,7 @@ $(document).ready(function(){
             },
 
             success: function(data, textStatus, jqXHR) {
+                $("#loading_gif").hide();
                 console.log("succes");
                 console.log(data);
                 $("#body").html(data);
@@ -32,6 +34,7 @@ $(document).ready(function(){
 $(document).ready(function(){
 
     $('#view-news').on('click', function(){
+        $("#loading_gif").show();
         $.ajax({
             url: "/news/view",
             method: "GET",
@@ -42,6 +45,7 @@ $(document).ready(function(){
             success: function(data, textStatus, jqXHR) {
                 console.log("succes");
                 console.log(data);
+                $("#loading_gif").hide();
                 $("#body").html(data);
                 $("#items li").css("background-color","transparent");
                 $("#view-news").css("background-color","#18a39c");
@@ -63,6 +67,7 @@ $(document).ready(function(){
 $(document).ready(function(){
 
     $('#view-admin').on('click', function(){
+        $("#loading_gif").show();
         $.ajax({
             url: "/admin/view",
             method: "GET",
@@ -73,6 +78,7 @@ $(document).ready(function(){
             success: function(data, textStatus, jqXHR) {
                 console.log("succes");
                 console.log(data);
+                $("#loading_gif").hide();
                 $("#body").html(data);
                 $("#items li").css("background-color","transparent");
                 $("#view-admin").css("background-color","#18a39c");
@@ -93,6 +99,7 @@ $(document).ready(function(){
 $(document).ready(function(){
 
     $('#add-admin').on('click', function(){
+        $("#loading_gif").show();
         $.ajax({
             url: "/admin/new",
             method: "GET",
@@ -103,6 +110,7 @@ $(document).ready(function(){
             success: function(data, textStatus, jqXHR) {
                 console.log("succes");
                 console.log(data);
+                $("#loading_gif").hide();
                 $("#body").html(data);
                 $("#items li").css("background-color","transparent");
                 $("#add-admin").css("background-color","#18a39c");
@@ -119,6 +127,9 @@ $(document).ready(function(){
 
     });
 });
+
+
+
 
 
 

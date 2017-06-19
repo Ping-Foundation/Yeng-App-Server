@@ -25,7 +25,7 @@
 
 </div>
     <div class="col-xs-6 col-md-6" id="news-details">
-
+        <img src="/images/loading.gif" class="img-responsive" id="loading_gif">
     </div>
 
 </div>
@@ -37,6 +37,7 @@
     $(document).ready(function(){
 
         $('#{{this._id}}').on('click', function(){
+            $("#loading_gif").show();
             $.ajax({
                 url: "/news/detailedview/{{this._id}}",
                 method: "GET",
@@ -47,6 +48,7 @@
                 success: function(data, textStatus, jqXHR) {
                     console.log("succes");
                     console.log(data);
+                    $("#loading_gif").show();
                     $("#news-details").show();
                     $("#news-details").html(data);
 

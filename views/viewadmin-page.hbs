@@ -20,7 +20,7 @@
     </div>
     <div class="col-xs-12 col-md-6">
         <div id="change_pswd" class="border-left">
-
+            <img src="/images/loading.gif" class="img-responsive" id="loading_gif">
         </div>
     </div>
 </div>
@@ -31,6 +31,7 @@
     $(document).ready(function(){
 
         $('#change{{this._id}}').on('click', function(){
+            $("#loading_gif").show();
             $.ajax({
                 url: "/admin/changepassword/{{this.Email}}",
                 method: "GET",
@@ -41,6 +42,7 @@
                 success: function(data, textStatus, jqXHR) {
                     console.log("succes");
                     console.log(data);
+                    $("#loading_gif").hide();
                     $("#change_pswd").show();
                     $("#change_pswd").html(data);
 
