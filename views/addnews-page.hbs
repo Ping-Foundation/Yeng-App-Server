@@ -1,0 +1,24 @@
+<h2>Add News & Updates</h2>
+<div>
+
+<form class="form-group" id="addnewsandupdates" method="POST" action="/news/add">
+    <input type="text" name="Tittle" id="Tittle" class="form-control" placeholder="Tittle" required>
+    <br><textarea name="News" id="News" class="form-control" placeholder="Type News" required></textarea>
+    <br><input type="text" name="DisplayDate" id="DisplayDate" class="date" placeholder="Display Date" required>
+
+    <br><br><input type="text" name="EndDate" id="EndDate" class="date"  placeholder="End Date" required>
+    <br><br><button type="submit" value="Submit" class="btn btn-success"><b>Submit</b></button>
+
+</form>
+
+    <!--calender function-->
+
+    <script>
+
+        $( function() {
+
+            $( ".date" ).datepicker();
+
+        } );
+    </script>
+</div>

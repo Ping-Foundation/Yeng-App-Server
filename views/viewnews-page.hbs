@@ -1,0 +1,69 @@
+
+<h2>View News & Updates</h2>
+<div class="row">
+    <div class="col-xs-6 col-md-6 news_list">
+        <div class="news_box">
+        <form id="NewsAndUpdates" method="get" action="" class="form-group">
+            {{#each news}}
+
+
+                <ul class="list-group">
+                    <a href="#" class="news"><li class="list-group-item" id="{{this._id}}">
+                        <h4>{{this.Tittle}}</h4>
+                    <div class="d-flex w-100 justify-content-between">
+                        <small>{{this.DisplayDate}}</small>
+                    </div>
+                   </li>
+                    </a>
+
+                </ul>
+
+            {{/each}}
+        </form>
+
+    </div>
+
+</div>
+    <div class="col-xs-6 col-md-6" id="news-details">
+        <img src="/images/loading.gif" class="img-responsive" id="loading_gif">
+    </div>
+
+</div>
+<script src="/js/sidepanel_home.js"></script>
+
+<!--display news details-->
+<script type="text/javascript">
+    {{#each news}}
+    $(document).ready(function(){
+
+        $('#{{this._id}}').on('click', function(){
+            $("#loading_gif").show();
+            $.ajax({
+                url: "/news/detailedview/{{this._id}}",
+                method: "GET",
+                data: {
+
+                },
+
+                success: function(data, textStatus, jqXHR) {
+                    console.log("succes");
+                    console.log(data);
+                    $("#loading_gif").show();
+                    $("#news-details").show();
+                    $("#news-details").html(data);
+
+
+
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log("error");
+                }
+            });
+
+        });
+    });
+    {{/each}}
+</script>
+
+
+
