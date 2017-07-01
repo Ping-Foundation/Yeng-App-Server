@@ -44,6 +44,21 @@ var newsSchema = new mongoose.Schema({
     ModifiedOn: Date
 });
 
+var syllabusSchema=new mongoose.Schema({
+    _id: mongoose.Schema.Types.Mixed,
+    children:[String],
+    files:[String]
+});
+
+var seedSchema=new mongoose.Schema({
+    idd:String,
+    children:[String],
+    files:[String],
+    _id:mongoose.Schema.Types.Mixed
+});
+
 
 mongoose.model( 'admin', adminSchema );
 mongoose.model( 'news', newsSchema);
+mongoose.model('syllabus_pdf',syllabusSchema);
+mongoose.model('test',seedSchema);

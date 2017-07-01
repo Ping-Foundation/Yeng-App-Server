@@ -6,9 +6,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var db=require('./model/db');
 var session=require('express-session');
+var hbs=require('express-handlebars');
+
+
 var admin=require('./routes/admin');
 var news=require('./routes/news');
-var hbs=require('express-handlebars');
+var syllabus=require('./routes/syllabus');
+
+var seed=require('./routes/seed');
 
 //var index = require('./routes/index');
 //var users = require('./routes/users');
@@ -52,6 +57,10 @@ app.get('/admin/view',admin.view);
 app.get('/admin/changepassword/:id',admin.changepassword);
 app.post('/admin/changepassword',admin.dochangepassword);
 app.get('/admin/delete/:id',admin.delete);
+
+
+app.get('/syllabus/getChildById/:path',syllabus.getChildById);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
