@@ -59,6 +59,12 @@ app.get('/admin/delete/:id',admin.delete);
 
 
 app.get('/syllabus/getChildById/:path',syllabus.getChildById);
+//Syllabus - Course view abu
+app.get('/syllabus/course/view',syllabus.viewcourse);
+app.get('/syllabus/course/new',syllabus.coursecreate);
+app.get('/syllabus/course/:course',syllabus.editCourse);
+
+app.post('/syllabus/course/new',syllabus.docoursecreate);
 
 
 // catch 404 and forward to error handler

@@ -30,6 +30,8 @@ $(document).ready(function(){
 
     });
 });
+
+
 /*view news&updates*/
 $(document).ready(function(){
 
@@ -126,6 +128,87 @@ $(document).ready(function(){
         });
 
     });
+});
+
+/*ABU Create ViewSyllabus 29-9-2017*/
+$(document).ready(function () {
+    $('#view-syllabus').on('click',function () {
+        $("#loading_gif").show();
+        $.ajax({
+            url:"/syllabus/course/view",
+            method:"GET",
+            data:{
+
+            },
+            success:function (data,txtStataus,jqXHR) {
+                console.log("succes");
+                console.log(data);
+                $("#loading_gif").hide();
+                $("#body").html(data);
+                $("#items li").css("background-color","transparent");
+                $("#view-syllabus").css("background-color","#18a39c");
+
+                $("#items a").css("color","black");
+                $("#view-syllabus a").css("color","#fff");
+            }
+            //$("#items li").css("background-color","transparent");
+            //$("#view-syllabus").css("background-color","#18a39c");
+        });
+
+    });
+});
+
+$(document).ready(function () {
+    $('#add-course').on('click',function () {
+        $('#loading_gif').show();
+        $.ajax({
+            url:"/syllabus/course/new",
+            method:"get",
+            data:{
+
+            },
+            success:function (data,txtStataus,jqXHR) {
+                console.log("create page enterd");
+                console.log(data);
+                $("#loading_gif").hide();
+                $("#body").html(data);
+                $("#items li").css("background-color","transparent");
+                $("#view-syllabus").css("background-color","#18a39c");
+
+                $("#items a").css("color","black");
+                $("#view-syllabus a").css("color","#fff");
+            }
+        });
+
+    });
+
+});
+
+$(document).ready(function () {
+    var nmcourse=$('#nmCourse').text();
+    $('#edit-course_').on('click',function () {
+        //var nmcourse=$('#nmCourse').text();
+        $('#loading_gif').show();
+        console.log(nmcourse);
+        $.ajax({
+            url:"/syllabus/course/"+nmcourse,
+            method:"get",
+            data:{
+
+            },
+            success:function (data,txtStataus,jqXHR) {
+                console.log("Edit page enterd");
+                console.log(data);
+                $("#loading_gif").hide();
+                $("#body").html(data);
+                $("#items li").css("background-color","transparent");
+                $("#view-syllabus").css("background-color","#18a39c");
+
+                $("#items a").css("color","black");
+                $("#view-syllabus a").css("color","#fff");
+            }
+        });
+    })
 });
 
 
