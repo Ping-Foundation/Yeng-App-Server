@@ -35,7 +35,7 @@ exports.viewcourse = function (req, res) {
 }
 /*Abu Created Create Course 1-10-2017*/
 exports.coursecreate = function (req, res) {
-    res.render('syllabus/addcourse', {layout: false});
+    res.render('syllabus/addcourse', {layout: false,titlecr:"Create Course"});
 }
 /*Abu Created Create Course 1-10-2017*/
 exports.docoursecreate = function (req, res) {
@@ -49,15 +49,12 @@ exports.docoursecreate = function (req, res) {
 }
 
 exports.editCourse=function (req,res) {
+    console.log(req.params.course);
     syllabus.findOne({children:req.params.course},function (err,data) {
         if(!err){
-            console.log("hai iam Enter in Course Edit");
-            console.log(req.params.course);
-            console.log(data._id);
-
             syllabus.findOne({_id:req.params.course},function (err,idData) {
                 if(!err){
-
+                    res.render('syllabus/editcourse',{layout:false,titlecr:"Edit Course",courseName:req.params.course});
                 }
                 else{
                     console.log(req.params.course+" : _id not exist in our databse ");
@@ -68,6 +65,35 @@ exports.editCourse=function (req,res) {
             console.log("course exist in our databse ")
         }
     });
+}
+
+exports.doeditCourse=function (req,res,data) {
+    syllabus.findOne({children:req.params.course},function(err,data){
+       // console.log(data);
+        var test="MBA"
+        if(!err){
+            if(!data){
+                syllabus.update({
+                    _id:"Syllabus"
+                },{
+
+                        children:{
+                            $set:{
+                                test:req.params.course
+                            }
+                        }
+
+                });
+            }
+            else{
+                console.log("Course Name Alredy Exist");
+            }
+        }
+        else{
+            console.log("Course Name Alredy Exist");
+        }
+    });
+
 }
 /*Create Directory for Creating Course (Abu 2-10-2017)*/
 function createDirectory(path){

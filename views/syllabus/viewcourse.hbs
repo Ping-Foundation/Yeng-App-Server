@@ -35,9 +35,9 @@
                     <form  href="#">
                         <span class="glyphicon glyphicon-trash pull-left" style="font-size:20px; margin-top: -5px"></span>
                     </form >
-                    <form method='get' action='/syllabus/course/{{this}}' onsubmit="return confirm('Confirm Edit?');">
-                        <button type="submit"  class="glyphicon glyphicon-edit pull-right" style="font-size:20px; margin-top: -5px"></button>
-                    </form>
+                    <a >
+                        <button type="submit"  value="{{this}}"  onclick="editCourse(this)" class="glyphicon glyphicon-edit pull-right" style="font-size:20px; margin-top: -5px;background: none;border: 0px;"></button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -49,4 +49,5 @@
 </div>
 
 <script src="/js/sidepanel_home.js"></script>
+
 

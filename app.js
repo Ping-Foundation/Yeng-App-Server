@@ -65,6 +65,7 @@ app.get('/syllabus/course/new',syllabus.coursecreate);
 app.get('/syllabus/course/:course',syllabus.editCourse);
 
 app.post('/syllabus/course/new',syllabus.docoursecreate);
+app.post('/syllabus/course/:course',syllabus.doeditCourse);
 
 
 // catch 404 and forward to error handler

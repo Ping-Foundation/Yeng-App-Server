@@ -183,39 +183,67 @@ $(document).ready(function () {
     });
 
 });
+function editCourse(objButton) {
+    //console.log(objButton.value);
+    $("#loading_gif").show();
+    $.ajax({
+        url:"/syllabus/course/"+objButton.value,
+        type: "get",
+        data: {
+            //date:$('button').val()
+        },
+        success:function (data,txtStataus,jqXHR) {
+            console.log("Edit page enterd");
+            //console.log(data);
+            $("#loading_gif").hide();
+            $("#body").html(data);
+            $("#items li").css("background-color","transparent");
+            $("#view-syllabus").css("background-color","#18a39c");
 
+            $("#items a").css("color","black");
+            $("#view-syllabus a").css("color","#fff");
+        }
+
+    });
+    //console.log(data);
+}
+function doeditCourse(){
+    $("#loading_gif").show();
+    var coursename=document.getElementById('coursevalue').value;
+    console.log(coursename);
+    $.ajax({
+        url:"/syllabus/course/"+coursename,
+        method:"POST",
+        data: {
+            coursename:coursename
+        },
+        success:function(data,txtStataus,jqXHR){
+            console.log(data);
+        }
+    });
+
+}
+/*
 $(document).ready(function () {
-    var nmcourse=$('#nmCourse').text();
-    $('#edit-course_').on('click',function () {
-        //var nmcourse=$('#nmCourse').text();
-        $('#loading_gif').show();
-        console.log(nmcourse);
+    $('#editCoursetext').click(function () {
+        var coursename=$('#coursevalue').value;
+        console.log(coursename);
+        $("#loading_gif").show();
         $.ajax({
-            url:"/syllabus/course/"+nmcourse,
-            method:"get",
+            url:"/syllabus/course/docourseedit",
+            method:"POST",
             data:{
-
+               //course:$('#editCoursetext').value
             },
-            success:function (data,txtStataus,jqXHR) {
-                console.log("Edit page enterd");
-                console.log(data);
-                $("#loading_gif").hide();
-                $("#body").html(data);
-                $("#items li").css("background-color","transparent");
-                $("#view-syllabus").css("background-color","#18a39c");
-
-                $("#items a").css("color","black");
-                $("#view-syllabus a").css("color","#fff");
+            success:function (data) {
+                console.log("");
             }
-        });
-    })
+        })
+
+    });
 });
 
-
-
-
-
-
+*/
 function delet() {
     confirm("Confirm Delete?");
 }

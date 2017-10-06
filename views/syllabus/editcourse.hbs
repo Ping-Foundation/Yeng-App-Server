@@ -1,16 +1,16 @@
 <div class="panel breadcrumb" style="background-color: #ffffff">
     <li><a href="#">Syllabus</a></li>
     <li><a href="#">Course</a></li>
-    <li><a href="#">Create New</a></li>
+    <li><a href="#">Edit Course</a></li>
     <div class="panel-body sy-menu text-center  " style="color:#ffffff;font-size: 20px;">{{titlecr}}</div>
     <div class="panel-body">
         <div class="col-sm-8 col-md-6">
-            <h2>Instruction</h2>
+            <h2>Course Edit</h2>
             <p>The form below contains two input elements; one of type text and one of type password:</p>
-            <form method="post" action="/syllabus/course/new" data-toggle="validator">
+            <div data-toggle="validator">
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-graduation-cap" aria-hidden="true"></i></span>
-                    <input id="course" type="taxt" class="form-control" name="course" placeholder="Course Name"
+                    <input id="coursevalue" type="taxt" value="{{courseName}}" class="form-control" name="coursevalue" placeholder="Course Name"
                            required="hello">
 
                 </div>
@@ -18,11 +18,11 @@
                     <button class="btn btn-danger" type="button">
                         cancel
                     </button>
-                    <button type="submit" id="docourse" class="btn btn-primary pull-right" type="button">
-                        Create Course
+                    <button type="submit" id="editCoursetext" onclick="doeditCourse()" class="btn btn-primary pull-right" type="button">
+                        {{titlecr}}
                     </button>
                 </div>
-            </form>
+            </div>
 
 
         </div>
