@@ -183,8 +183,27 @@ $(document).ready(function () {
     });
 
 });
+
+function parantCourse(objCourse){
+    //console.log(objCourse.value);
+    $("#loading_gif").show();
+    $.ajax({
+        url:"/syllabus/course/sem/"+objCourse.value,
+        method:"get",
+        data:{
+
+        },
+        success:function (data,txtStataus,jqXHR) {
+            console.log(objCourse.value+" Viw page enterd");
+            $("#loading_gif").hide();
+            $("#body").html(data);
+        }
+
+    });
+
+}
 function editCourse(objButton) {
-    //console.log(objButton.value);
+    console.log(objButton.value);
     $("#loading_gif").show();
     $.ajax({
         url:"/syllabus/course/"+objButton.value,

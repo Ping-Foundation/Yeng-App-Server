@@ -69,20 +69,23 @@ exports.editCourse=function (req,res) {
 
 exports.doeditCourse=function (req,res,data) {
     syllabus.findOne({children:req.params.course},function(err,data){
-       // console.log(data);
-        var test="MBA"
+       //console.log(data);
+        //var test="MBA"
         if(!err){
             if(!data){
                 syllabus.update({
                     _id:"Syllabus"
                 },{
+                        $set: {
 
-                        children:{
-                            $set:{
-                                test:req.params.course
-                            }
+                                "MBA": req.params.course
+
                         }
 
+
+                },function (err,data) {
+                    console.log(err);
+                    console.log(data);
                 });
             }
             else{
@@ -94,6 +97,18 @@ exports.doeditCourse=function (req,res,data) {
         }
     });
 
+}
+
+exports.viewSemester=function (req,res) {
+    syllabus.findOne({_id:req.params.course},function (err,data) {
+        if(!err) {
+            res.render('syllabus/viewsem',{SemDetails:data,layout:false});
+
+        }
+        else {
+            console.log(err +" : viw Sem");
+        }
+    });
 }
 /*Create Directory for Creating Course (Abu 2-10-2017)*/
 function createDirectory(path){

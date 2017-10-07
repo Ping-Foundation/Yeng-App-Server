@@ -63,6 +63,7 @@ app.get('/syllabus/getChildById/:path',syllabus.getChildById);
 app.get('/syllabus/course/view',syllabus.viewcourse);
 app.get('/syllabus/course/new',syllabus.coursecreate);
 app.get('/syllabus/course/:course',syllabus.editCourse);
+app.get('/syllabus/course/sem/:course',syllabus.viewSemester);
 
 app.post('/syllabus/course/new',syllabus.docoursecreate);
 app.post('/syllabus/course/:course',syllabus.doeditCourse);
