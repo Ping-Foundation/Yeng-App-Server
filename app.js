@@ -64,9 +64,14 @@ app.get('/syllabus/course/view',syllabus.viewcourse);
 app.get('/syllabus/course/new',syllabus.coursecreate);
 app.get('/syllabus/course/:course',syllabus.editCourse);
 app.get('/syllabus/course/sem/:course',syllabus.viewSemester);
+app.get('/syllabus/course/addSem/:courseparant',syllabus.addSemester);
+app.get('/syllabus/course/sem/branch/:sem',syllabus.viewbranch);
+app.get('/syllabus/course/sem/addbranch/:sem',syllabus.addbranch);
 
 app.post('/syllabus/course/new',syllabus.docoursecreate);
 app.post('/syllabus/course/:course',syllabus.doeditCourse);
+app.post('/syllabus/course/addSem/:courseparant',syllabus.doaddSemester);
+app.post('/syllabus/course/sem/addbranch/:sem',syllabus.doaddbranch);
 
 
 // catch 404 and forward to error handler
