@@ -53,6 +53,7 @@ app.get('/admin/changepassword/:id',admin.changepassword);
 app.post('/admin/changepassword',admin.dochangepassword);
 app.get('/admin/delete/:id',admin.delete);
 app.get('/admin/details/:id',admin.details);
+app.get('/logout',admin.logout);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
