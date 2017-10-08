@@ -3,7 +3,10 @@
  */
 var mongoose = require('mongoose');
 var syllabus = mongoose.model('syllabus_pdf');
+var fileUpload=require('express-fileupload')
 var mkdir=require('mkdirp');
+
+//var fs=require('fs-extra');
 //var syllabus_flow=mongoose.model('syllabus');
 
 exports.getChildById = function (req, res) {
@@ -174,6 +177,97 @@ exports.doaddbranch=function (req,res) {
     var path=req.body.course+"/"+req.body.sem+"/"+brname;
     CreateCourse(req.body.sem,brname,req,res,path);
 
+}
+exports.viewSubj=function (req,res) {
+    //console.log(req.params.subj);
+    syllabus.findOne({_id:req.params.subj},function (err,data) {
+        if(!err){
+            res.render("syllabus/viewsubj",{layout:false,subjData:data})
+        }else{
+            console.log(err);
+        }
+    })
+
+}
+exports.addSubj=function (req,res) {
+    syllabus.findOne({_id:req.params.subj},function (err,brdata) {
+        if(!err){
+            syllabus.findOne({children:req.params.subj},function (err,semdata) {
+                if(!err){
+                    syllabus.findOne({children:semdata._id},function (err,coursedata) {
+                        if(!err){
+                            res.render('syllabus/addsubj',{layout:false,brName:brdata._id,semName:semdata._id,courseName:coursedata._id});
+                        }else{
+                            console.log(err);
+                        }
+                    })
+                }else{
+                    console.log(err);
+                }
+            });
+
+        }else{
+            console.log(err);
+        }
+    });
+}
+exports.doaddSubj=function (req,res) {
+    var objSub=req.body.inputsub;
+    var objbr=req.body.inputbr;
+    var objsem=req.body.inputsm;
+    var objCourse=req.body.inputcrs;
+    var sujID=objbr+"_"+objSub;
+    var strlocation=objCourse+"/"+objsem+"/"+objbr+"/"+objSub;
+    console.log(objSub);
+    console.log(objbr);
+    console.log(objsem);
+    console.log(objCourse);
+    console.log(req.body.pdf);
+    if(req.body.pdf) {
+        syllabus.findOne({children: sujID}, function (err, data) {
+            if (!err) {
+                if (!data) {
+                    console.log("i am here");
+                    syllabus.update(
+                        {
+                            _id: objbr
+                        },
+                        {
+                            $addToSet: {
+                                children: sujID
+                            }
+
+                        }, function (err, syllabus) {
+                            if (!err) {
+                                //console.log(sujID.name)
+                                var subjectFile=req.body.pdf;
+                                console.log(subjectFile);
+                                subjectFile.mv('Syllabus'+'/'+subjectFile.name,function (err) {
+                                    if(err){
+                                        console.log(err)
+                                    }else {
+
+                                        res.send('file Uploaded !')
+                                    }
+                                });
+
+                            }
+                            else {
+                                console.log(err);
+                            }
+                        });
+                } else {
+                    console.log("Subject Alredy exist");
+                }
+
+            } else {
+                console.log(err);
+            }
+        });
+    }
+    else{
+        return res.status(400).send('No File were Uploaded');
+    }
 }
 /*Create Directory for Creating Course (Abu 2-10-2017)*/
 function createDirectory(path,child){

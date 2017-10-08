@@ -2,8 +2,8 @@
     <li><a href="#">Syllabus</a></li>
     <li><a href="#">Course</a></li>
     <li><a href="#">Sem</a></li>
-    <li><a href="#">Branch</a></li>
-    <li><a href="#">Create Branch</a></li>
+    <li><a href="#">Subject</a></li>
+    <li><a href="#">Create Subject</a></li>
     <div class="panel-body sy-menu text-center  " style="color:#ffffff;font-size: 20px;">CRETAE BRANCH</div>
     <div class="panel-body">
         <div class="row">
@@ -18,11 +18,20 @@
                 </div>
                 <div class="form-group">
                     <label for="inputsm">Branch Name</label>
-                    <input class="form-control input-sm" id="inputbr" name="inputbr" type="text" placeholder="Branch Name" required>
+                    <input class="form-control input-sm" value="{{brName}}" id="inputbr" name="inputsm" type="text" disabled>
                 </div>
                 <div class="form-group">
-                    <button type="button" id="create-br" class="btn btn-success pull-right">Create Branch</button>
+                    <label for="inputsm">Subject Name</label>
+                    <input class="form-control input-sm" id="inputsub" name="inputsub" type="text" placeholder="Subject Name" required>
                 </div>
+
+                <div class="fileinput fileinput-new" id="formInfo">
+                    <input type="file" id="pdf" name="pdf-file" multiple  >
+                </div>
+                <div class="form-group">
+                    <button type="button" id="create-sub" class="btn btn-success pull-right">Create Subject</button>
+                </div>
+
             </div>
         </div>
     </div>

@@ -3,7 +3,8 @@
     <li><a href="#">Course</a></li>
     <li><a href="#">Semester</a></li>
     <li><a href="#">Branch</a></li>
-    <div class="panel-body sy-menu text-center  " style="color:#ffffff;font-size: 20px;">BRANCH DETAILS</div>
+    <li><a href="#">Subject</a></li>
+    <div class="panel-body sy-menu text-center  " style="color:#ffffff;font-size: 20px;">SUJECT DETAILS</div>
     <!--  Serch Box   -->
     <div id="custom-search-input">
         <div class="input-group col-md-12" style="padding:20px;">
@@ -18,15 +19,15 @@
     <!-- End Serch Box   -->
 
     <div class="panel-body">
-        <button class="btn col-xs-12" id="add-branch" type="button">
-            Create Branch
+        <button class="btn col-xs-12" id="add-subject"  type="button">
+            Create Subject
         </button>
     </div>
-    {{#each branchDetails}}
+    {{#each subjData}}
 
         <div class="input-group hide">
             <span class="input-group-addon"><i class="fa fa-graduation-cap" aria-hidden="true"></i></span>
-            <input id="branchParant" type="taxt" value="{{this._id}}" class="form-control" name="branchParant" placeholder="Course Name"
+            <input id="subjectParant" type="taxt" value="{{this._id}}" class="form-control" name="subjectParant" placeholder="Course Name"
                    required="hello">
 
         </div>
@@ -34,7 +35,7 @@
             {{#each this.children}}
                 <div class="col-sm-12 col-md-12">
                     <div class="thumbnail">
-                        <button style="border:0px;width: 100%" value="{{this}}" onclick="parantbranch(this)" >
+                        <button style="border:0px;width: 100%" value="{{this}}" >
                             <div class="caption" >
                                 <h3 class="text-center"  >{{this}}</h3>
                             </div>

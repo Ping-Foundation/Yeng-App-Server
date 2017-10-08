@@ -303,6 +303,70 @@ $(document).ready(function () {
 
 });
 
+function parantbranch(objBranch) {
+    $("#loading_gif").show();
+    $.ajax({
+        url:"/syllabus/course/sem/branch/subj/"+objBranch.value,
+        method:"get",
+        data:{
+
+        },
+        success:function (data,txtStataus,jqXHR) {
+            console.log(objBranch.value+" view page enterd");
+            $("#loading_gif").hide();
+            $("#body").html(data);
+        }
+
+    });
+}
+$(document).ready(function () {
+    $('#add-subject').on('click',function () {
+        $("#loading_gif").show();
+        var objSubParant=document.getElementById('subjectParant').value;
+        $.ajax({
+            url:"/syllabus/course/sem/branch/addsubj/"+objSubParant,
+            method:"get",
+            data:{
+
+            },
+            success:function (data,txtStataus,jqXHR) {
+                console.log(objSubParant.value+" view page enterd");
+                $("#loading_gif").hide();
+                $("#body").html(data);
+            }
+        });
+    });
+});
+$(document).ready(function () {
+    $("#create-sub").on('click',function () {
+        $("#loading_gif").show();
+        var course=document.getElementById('inputcrs').value;
+        var sem=document.getElementById('inputsm').value;
+        var branch=document.getElementById('inputbr').value;
+        var objbranch=document.getElementById('inputsub').value;
+        var subject=document.getElementById('inputsub').value;
+        var files=document.getElementById('pdf').value;
+        //var datafile=this.file[0];
+        $.ajax({
+            url:"/syllabus/course/sem/branch/addsubj/"+objbranch,
+            method:"post",
+            data:{
+                inputsub:subject,
+                inputbr:branch,
+                inputsm:sem,
+                inputcrs:course,
+                pdf:files
+
+            },
+            suceess:function (data,txtStataus,jqXHR) {
+                console.log(objbranch+" view page enterd");
+                $("#loading_gif").hide();
+                $("#body").html(data);
+            }
+        });
+    });
+});
+
 function editCourse(objButton) {
     console.log(objButton.value);
     $("#loading_gif").show();

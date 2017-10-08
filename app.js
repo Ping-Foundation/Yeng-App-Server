@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var db=require('./model/db');
 var session=require('express-session');
 var hbs=require('express-handlebars');
+var fileUpload=require('express-fileupload');
 
 
 var admin=require('./routes/admin');
@@ -34,6 +35,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret: 'secretkey'}));
+app.use(fileUpload());
 
 app.get('/getnews',news.getnews);
 app.get('/getspecificnews/:id',news.getspecificnews);
@@ -67,11 +69,14 @@ app.get('/syllabus/course/sem/:course',syllabus.viewSemester);
 app.get('/syllabus/course/addSem/:courseparant',syllabus.addSemester);
 app.get('/syllabus/course/sem/branch/:sem',syllabus.viewbranch);
 app.get('/syllabus/course/sem/addbranch/:sem',syllabus.addbranch);
+app.get('/syllabus/course/sem/branch/subj/:subj',syllabus.viewSubj);
+app.get('/syllabus/course/sem/branch/addsubj/:subj',syllabus.addSubj);
 
 app.post('/syllabus/course/new',syllabus.docoursecreate);
 app.post('/syllabus/course/:course',syllabus.doeditCourse);
 app.post('/syllabus/course/addSem/:courseparant',syllabus.doaddSemester);
 app.post('/syllabus/course/sem/addbranch/:sem',syllabus.doaddbranch);
+app.post('/syllabus/course/sem/branch/addsubj/:subj',syllabus.doaddSubj);
 
 
 // catch 404 and forward to error handler
