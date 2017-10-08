@@ -1,14 +1,32 @@
+<div class="row">
+    <div class="col-xs-6 col-md-6">
+        <div class="col-md-6 news_search" style="width: 60%">
+                <div class="input-group">
+                    <input class="form-control" placeholder="Search" name="news_sear" id="news_sear" type="text">
+                    <div class="input-group-btn">
+                        <button class="btn btn-primary" id="news_sear_btn"><i class="glyphicon glyphicon-search"></i>
 
-<h2>View News & Updates</h2>
+                        </button>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div class="col-xs-6 col-md-6">
+        <button type="button" class="btn btn-default btn-sm " id="news_add">
+            <span class="glyphicon glyphicon-plus"></span> New
+        </button>
+    </div>
+</div>
+
+<br>
 <div class="row">
     <div class="col-xs-6 col-md-6 news_list">
         <div class="news_box">
         <form id="NewsAndUpdates" method="get" action="" class="form-group">
             {{#each news}}
-
-
                 <ul class="list-group">
-                    <a href="#" class="news"><li class="list-group-item" id="{{this._id}}">
+                    <a href="#" class="news" style="text-decoration: none"><li class="list-group-item news_items" id="{{this._id}}">
+
                         <h4>{{this.Tittle}}</h4>
                     <div class="d-flex w-100 justify-content-between">
                         <small>{{this.DisplayDate}}</small>
@@ -24,7 +42,7 @@
     </div>
 
 </div>
-    <div class="col-xs-6 col-md-6" id="news-details">
+    <div class="col-xs-6 col-md-6" id="news_details">
         <img src="/images/loading.gif" class="img-responsive" id="loading_gif">
     </div>
 
@@ -38,6 +56,11 @@
 
         $('#{{this._id}}').on('click', function(){
             $("#loading_gif").show();
+            $(".news_items").css("background","#fff");
+            $(".news_items").css("color","#cc0052");
+            $(this).css("background","#18a39c");
+            $(this).css("color","#fff");
+
             $.ajax({
                 url: "/news/detailedview/{{this._id}}",
                 method: "GET",
@@ -48,9 +71,9 @@
                 success: function(data, textStatus, jqXHR) {
                     console.log("succes");
                     console.log(data);
-                    $("#loading_gif").show();
-                    $("#news-details").show();
-                    $("#news-details").html(data);
+
+                    $("#loading_gif").hide();
+                    $("#news_details").html(data);
 
 
 

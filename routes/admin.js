@@ -156,3 +156,15 @@ exports.delete=function (req,res) {
 
 
 };
+exports.details=function (req,res,next) {
+    console.log(req.params.id);
+    admin.findById(req.params.id,function (err,admin) {
+        if(!err){
+            console.log(admin);
+            res.render('detailed-admin-view',{'admin':admin,layout:false});
+        }
+        console.log(err);
+
+
+    })
+}

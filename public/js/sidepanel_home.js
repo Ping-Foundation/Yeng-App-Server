@@ -1,10 +1,19 @@
-/*add news&updates*/
+
+// side navigation menu
+//////////////////////////////////
+
 $(document).ready(function(){
 
-    $('#add-news').on('click', function(){
+    $('.side_menu').on('click', function(){
+        var value=$(this).val();
+        console.log(value);
+        $(".side_menu").css("background-color","transparent");
+        $(".side_menu").css("color","black");
+        $(this).css("background-color","#18a39c");
+        $(this).css("color","#fff");
         $("loading_gif").show();
         $.ajax({
-            url: "/news/add",
+            url: value,
             method: "GET",
             data: {
 
@@ -13,15 +22,8 @@ $(document).ready(function(){
             success: function(data, textStatus, jqXHR) {
                 $("#loading_gif").hide();
                 console.log("succes");
-                console.log(data);
+
                 $("#body").html(data);
-                $("#items li").css("background-color","transparent");
-               $("#add-news").css("background-color","#18a39c");
-
-               $("#items a").css("color","black");
-                $("#add-news a").css("color","#fff");
-
-
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log("error");
@@ -30,127 +32,84 @@ $(document).ready(function(){
 
     });
 });
-/*view news&updates*/
-$(document).ready(function(){
+//////////////////
+/*add news*/
 
-    $('#view-news').on('click', function(){
-        $("#loading_gif").show();
-        $.ajax({
-            url: "/news/view",
-            method: "GET",
-            data: {
-
-            },
-
-            success: function(data, textStatus, jqXHR) {
-                console.log("succes");
-                console.log(data);
-                $("#loading_gif").hide();
-                $("#body").html(data);
-                $("#items li").css("background-color","transparent");
-                $("#view-news").css("background-color","#18a39c");
-
-                $("#items a").css("color","black");
-                $("#view-news a").css("color","#fff");
-
-
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log("error");
-            }
-        });
-
-    });
-});
-
-/*view admin details*/
-$(document).ready(function(){
-
-    $('#view-admin').on('click', function(){
-        $("#loading_gif").show();
-        $.ajax({
-            url: "/admin/view",
-            method: "GET",
-            data: {
-
-            },
-
-            success: function(data, textStatus, jqXHR) {
-                console.log("succes");
-                console.log(data);
-                $("#loading_gif").hide();
-                $("#body").html(data);
-                $("#items li").css("background-color","transparent");
-                $("#view-admin").css("background-color","#18a39c");
-
-                $("#items a").css("color","black");
-                $("#view-admin a").css("color","#fff");
-
-
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log("error");
-            }
-        });
-
-    });
-});
-/*add new admin*/
-$(document).ready(function(){
-
-    $('#add-admin').on('click', function(){
-        $("#loading_gif").show();
-        $.ajax({
-            url: "/admin/new",
-            method: "GET",
-            data: {
-
-            },
-
-            success: function(data, textStatus, jqXHR) {
-                console.log("succes");
-                console.log(data);
-                $("#loading_gif").hide();
-                $("#body").html(data);
-                $("#items li").css("background-color","transparent");
-                $("#add-admin").css("background-color","#18a39c");
-
-                $("#items a").css("color","black");
-                $("#add-admin a").css("color","#fff");
-
-
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log("error");
-            }
-        });
-
-    });
-});
-
-
-
-
-
-
-function delet() {
-    confirm("Confirm Delete?");
-}
-
-/*cancel edit news*/
 $(document).ready(function () {
-    $("#cancel_edit").click(function () {
-        $("#news-details").hide();
-        console.log("success");
-    });
-});
-/*cancel change password*/
+    $("#news_add").click(function () {
+        $.ajax({
+            url: '/news/add',
+            method: "GET",
+            data: {
+
+            },
+
+            success: function(data, textStatus, jqXHR) {
+                $("#loading_gif").hide();
+                console.log("succes");
+
+                $("#news_details").html(data);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log("error");
+            }
+        });
+    })
+})
+//////////////////////////
+/*add admin page*/
 $(document).ready(function () {
-    $("#cancel_change").click(function () {
-        $("#change_pswd").hide();
-        console.log("success");
+    $("#admin_add").click(function () {
+        $.ajax({
+            url: '/admin/new',
+            method: "GET",
+            data: {
+
+            },
+
+            success: function(data, textStatus, jqXHR) {
+                $("#loading_gif").hide();
+                console.log("succes");
+
+                $("#admin_details").html(data);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log("error");
+            }
+        });
+    })
+})
+
+
+
+/*search news*/
+
+$(document).ready(function () {
+    $("#news_sear_btn").click(function () {
+        var value=$("#news_sear").val();
+        alert(value);
+
+        $.ajax({
+            url: "/news/search",
+            method: "GET",
+            data: {
+                "news-title":value
+            },
+
+            success: function(data, textStatus, jqXHR) {
+                $("#loading_gif").hide();
+                console.log("succes");
+
+                $("#body").html(data);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log("error");
+            }
+        });
     });
+
 });
+
 
 
 

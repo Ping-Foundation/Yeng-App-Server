@@ -89,18 +89,28 @@
   }
 }
 #items li{
-  transition: 2s;
+  transition: 1s;
   background: transparent;
   background-size: 200%;
 
 }
-#items li:hover{
+#items button:hover{
   background:#18a39c;
+  color: #fff;
 }
 #items a{
   color:black;
   font-weight: 600;
 }
+#items button{
+  color:black;
+  font-weight: 600;
+  width: 100%;
+  text-align: left;
+  height: 40px;
+  border:none;
+}
+
 #bold{
   font-weight: 700;
 }
@@ -108,8 +118,8 @@
   color:#cc0052;
 }
 .news{
-
   color: #cc0052;
+
 
 
 }
@@ -134,10 +144,7 @@
 .input input{
   border-radius: 0;
 }
-.news_list{
-  border-right:solid;
-  border-color: #18a39c;
-}
+
 .account{
   margin-top: 30px;
   margin-left: 30px;
@@ -159,3 +166,25 @@
 #loading_gif{
   display: none;
 }
+
+
+.news_li{
+  border: none;
+  background: none;
+}
+.news_list{
+  height:500px;
+  overflow-y: scroll;
+}
+.news_search{
+  margin-left:-16px;
+  width:60%;
+}
+.admin_li{
+  color: #cc0052;
+}
+.add_admin_form{
+  width:200%;
+}
+
+

@@ -1,6 +1,4 @@
-/**
- * Created by navina on 11/10/16.
- */
+
 var mongoose=require('mongoose');
 var news=mongoose.model('news');
 
@@ -179,3 +177,4 @@ var onEditSave = function (req, res, err, news) {
         res.redirect('/adminhome')
     }
 };
+

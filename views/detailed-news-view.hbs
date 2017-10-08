@@ -1,6 +1,6 @@
 
 <div class="row">
-    <div class="col-xs-12 col-md-12">
+    <div class="col-xs-10 col-md-10 col-xs-offset-1 col-md-offset-1">
         <h3>{{Tittle}}</h3>
         <br>
         <p style="color: #18a39c" id="bold">{{News}}</p>
@@ -14,6 +14,7 @@
     </div>
 
 </div>
+
 <script src="/js/sidepanel_home.js"></script>
 <!--
 edit news display-->
@@ -34,8 +35,8 @@ edit news display-->
     console.log("succes");
     console.log(data);
         $("#loading_gif").hide();
-    $("#news-details").show();
-    $("#news-details").html(data);
+    $("#news_details").show();
+    $("#news_details").html(data);
 
 
 

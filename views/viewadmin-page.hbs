@@ -1,64 +1,86 @@
-<h3>Admin Details</h3>
+<h3>Admins</h3>
 <div class="row">
-    <div class="col-xs-12 col-md-6">
-        {{#each admin}}
-        <table class="table">
-            <tr><td><h5><span id="color">Email:</span></h5></td><td><h5>{{this.Email}}</h5></td></tr>
-            <tr><td><h5><span id="color"> Created On: </span></h5></td><td><h5>{{this.CreatedOn}}</h5></td></tr>
-            <tr><td><h5><span id="color">Modified On: </span></h5></td><td><h5>{{this.ModifiedOn}}</h5></td></tr>
-            <tr><td><h5><span id="color">Last login: </span></h5></td><td><h5>{{this.LastLogin}}</h5></td></tr>
-        </table>
-            <button class="btn admin_det_btn" id="change{{this._id}}" style="float:left"><b>Change Password</b></button>
-            <form method='get' action='/admin/changepassword/{{this.Email}}' style="float:left">
+    <div class="col-xs-6 col-md-6">
+        <div class="col-md-6 admin_search" style="width: 60%;margin-left: -15px">
+            <div class="input-group">
+                <input class="form-control" placeholder="Search" name="news_sear" id="admin_sear" type="text">
+                <div class="input-group-btn">
+                    <button class="btn btn-primary" id="admin_sear_btn"><i class="glyphicon glyphicon-search"></i>
 
-            </form>
-            <form method='get' action='/admin/delete/{{this._id}}' onsubmit="return confirm('Confirm Delete?');">
-                <button type="submit" class="btn admin_det_btn" style="margin-left:100px"><b>Delete</b></button>
-            </form>
-            <br>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-6 col-md-6">
+        <button type="button" class="btn btn-default btn-sm" id="admin_add">
+            <span class="glyphicon glyphicon-plus"></span> New
+        </button>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-xs-12 col-md-6" style="overflow-y: scroll">
+        {{#each admin}}
+            <ul class="list-group">
+                <a style="text-decoration: none" href="#" class="admin"><li class="list-group-item admin_li" id="{{this._id}}">
+                    <h4>{{this.Email}}</h4>
+                </li>
+                </a>
+
+            </ul>
+
         {{/each}}
     </div>
     <div class="col-xs-12 col-md-6">
-        <div id="change_pswd" class="border-left">
+        <div id="admin_details">
             <img src="/images/loading.gif" class="img-responsive" id="loading_gif">
         </div>
     </div>
 </div>
 <script src="/js/sidepanel_home.js"></script>
-<!--change password display-->
+
+<!--detailed view of admin-->
 <script type="text/javascript">
-    {{#each admin}}
-    $(document).ready(function(){
+        {{#each admin}}
+        $(document).ready(function(){
 
-        $('#change{{this._id}}').on('click', function(){
-            $("#loading_gif").show();
-            $.ajax({
-                url: "/admin/changepassword/{{this.Email}}",
-                method: "GET",
-                data: {
+            $('#{{this._id}}').on('click', function(){
+                $("#loading_gif").show();
+                $(".admin_li").css("background","#fff");
+                $(".admin_li").css("color","#cc0052");
+                $(this).css("background","#18a39c");
+                $(this).css("color","#fff");
 
-                },
+                $.ajax({
+                    url: "/admin/details/{{this._id}}",
+                    method: "GET",
+                    data: {
 
-                success: function(data, textStatus, jqXHR) {
-                    console.log("succes");
-                    console.log(data);
-                    $("#loading_gif").hide();
-                    $("#change_pswd").show();
-                    $("#change_pswd").html(data);
+                    },
+
+                    success: function(data, textStatus, jqXHR) {
+                        console.log("succes");
+                        console.log(data);
+                        $("#loading_gif").hide();
+                        $("#admin_details").show();
+                        $("#admin_details").html(data);
 
 
 
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log("error");
-                }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log("error");
+                    }
+                });
+
             });
-
         });
-    });
-    {{/each}}
+        {{/each}}
 
 </script>
+
+
 
 
 
