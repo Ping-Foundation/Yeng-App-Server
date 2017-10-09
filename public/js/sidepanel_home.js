@@ -338,15 +338,16 @@ $(document).ready(function () {
     });
 });
 $(document).ready(function () {
-    $("#create-sub").on('click',function () {
+    $("#create-subject").on('click',function () {
         $("#loading_gif").show();
         var course=document.getElementById('inputcrs').value;
         var sem=document.getElementById('inputsm').value;
         var branch=document.getElementById('inputbr').value;
         var objbranch=document.getElementById('inputsub').value;
         var subject=document.getElementById('inputsub').value;
-        var files=document.getElementById('pdf').value;
-        //var datafile=this.file[0];
+        var pdf=document.getElementById('pdf').value;
+        //var file=pdf.files[0];
+        //var formData=new formData($(this).form);
         $.ajax({
             url:"/syllabus/course/sem/branch/addsubj/"+objbranch,
             method:"post",
@@ -355,7 +356,7 @@ $(document).ready(function () {
                 inputbr:branch,
                 inputsm:sem,
                 inputcrs:course,
-                pdf:files
+                pdf:pdf
 
             },
             suceess:function (data,txtStataus,jqXHR) {

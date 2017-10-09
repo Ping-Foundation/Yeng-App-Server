@@ -8,29 +8,35 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-sm-8 col-md-6">
-                <div class="form-group">
-                    <label for="inputsm">Course Name</label>
-                    <input class="form-control input-sm" value="{{courseName}}" id="inputcrs" name="inputcrs" type="text" disabled>
-                </div>
-                <div class="form-group">
-                    <label for="inputsm">Semester Name</label>
-                    <input class="form-control input-sm" value="{{semName}}" id="inputsm" name="inputsm" type="text" disabled>
-                </div>
-                <div class="form-group">
-                    <label for="inputsm">Branch Name</label>
-                    <input class="form-control input-sm" value="{{brName}}" id="inputbr" name="inputsm" type="text" disabled>
-                </div>
-                <div class="form-group">
-                    <label for="inputsm">Subject Name</label>
-                    <input class="form-control input-sm" id="inputsub" name="inputsub" type="text" placeholder="Subject Name" required>
-                </div>
+                <form method="post" action="/syllabus/course/sem/branch/addsubj/{{brName}}" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="inputsm">Course Name</label>
+                        <input class="form-control input-sm" value="{{courseName}}" id="inputcrs" name="inputcrs"
+                               type="text" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputsm">Semester Name</label>
+                        <input class="form-control input-sm" value="{{semName}}" id="inputsm" name="inputsm" type="text"
+                               disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputsm">Branch Name</label>
+                        <input class="form-control input-sm" value="{{brName}}" id="inputbr" name="inputsm" type="text"
+                               disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputsm">Subject Name</label>
+                        <input class="form-control input-sm" id="inputsub" name="inputsub" type="text"
+                               placeholder="Subject Name" required>
+                    </div>
 
-                <div class="fileinput fileinput-new" id="formInfo">
-                    <input type="file" id="pdf" name="pdf-file" multiple  >
-                </div>
-                <div class="form-group">
-                    <button type="button" id="create-sub" class="btn btn-success pull-right">Create Subject</button>
-                </div>
+                    <div class="fileinput fileinput-new" id="formInfo">
+                        <input type="file" name="pdffile" >
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" id="create-sub" class="btn btn-success pull-right">Create Subject</button>
+                    </div>
+                </form>
 
             </div>
         </div>

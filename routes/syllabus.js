@@ -3,7 +3,7 @@
  */
 var mongoose = require('mongoose');
 var syllabus = mongoose.model('syllabus_pdf');
-var fileUpload=require('express-fileupload')
+//var fileUpload=require('express-fileupload')
 var mkdir=require('mkdirp');
 
 //var fs=require('fs-extra');
@@ -212,62 +212,21 @@ exports.addSubj=function (req,res) {
     });
 }
 exports.doaddSubj=function (req,res) {
-    var objSub=req.body.inputsub;
-    var objbr=req.body.inputbr;
-    var objsem=req.body.inputsm;
-    var objCourse=req.body.inputcrs;
-    var sujID=objbr+"_"+objSub;
-    var strlocation=objCourse+"/"+objsem+"/"+objbr+"/"+objSub;
-    console.log(objSub);
-    console.log(objbr);
-    console.log(objsem);
-    console.log(objCourse);
-    console.log(req.body.pdf);
-    if(req.body.pdf) {
-        syllabus.findOne({children: sujID}, function (err, data) {
-            if (!err) {
-                if (!data) {
-                    console.log("i am here");
-                    syllabus.update(
-                        {
-                            _id: objbr
-                        },
-                        {
-                            $addToSet: {
-                                children: sujID
-                            }
+    //var objSub=req.body.inputsub;
+    //var objbr=req.body.inputbr;
+    //var objsem=req.body.inputsm;
+    //var objCourse=req.body.inputcrs;
+    //var sujID=objbr+"_"+objSub;
+    //var strlocation=objCourse+"/"+objsem+"/"+objbr+"/"+objSub;
+    //console.log(objSub);
+    //console.log(objbr);
+    //console.log(objsem);
+    //console.log(objCourse);
+    console.log("file Upload");
+    //var filename=req.body.pdf.files[0];
+    console.log(req.files);
 
-                        }, function (err, syllabus) {
-                            if (!err) {
-                                //console.log(sujID.name)
-                                var subjectFile=req.body.pdf;
-                                console.log(subjectFile);
-                                subjectFile.mv('Syllabus'+'/'+subjectFile.name,function (err) {
-                                    if(err){
-                                        console.log(err)
-                                    }else {
 
-                                        res.send('file Uploaded !')
-                                    }
-                                });
-
-                            }
-                            else {
-                                console.log(err);
-                            }
-                        });
-                } else {
-                    console.log("Subject Alredy exist");
-                }
-
-            } else {
-                console.log(err);
-            }
-        });
-    }
-    else{
-        return res.status(400).send('No File were Uploaded');
-    }
 }
 /*Create Directory for Creating Course (Abu 2-10-2017)*/
 function createDirectory(path,child){
@@ -279,6 +238,7 @@ function createDirectory(path,child){
             console.log("Created Succes");
     });
 }
+
 
 function CreateCourse(parant,child,req,res,path){
     syllabus.findOne({_id: parant}, function (err, data) {
