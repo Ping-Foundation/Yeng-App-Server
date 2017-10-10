@@ -338,14 +338,14 @@ $(document).ready(function () {
     });
 });
 $(document).ready(function () {
-    $("#create-subject").on('click',function () {
+    $("#create-sub").on('click',function () {
         $("#loading_gif").show();
         var course=document.getElementById('inputcrs').value;
         var sem=document.getElementById('inputsm').value;
         var branch=document.getElementById('inputbr').value;
         var objbranch=document.getElementById('inputsub').value;
         var subject=document.getElementById('inputsub').value;
-        var pdf=document.getElementById('pdf').value;
+        //var pdf=document.getElementById('pdf').value;
         //var file=pdf.files[0];
         //var formData=new formData($(this).form);
         $.ajax({
@@ -356,13 +356,14 @@ $(document).ready(function () {
                 inputbr:branch,
                 inputsm:sem,
                 inputcrs:course,
-                pdf:pdf
+                //pdf:pdf
 
             },
-            suceess:function (data,txtStataus,jqXHR) {
+            success:function (data,txtStataus,jqXHR) {
                 console.log(objbranch+" view page enterd");
                 $("#loading_gif").hide();
                 $("#body").html(data);
+                alert('Success!');
             }
         });
     });

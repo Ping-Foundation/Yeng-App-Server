@@ -2,9 +2,7 @@
     <li><a  href="#">Syllabus</a></li>
     <li><a href="#">Course</a></li>
     <li><a href="#">Semester</a></li>
-    <li><a href="#">Branch</a></li>
-    <li><a href="#">Subject</a></li>
-    <div class="panel-body sy-menu text-center  " style="color:#ffffff;font-size: 20px;">SUJECT DETAILS</div>
+    <div class="panel-body sy-menu text-center  " style="color:#ffffff;font-size: 20px;">SEMESTER DETAILS</div>
     <!--  Serch Box   -->
     <div id="custom-search-input">
         <div class="input-group col-md-12" style="padding:20px;">
@@ -19,24 +17,23 @@
     <!-- End Serch Box   -->
 
     <div class="panel-body">
-        <button class="btn col-xs-12" id="add-subject"  type="button">
-            Create Subject
+        <button class="btn col-xs-12" id="add-sem" type="button">
+            Create Sem
         </button>
     </div>
-    {{#each subjData}}
+    {{#each pdfDetails}}
 
         <div class="input-group hide">
             <span class="input-group-addon"><i class="fa fa-graduation-cap" aria-hidden="true"></i></span>
-            <input id="subjectParant" type="taxt" value="{{this._id}}" class="form-control" name="subjectParant" placeholder="Course Name"
+            <input id="ParantCourse" type="taxt" value="{{this._id}}" class="form-control" name="ParantCourse" placeholder="Course Name"
                    required="hello">
 
         </div>
-    <button></button>
         <div class="row">
             {{#each this.children}}
-                <div class="col-sm-12 col-md-12">
+                <div class="col-sm-6 col-md-4">
                     <div class="thumbnail">
-                        <button style="border:0px;width: 100%" value="{{this}}" onclick="parantpdf(this)" >
+                        <button style="border:0px;width: 100%" value="{{this}}" onclick="parantSem(this)">
                             <div class="caption" >
                                 <h3 class="text-center"  >{{this}}</h3>
                             </div>

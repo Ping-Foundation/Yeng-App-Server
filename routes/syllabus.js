@@ -212,19 +212,22 @@ exports.addSubj=function (req,res) {
     });
 }
 exports.doaddSubj=function (req,res) {
-    //var objSub=req.body.inputsub;
-    //var objbr=req.body.inputbr;
-    //var objsem=req.body.inputsm;
-    //var objCourse=req.body.inputcrs;
+    var objSub=req.body.inputsub;
+    var objbr=req.body.inputbr;
+    var objsem=req.body.inputsm;
+    var objCourse=req.body.inputcrs;
     //var sujID=objbr+"_"+objSub;
-    //var strlocation=objCourse+"/"+objsem+"/"+objbr+"/"+objSub;
+
     //console.log(objSub);
     //console.log(objbr);
     //console.log(objsem);
     //console.log(objCourse);
-    console.log("file Upload");
+    //console.log("file Upload");
     //var filename=req.body.pdf.files[0];
-    console.log(req.files);
+    //console.log(req.files);
+    var subjID=objbr+"_"+objSub;
+    var path=objCourse+"/"+objsem+"/"+objbr+"/"+subjID;
+    CreateCourse(objbr,subjID,req,res,path);
 
 
 }
