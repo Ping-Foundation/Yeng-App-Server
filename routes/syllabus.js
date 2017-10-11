@@ -47,16 +47,11 @@ exports.coursecreate = function (req, res) {
     res.render('syllabus/addcourse', {layout: false,titlecr:"Create Course"});
 }
 /*Abu Created Create Course 1-10-2017*/
+/*modified create 11-10-2017*/
 exports.docoursecreate = function (req, res) {
-    if (req.body.course.trim() == "") {
-
-    }
-    else {
-        var path=req.body.course;
-        console.log(path);
-        CreateCourse("Syllabus",req.body.course,req,res,path);
-        //CreateCourse(req.body.course,"",req,res)
-    }
+    var path=req.body.course;
+    console.log(path);
+    CreateCourse("Syllabus",req.body.course,req,res,path);
 }
 
 exports.editCourse=function (req,res) {
@@ -130,14 +125,15 @@ exports.addSemester=function (req,res) {
     })
     console.log(objParantCourse);
 }
+/*modified create 11-10-2017*/
 exports.doaddSemester=function (req,res) {
     //console.log("i am here");
-    //console.log(req.body.name);
+    //console.log(req.body.course);
     //console.log(req.body.sem);
-    var semNAme=req.body.name+"_"+req.body.sem
+    var semNAme=req.body.course+"_"+req.body.sem
     //var path=req.body.name+"/"+req.body.sem; // under folder name same like Sem Name no extension
-    var path=req.body.name+"/"+semNAme;
-    CreateCourse(req.body.name,semNAme,req,res,path);
+    var path=req.body.course+"/"+req.body.sem;
+    CreateCourse(req.body.course,semNAme,req,res,path);
 
 
 }
@@ -169,13 +165,15 @@ exports.addbranch=function (req,res) {
         }
     });
 }
+/*modified create 11-10-2017*/
 exports.doaddbranch=function (req,res) {
-    console.log(req.body.course);
-    console.log(req.body.sem);
-    console.log(req.body.branch);
-    var brname=req.body.sem+"_"+req.body.branch
-    var path=req.body.course+"/"+req.body.sem+"/"+brname;
-    CreateCourse(req.body.sem,brname,req,res,path);
+    //console.log(req.body.course);
+    //console.log(req.body.sem);
+    //console.log(req.body.branch);
+
+    var brname=req.body.course+"_"+req.body.sem+"_"+req.body.branch
+    var path=req.body.course+"/"+req.body.sem+"/"+req.body.branch;
+    CreateCourse(req.body.course+"_"+req.body.sem,brname,req,res,path);
 
 }
 exports.viewSubj=function (req,res) {
@@ -253,7 +251,9 @@ function CreateCourse(parant,child,req,res,path){
                 if (!err) {
                     //var path=parant+"/"+child
                     createDirectory(path,child);
-                    res.redirect('/adminhome');
+                    res.redirect( '#' );
+                    //return done(null, false, {message: 'syllabus Create succes'});
+                    //return true;
 
                 }
                 else {
@@ -275,7 +275,8 @@ function CreateCourse(parant,child,req,res,path){
                     }, function (err, syllabus) {
                         if (!err) {
                             createDirectory(path,child);
-                            res.redirect('/adminhome');
+                            res.redirect( '#' );
+                            //return done(null, false, {message: 'syllabus Create succes'});
                         }
                         else {
                             console.log(err);
@@ -284,7 +285,8 @@ function CreateCourse(parant,child,req,res,path){
             }
             else {
                 console.log("Course Allredy Exists");
-                res.redirect('/adminhome');
+                res.redirect( '#' );
+                //return done(null, false, {message: 'syllabus Create succes'});
             }
 
         }

@@ -337,6 +337,9 @@ $(document).ready(function () {
         });
     });
 });
+
+
+
 $(document).ready(function () {
     $("#create-sub").on('click',function () {
         $("#loading_gif").show();
@@ -411,6 +414,7 @@ function doeditCourse(){
     });
 
 }
+
 /*
 $(document).ready(function () {
     $('#editCoursetext').click(function () {
@@ -452,7 +456,65 @@ $(document).ready(function () {
 });
 
 
+/* Started new method for add syllabus (ABU 10-10-2017)*/
 
+function docr() {
+    $('#loading_gif').show();
+    /* Loader not working */
+    //debugger
+    var objCourse=document.getElementById('txtCourse').value;
+    $.ajax({
+        url:"/syllabus/course/new",
+        method:"post",
+        data:{
+            course:objCourse
+
+        },success:function (data) {
+            alert("Poda");
+            for (var x =0;x <$('#semTable input.semobj').length;x++){
+                var sem=$('#semTable input.semobj')[x].value;
+                alert(sem);
+                $.ajax({
+                    url:"/syllabus/course/sem/new",
+                    method:"post",
+                    data:{
+                        course:objCourse,
+                        sem:sem
+                    },
+                    success:function (data) {
+                        //alert(data);
+                        for (var x = 0; x < $('#semTable input.semobj').length; x++) {
+                            var objsem = $('#semTable input.semobj')[x].value;
+                            for (var y = 0; y < $('#brTable input.semobj').length; y++) {
+                                var br = $('#brTable input.semobj')[y].value;
+                                alert(br);
+                                $.ajax({
+                                    url: "/syllabus/course/sem/branch/new",
+                                    method: "post",
+                                    data: {
+                                        course: objCourse,
+                                        sem: objsem,
+                                        branch: br
+                                    },
+                                    success: function (data, txtStataus, jqXHR) {
+                                        console.log("Done");
+                                    }
+                                });
+
+                            }
+                        }
+                    }
+
+                });
+                //console.log(    $('#semTable input.semobj')[x].value)
+            }
+            alert("Course Created Succes")
+
+        }
+    });
+
+
+}
 
 
 

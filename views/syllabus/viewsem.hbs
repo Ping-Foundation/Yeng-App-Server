@@ -35,7 +35,15 @@
                     <div class="thumbnail">
                         <button style="border:0px;width: 100%" value="{{this}}" onclick="parantSem(this)">
                             <div class="caption" >
-                                <h3 class="text-center"  >{{this}}</h3>
+                                <script>
+                                    var objSem={{this}};
+                                    var split=objSem.split("_");
+                                    //var SemName=split[objSem.index-1];
+                                    console.log(split);
+                                   // document.getElementById("{{this}}").value=SemName;
+
+                                </script>
+                                <h3 class="text-center" >{{this}}</h3>
                             </div>
                         </button>
                         <div class="panel-body sy-menu"  style="height: 40px;">
