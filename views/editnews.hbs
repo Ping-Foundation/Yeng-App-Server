@@ -10,10 +10,25 @@
              <br>
             <textarea id="News" name="News" class="form-control" style="width: 45%" required>{{News}}</textarea>
              <br>
-            <input type="text" name="DisplayDate" id="DisplayDate" class="date" value="{{DisplayDate}}" required>
-             <br><br>
-            <input type="text" name="EndDate" id="EndDate" class="date" value="{{EndDate}}" required>
-            <br><br><button type="submit" class="btn btn-success"><b>Save</b></button>
+            <!--<input type="text" name="DisplayDate" id="DisplayDate" class="date" value="{{DisplayDate}}" required>-->
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='date' class="form-control" name="DisplayDate" placeholder="Display Date" value="{{DisplayDate}}" required>
+                    <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                </div>
+            </div>
+            <!--<input type="text" name="EndDate" id="EndDate" class="date" value="{{EndDate}}" required>-->
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker2'>
+                    <input type='date' class="form-control" name="EndDate" placeholder="End Date" value="{{EndDate}}" required>
+                    <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                </div>
+            </div>
+            <br><button type="submit" class="btn btn-success"><b>Save</b></button>
 
 
 
@@ -24,8 +39,11 @@
 </div>
 
 <script src="/js/sidepanel_home.js"></script>
-<script>
-    $( function() {
-        $( ".date" ).datepicker({ dateFormat: 'dd-mm-yy' });
-    } );
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker1').datetimepicker();
+    });
+    $(function () {
+        $('#datetimepicker2').datetimepicker();
+    });
 </script>

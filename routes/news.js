@@ -10,16 +10,19 @@ var collections = ['news'];
 
 
 exports.add=function (req,res) {
+    if(req.session.loggedIn==false)
+        res.redirect('/');
     res.render("addnews-page",{layout:false});
 };
 exports.doAdd=function (req,res) {
+    if(req.session.loggedIn==false)
+        res.redirect('/');
     news.create({
         Tittle: req.body.Tittle,
         News:req.body.News,
         CreatedOn: Date.now(),
-        DisplayDate:Date.now(),
-        EndDate:Date.now(),
-        ModifiedOn: Date.now()
+        DisplayDate:req.body.DisplayDate,
+        EndDate:req.body.EndDate
     },function (err,news) {
         if(err){
             console.log(err);
@@ -38,6 +41,8 @@ exports.doAdd=function (req,res) {
     })
 };
 exports.view=function (req,res) {
+    if(req.session.loggedIn==false)
+        res.redirect('/');
     news.find(function(err, news) {
         keys=Object.keys(news);
         l=keys.length;
@@ -64,6 +69,8 @@ exports.getnews=function (req,res) {
 
 };
 exports.detailedview=function (req,res) {
+    if(req.session.loggedIn==false)
+        res.redirect('/');
     console.log(req.params.id);
     news.findOne({_id:req.params.id},function (err,news){
         if(!err){
@@ -176,5 +183,9 @@ var onEditSave = function (req, res, err, news) {
         console.log('news updated');
         res.redirect('/adminhome')
     }
+};
+
+exports.date=function (req,res,next) {
+    res.render('date');
 };
 

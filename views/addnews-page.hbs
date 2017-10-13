@@ -4,21 +4,39 @@
 <form class="form-group" id="addnewsandupdates" method="POST" action="/news/add">
     <input type="text" name="Tittle" id="Tittle" class="form-control" placeholder="Tittle" required>
     <br><textarea name="News" id="News" class="form-control" placeholder="Type News" required></textarea>
-    <br><input type="text" name="DisplayDate" id="DisplayDate" class="date" placeholder="Display Date" required>
+    <br><!--<input type="text" name="DisplayDate" id="DisplayDate" class="date" placeholder="Display Date" required>-->
+    <div class="form-group">
+        <div class='input-group date' id='datetimepicker1'>
+            <input type='date' class="form-control" name="DisplayDate" placeholder="Display Date" required>
+            <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class='input-group date' id='datetimepicker2'>
+            <input type='date' class="form-control" name="EndDate" placeholder="End Date" required>
+            <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+        </div>
+    </div>
 
-    <br><br><input type="text" name="EndDate" id="EndDate" class="date"  placeholder="End Date" required>
+    <br><br><!--<input type="text" name="EndDate" id="EndDate" class="date"  placeholder="End Date" required>-->
     <br><br><button type="submit" value="Submit" class="btn btn-success"><b>Submit</b></button>
 
+    <!--calender function-->
 </form>
 
-    <!--calender function-->
-
-    <script>
-
-        $( function() {
-
-            $( ".date" ).datepicker({ dateFormat: 'dd-mm-yy' });
-
-        } );
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker1').datetimepicker();
+        });
+        $(function () {
+            $('#datetimepicker2').datetimepicker();
+        });
     </script>
+
 </div>
+
+

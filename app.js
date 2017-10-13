@@ -55,6 +55,8 @@ app.get('/admin/delete/:id',admin.delete);
 app.get('/admin/details/:id',admin.details);
 app.get('/logout',admin.logout);
 
+app.get('/date',news.date);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

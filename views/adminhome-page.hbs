@@ -56,6 +56,10 @@ $(document).ready(function(){
 
 $(window).on('load',function(){
     $("#loading_gif").show();
+    $("#items li").css("background-color","transparent");
+    $("#items a").css("color","black");
+    $(".default").css("background-color","#18a39c");
+    $(".default").css("color","#fff");
 $.ajax({
 url: "/news/view",
 method: "GET",
@@ -68,13 +72,6 @@ console.log("succes");
 
     $("#loading_gif").hide();
 $("#body").html(data);
-$("#items li").css("background-color","transparent");
-$(".default").css("background-color","#18a39c");
-
-$("#items a").css("color","black");
-$("#view-news a").css("color","#fff");
-
-
 },
 error: function(jqXHR, textStatus, errorThrown) {
 console.log("error");

@@ -63,12 +63,16 @@ exports.index = function (req, res,next) {
     }
 };
 exports.create= function (req,res) {
+    if(!req.session.loggedIn)
+        res.redirect('/');
     res.render('addadmin', {
         title: 'Create admin',
         buttonText: "Add",layout:false
     });
 };
 exports.doCreate=function (req,res) {
+    if(!req.session.loggedIn)
+        res.redirect('/');
     admin.create({
         Email: req.body.Email,
         Password:req.body.Password,
@@ -92,6 +96,8 @@ exports.doCreate=function (req,res) {
 
 };
 exports.view=function (req,res) {
+    if(!req.session.loggedIn)
+        res.redirect('/');
     admin.find(function (err,admin) {
         keys=Object.keys(admin);
         console.log(keys);
@@ -107,11 +113,15 @@ exports.view=function (req,res) {
 };
 
 exports.changepassword= function (req,res) {
+    if(!req.session.loggedIn)
+        res.redirect('/');
     res.render('changepassword',{
         name:req.params.id,layout:false
     });
 };
 exports.dochangepassword=function (req,res) {
+    if(!req.session.loggedIn)
+        res.redirect('/');
     console.log("entered into changepassword");
     if (req.body.upassword==req.session.admin.Password){
         console.log("entered into loop");
@@ -146,6 +156,8 @@ exports.dochangepassword=function (req,res) {
     }
 };
 exports.delete=function (req,res) {
+    if(!req.session.loggedIn)
+        res.redirect('/');
     console.log(req.params.id);
     admin.remove({_id:req.params.id}, function(err,removed) {
           if (!err){
@@ -157,6 +169,8 @@ exports.delete=function (req,res) {
 
 };
 exports.details=function (req,res,next) {
+    if(!req.session.loggedIn)
+        res.redirect('/');
     console.log(req.params.id);
     admin.findById(req.params.id,function (err,admin) {
         if(!err){
@@ -170,5 +184,6 @@ exports.details=function (req,res,next) {
 }
 exports.logout=function (req,res,next) {
     req.session.admin=null;
+    req.session.loggedIn=false;
     res.redirect('/');
 }
