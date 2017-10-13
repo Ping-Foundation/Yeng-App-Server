@@ -1,7 +1,7 @@
 <div class="panel breadcrumb" style="background-color: #ffffff">
     <li><a  href="#">Syllabus</a></li>
     <li><a href="#">Course</a></li>
-    <li><a href="#">Semester</a></li>
+    <li><a href="#">{{Course}}</a></li>
     <div class="panel-body sy-menu text-center  " style="color:#ffffff;font-size: 20px;">SEMESTER DETAILS</div>
     <!--  Serch Box   -->
     <div id="custom-search-input">
@@ -21,28 +21,19 @@
             Create Sem
         </button>
     </div>
-    {{#each SemDetails}}
 
         <div class="input-group hide">
             <span class="input-group-addon"><i class="fa fa-graduation-cap" aria-hidden="true"></i></span>
-            <input id="ParantCourse" type="taxt" value="{{this._id}}" class="form-control" name="ParantCourse" placeholder="Course Name"
+            <input id="ParantCourse" type="taxt" value="{{Course}}" class="form-control" name="ParantCourse" placeholder="Course Name"
                    required="hello">
-
         </div>
         <div class="row">
-            {{#each this.children}}
+        {{#each SemDetails}}
                 <div class="col-sm-6 col-md-4">
                     <div class="thumbnail">
                         <button style="border:0px;width: 100%" value="{{this}}" onclick="parantSem(this)">
                             <div class="caption" >
-                                <script>
-                                    var objSem={{this}};
-                                    var split=objSem.split("_");
-                                    //var SemName=split[objSem.index-1];
-                                    console.log(split);
-                                   // document.getElementById("{{this}}").value=SemName;
 
-                                </script>
                                 <h3 class="text-center" >{{this}}</h3>
                             </div>
                         </button>
@@ -56,10 +47,9 @@
                         </div>
                     </div>
                 </div>
-            {{/each}}
-
+        {{/each}}
         </div>
-    {{/each}}
+
 
 </div>
 

@@ -4,30 +4,150 @@
     <li><a href="#">Edit Course</a></li>
     <div class="panel-body sy-menu text-center  " style="color:#ffffff;font-size: 20px;">{{titlecr}}</div>
     <div class="panel-body">
-        <div class="col-sm-8 col-md-6">
+        <div class="col-sm-8 col-md-12">
             <h2>Course Edit</h2>
-            <p>The form below contains two input elements; one of type text and one of type password:</p>
-            <div data-toggle="validator">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-graduation-cap" aria-hidden="true"></i></span>
-                    <input id="coursevalue" type="taxt" value="{{courseName}}" class="form-control" name="coursevalue" placeholder="Course Name"
-                           required="hello">
+            <table class="table">
+                <thead></thead>
+                <tbody>
+                <tr>
+                    <td class="td-left">
+                        <h5>Course</h5>
+                    </td>
+                    <td>
+                        <input type='text' id="txtCourse" value="{{courseName}}" name="txtCourse"
+                               placeholder="Enter Course Name">
+                    </td>
+                    <td>
+                        <input type="button" value="Update">
+                        <input type="button" value="Delete">
+                    </td>
+                </tr>
+                <tr>
+                    <table class="table">
+                        <thead></thead>
+                        <tbody id="smTable">
+                        {{#each semName}}
 
-                </div>
-                <div class="form-group" style="margin-top: 10px;">
-                    <button class="btn btn-danger" type="button">
-                        cancel
-                    </button>
-                    <button type="submit" id="editCoursetext" onclick="doeditCourse()" class="btn btn-primary pull-right" type="button">
-                        {{titlecr}}
-                    </button>
-                </div>
-            </div>
+                                <tr>
+                                    <td class="td-left">
+                                        <h5>Sem</h5>
+                                    </td>
+                                    <td>
+                                        <input type='text' class="editsemobj" value="{{this}}" placeholder='ex:-S1,S2,etc'>
+                                    </td>
+                                    <td>
+                                        <input type="button" value="Update">
+                                        <input type="button" value="Delete">
+                                    </td>
+                                </tr>
 
+                        {{/each}}
+                        <tbody>
+                        <tfoot>
+                        <td></td>
+                        <td>
+                            <input type="button" style="margin:0px auto" value="+ add Sem "
+                                   onClick="addRow('smTable','EnterSem')"/>
+                        </td>
+                        </tfoot>
+                    </table>
+                </tr>
+                <tr>
+                    <table class="table">
+                        <thead></thead>
+                    <tbody id="brTable">
+                        {{#each brName}}
+                            <tr>
+                                <td class="td-left">
+                                    <h5>Branch Name</h5>
+                                </td>
+                                <td>
+                                    <input type='text' class="editsemobj" value="{{this}}" placeholder='ex:-S1,S2,etc'>
+                                </td>
+                                <td>
+                                    <input type="button" value="Update">
+                                    <input type="button" value="Delete">
+                                </td>
+                            </tr>
+                        {{/each}}
+                        <tbody>
+                        <tfoot>
+                        <td></td>
+                        <td>
+                            <input type="button" style="margin:0px auto" value="+ add Sem "
+                                   onClick="addRow('brTable','EnterBranchName')"/>
+                        </td>
+                        </tfoot>
+                    </table>
+                </tr>
+                </tbody>
+                <tfoot>
+                <table class="table" >
+                    <tbody id="brTable" >
+                    <td class="td-left">
+                        <button>Back To Course</button>
+                    </td>
+                    <td>
+                        <button>Reset</button>
+                    </td>
+                    <td>
+                        <button onclick="docr()">Update New Course</button>
+                    </td>
 
+                    </tbody>
+                </table>
+                </tfoot>
+            </table>
         </div>
 
     </div>
 
 </div>
+<script>
+    function addRow(tableID, palceholder) {
+
+        var table = document.getElementById(tableID);
+
+        var rowCount = table.rows.length;
+        var row = table.insertRow(rowCount);
+
+        //  var cell1 = row.insertCell(0);
+        //var element1 = document.createElement("input");
+        // element1.type = "checkbox";
+        //  element1.name="chkbox[]";
+        // cell1.appendChild(element1);
+
+        var cell0 = row.insertCell(0);
+        //cell0.innerHTML = "";
+
+        var cell1 = row.insertCell(1);
+        cell1.innerHTML = "<input type='text' class='semobj'   placeholder=" + palceholder + " >";
+
+        var cell2 = row.insertCell(2);
+        cell2.innerHTML = "<input type='button' value='-' onClick='deleteRow(this)'>";
+    }
+
+    function deleteRow(obj) {
+        try {
+            var i = $(obj).parent().parent();
+            i.remove();
+            //document.getElementById('brTable').deleteRow(i);
+            //var table = document.getElementById(tableID);
+            //var rowCount = table.rows.length;
+            //$(this).parent("tr").remove();
+
+            //for(var i=1; i<rowCount; i++) {
+            //   var row = table.rows[i];
+            //   var chkbox = row.cells[0].childNodes[0];
+            //   if(null != chkbox && true == chkbox.checked) {
+            //       table.deleteRow(i);
+            //      rowCount--;
+            //      i--;
+            //  }
+            //}
+        } catch (e) {
+            alert(e);
+        }
+    }
+</script>
 

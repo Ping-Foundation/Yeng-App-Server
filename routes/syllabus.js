@@ -3,8 +3,9 @@
  */
 var mongoose = require('mongoose');
 var syllabus = mongoose.model('syllabus_pdf');
-//var fileUpload=require('express-fileupload')
-var mkdir=require('mkdirp');
+var multer = require('multer');
+var fileUpload = require('express-fileupload')
+var mkdir = require('mkdirp');
 
 //var fs=require('fs-extra');
 //var syllabus_flow=mongoose.model('syllabus');
@@ -27,221 +28,304 @@ exports.getChildById = function (req, res) {
 };
 /* ABU Created for viewing Course 29-9-2017*/
 exports.viewcourse = function (req, res) {
-    syllabus.find({_id:"Syllabus"},function (err,data) {
-        if(!err){
+    syllabus.find({_id: "Syllabus"}, function (err, data) {
+        if (!err) {
             //var items=[];
             //keys=Object.keys(data);
-            res.render('syllabus/viewcourse', {course:data,layout: false});
+            res.render('syllabus/viewcourse', {course: data, layout: false});
         }
     });
 
 }
 /* ABU Created for creating Sem 7-10-2017*/
-exports.createSem=function (req,res) {
-    syllabus.find({_id:""},function (err,data) {
+exports.createSem = function (req, res) {
+    syllabus.find({_id:""}, function (err, data) {
 
     });
 }
 /*Abu Created Create Course 1-10-2017*/
 exports.coursecreate = function (req, res) {
-    res.render('syllabus/addcourse', {layout: false,titlecr:"Create Course"});
+    res.render('syllabus/addcourse', {layout: false, titlecr: "Create Course"});
 }
 /*Abu Created Create Course 1-10-2017*/
 /*modified create 11-10-2017*/
 exports.docoursecreate = function (req, res) {
-    var path=req.body.course;
+    var path = req.body.course;
     console.log(path);
-    CreateCourse("Syllabus",req.body.course,req,res,path);
+    CreateCourse("Syllabus", req.body.course, req, res, path);
 }
 
-exports.editCourse=function (req,res) {
+exports.editCourse = function (req, res) {
     console.log(req.params.course);
-    syllabus.findOne({children:req.params.course},function (err,data) {
-        if(!err){
-            syllabus.findOne({_id:req.params.course},function (err,idData) {
-                if(!err){
-                    res.render('syllabus/editcourse',{layout:false,titlecr:"Edit Course",courseName:req.params.course});
+    var semsep=[];
+    var brsem=[];
+    syllabus.findOne({children: req.params.course}, function (err, data) {
+        if (!err) {
+            syllabus.findOne({_id: req.params.course}, function (err, idData) {
+                var branch=idData.children[0];
+                //console.log(branch)
+                for(var i=0;idData.children.length>i;i++){
+                    semsep[i]=idData.children[i].split("_")[1];
                 }
-                else{
-                    console.log(req.params.course+" : _id not exist in our databse ");
+                if (!err) {
+                    syllabus.findOne({_id:branch},function (err,brData) {
+                        if(!err){
+                            for(var i=0;brData.children.length>i;i++){
+                                brsem[i]=brData.children[i].split("_")[2];
+                            }
+                            res.render('syllabus/editcourse', {
+                                layout: false,
+                                titlecr: "Edit Course",
+                                courseName: req.params.course,
+                                semName:semsep,
+                                brName:brsem
+                            });
+                        }
+                    });
+
+                }
+                else {
+                    console.log(req.params.course + " : _id not exist in our databse ");
                 }
             })
 
-        }else{
+        } else {
             console.log("course exist in our databse ")
         }
     });
 }
 
-exports.doeditCourse=function (req,res,data) {
-    syllabus.findOne({children:req.params.course},function(err,data){
-       //console.log(data);
+exports.doeditCourse = function (req, res, data) {
+    syllabus.findOne({children: req.params.course}, function (err, data) {
+        //console.log(data);
         //var test="MBA"
-        if(!err){
-            if(!data){
+        if (!err) {
+            if (!data) {
                 syllabus.update({
-                    _id:"Syllabus"
-                },{
-                        $set: {
+                    _id: "Syllabus"
+                }, {
+                    $set: {
 
-                                "MBA": req.params.course
+                        "MBA": req.params.course
 
-                        }
+                    }
 
 
-                },function (err,data) {
+                }, function (err, data) {
                     console.log(err);
                     console.log(data);
                 });
             }
-            else{
+            else {
                 console.log("Course Name Alredy Exist");
             }
         }
-        else{
+        else {
             console.log("Course Name Alredy Exist");
         }
     });
 
 }
 
-exports.viewSemester=function (req,res) {
-    syllabus.findOne({_id:req.params.course},function (err,data) {
-        if(!err) {
-            res.render('syllabus/viewsem',{SemDetails:data,layout:false});
+exports.viewSemester = function (req, res) {
+    var objsem=[];
+    syllabus.findOne({_id: req.params.course}, function (err, data) {
+        for(var i=0;data.children.length>i;i++){
+            objsem[i]=data.children[i].split("_")[1];
+        }
+        var objcourse=data._id;
+        if (!err) {
+            res.render('syllabus/viewsem', {SemDetails: objsem,Course:objcourse,layout: false});
 
         }
         else {
-            console.log(err +" : viw Sem");
+            console.log(err + " : viw Sem");
         }
     });
 }
-exports.addSemester=function (req,res) {
-    var objParantCourse=req.params.courseparant;
-    syllabus.findOne({_id:objParantCourse},function (err,data) {
-        if(!err){
-            res.render('syllabus/addsem',{layout:false,courseName:objParantCourse});
+exports.addSemester = function (req, res) {
+    var objParantCourse = req.params.courseparant;
+    syllabus.findOne({_id: objParantCourse}, function (err, data) {
+        if (!err) {
+            res.render('syllabus/addsem', {layout: false, courseName: objParantCourse});
         }
     })
     console.log(objParantCourse);
 }
 /*modified create 11-10-2017*/
-exports.doaddSemester=function (req,res) {
+exports.doaddSemester = function (req, res) {
     //console.log("i am here");
     //console.log(req.body.course);
     //console.log(req.body.sem);
-    var semNAme=req.body.course+"_"+req.body.sem
+    var semNAme = req.body.course + "_" + req.body.sem
     //var path=req.body.name+"/"+req.body.sem; // under folder name same like Sem Name no extension
-    var path=req.body.course+"/"+req.body.sem;
-    CreateCourse(req.body.course,semNAme,req,res,path);
+    var path = req.body.course + "/" + req.body.sem;
+    CreateCourse(req.body.course, semNAme, req, res, path);
 
 
 }
-exports.viewbranch=function (req,res) {
-    syllabus.findOne({_id:req.params.sem},function (err,data) {
-        if(!err){
-            res.render("syllabus/viewbranch",{layout:false,branchDetails:data});
+exports.viewbranch = function (req, res) {
+    var br=[];
+    var course=req.params.sem.split("_")[0];
+    var sem=req.params.sem.split("_")[1];
+    syllabus.findOne({_id: req.params.sem}, function (err, data) {
+        for(var i=0;data.children.length>i;i++){
+            br[i]=data.children[i].split("_")[2];
         }
-        else{
+        if (!err) {
+            res.render("syllabus/viewbranch", {layout: false, branchDetails: br,course:course,sem:sem});
+        }
+        else {
             console.log(err);
         }
     })
 }
-exports.addbranch=function (req,res) {
-    syllabus.findOne({_id:req.params.sem},function (err1,semdata) {
-        if(!err1){
-            syllabus.findOne({children:req.params.sem},function (err,coursedata) {
-                if(!err) {
-                    res.render("syllabus/addbranch", {layout: false,semName: semdata._id,courseName:coursedata._id});
+exports.addbranch = function (req, res) {
+    syllabus.findOne({_id: req.params.sem}, function (err1, semdata) {
+        if (!err1) {
+            syllabus.findOne({children: req.params.sem}, function (err, coursedata) {
+                if (!err) {
+                    res.render("syllabus/addbranch", {layout: false, semName: semdata._id, courseName: coursedata._id});
                 }
-                else{
+                else {
                     console.log(err);
                 }
             });
 
         }
-        else{
+        else {
             console.log(err1);
         }
     });
 }
 /*modified create 11-10-2017*/
-exports.doaddbranch=function (req,res) {
+exports.doaddbranch = function (req, res) {
     //console.log(req.body.course);
     //console.log(req.body.sem);
     //console.log(req.body.branch);
 
-    var brname=req.body.course+"_"+req.body.sem+"_"+req.body.branch
-    var path=req.body.course+"/"+req.body.sem+"/"+req.body.branch;
-    CreateCourse(req.body.course+"_"+req.body.sem,brname,req,res,path);
+    var brname = req.body.course + "_" + req.body.sem + "_" + req.body.branch
+    var path = req.body.course + "/" + req.body.sem + "/" + req.body.branch;
+    CreateCourse(req.body.course + "_" + req.body.sem, brname, req, res, path);
 
 }
-exports.viewSubj=function (req,res) {
-    //console.log(req.params.subj);
-    syllabus.findOne({_id:req.params.subj},function (err,data) {
-        if(!err){
-            res.render("syllabus/viewsubj",{layout:false,subjData:data})
-        }else{
+exports.viewSubj = function (req, res) {
+    var course=req.params.subj.split("_")[0];
+    var sem=req.params.subj.split("_")[1];
+    var branch=req.params.subj.split("_")[2];
+
+    syllabus.findOne({_id: req.params.subj}, function (err, data) {
+        if (!err) {
+            res.render("syllabus/viewsubj",
+                {
+                    layout: false,
+                    subjData: data,
+                    course:course,
+                    sem:sem,
+                    branch:branch
+                })
+        } else {
             console.log(err);
         }
     })
 
 }
-exports.addSubj=function (req,res) {
-    syllabus.findOne({_id:req.params.subj},function (err,brdata) {
-        if(!err){
-            syllabus.findOne({children:req.params.subj},function (err,semdata) {
-                if(!err){
-                    syllabus.findOne({children:semdata._id},function (err,coursedata) {
-                        if(!err){
-                            res.render('syllabus/addsubj',{layout:false,brName:brdata._id,semName:semdata._id,courseName:coursedata._id});
-                        }else{
+exports.addSubj = function (req, res) {
+    syllabus.findOne({_id: req.params.subj}, function (err, brdata) {
+        if (!err) {
+            syllabus.findOne({children: req.params.subj}, function (err, semdata) {
+                if (!err) {
+                    syllabus.findOne({children: semdata._id}, function (err, coursedata) {
+                        if (!err) {
+                            res.render('syllabus/addsubj', {
+                                layout: false,
+                                brName: brdata._id,
+                                semName: semdata._id,
+                                courseName: coursedata._id
+                            });
+                        } else {
                             console.log(err);
                         }
                     })
-                }else{
+                } else {
                     console.log(err);
                 }
             });
 
-        }else{
+        } else {
             console.log(err);
         }
     });
 }
-exports.doaddSubj=function (req,res) {
-    var objSub=req.body.inputsub;
-    var objbr=req.body.inputbr;
-    var objsem=req.body.inputsm;
-    var objCourse=req.body.inputcrs;
-    //var sujID=objbr+"_"+objSub;
 
-    //console.log(objSub);
-    //console.log(objbr);
-    //console.log(objsem);
-    //console.log(objCourse);
-    //console.log("file Upload");
-    //var filename=req.body.pdf.files[0];
-    //console.log(req.files);
-    var subjID=objbr+"_"+objSub;
-    var path=objCourse+"/"+objsem+"/"+objbr+"/"+subjID;
-    CreateCourse(objbr,subjID,req,res,path);
+exports.doaddSubj = function (req, res) {
+    if(!req.files){
+        res.send("Error Message : Selected File Empty");
+    }else {
+        var objbr = req.params.branch;
+        var objSubjName = req.body.inputsubcode+"_"+req.body.inputsub;
+        var uploadingPath = objbr.split("_")[0] + "/" + objbr.split("_")[1] + "/" + objbr.split("_")[2];
+        syllabus.findOne({files:objSubjName},function (err,data) {
+            if(!err){
+                if(!data){
+                    syllabus.update({
+                            _id:objbr
+                    },  {
+                        $addToSet: {
+                            files: objSubjName
+                        }
 
+                    }, function (err, syllabus) {
+                        if (!err) {
+                            uploadPDF(req,res,objSubjName,uploadingPath)
+                        }
+                        else {
+                            res.send('Error while Uploading file :'+err);
+                        }
+                    });
 
+                }else {
+                    res.send('Warning :Suject Name Alredy Exists');
+                }
+            }
+            else {
+                res.send('Erro :'+err);
+            }
+        })
+    }
+    //REF_
+    //REF_
+    //REF_
+    //REF_
+    //console.log(objbr.split("_").splice(-1));
+    //console.log(objbr.split("_")[1]);
 }
+
+function uploadPDF(req,res,objFileName,Path){
+    var selectedFile = req.files.myfile;
+    selectedFile.mv('public/Syllabus/'+Path+"/"+objFileName +'.pdf', function (err) {
+        if (err) {
+            console.log(err)
+        } else {
+
+            res.send('file Uploaded !')
+        }
+    });
+}
+
 /*Create Directory for Creating Course (Abu 2-10-2017)*/
-function createDirectory(path,child){
-    mkdir('public/Syllabus/'+path,function (err) {
-        if(!err)
+function createDirectory(path, child) {
+    mkdir('public/Syllabus/' + path, function (err) {
+        if (!err)
             syllabus.create({
-                _id:child
+                _id: child
             });
-            console.log("Created Succes");
+        console.log("Created Succes");
     });
 }
 
 
-function CreateCourse(parant,child,req,res,path){
+function CreateCourse(parant, child, req, res, path) {
     syllabus.findOne({_id: parant}, function (err, data) {
         if (!data) {
             syllabus.create({
@@ -250,8 +334,8 @@ function CreateCourse(parant,child,req,res,path){
             }, function (err, syllabus) {
                 if (!err) {
                     //var path=parant+"/"+child
-                    createDirectory(path,child);
-                    res.redirect( '#' );
+                    createDirectory(path, child);
+                    res.redirect('#');
                     //return done(null, false, {message: 'syllabus Create succes'});
                     //return true;
 
@@ -274,8 +358,8 @@ function CreateCourse(parant,child,req,res,path){
 
                     }, function (err, syllabus) {
                         if (!err) {
-                            createDirectory(path,child);
-                            res.redirect( '#' );
+                            createDirectory(path, child);
+                            res.redirect('#');
                             //return done(null, false, {message: 'syllabus Create succes'});
                         }
                         else {
@@ -285,13 +369,14 @@ function CreateCourse(parant,child,req,res,path){
             }
             else {
                 console.log("Course Allredy Exists");
-                res.redirect( '#' );
+                res.redirect('#');
                 //return done(null, false, {message: 'syllabus Create succes'});
             }
 
         }
     });
 }
+
 
 
 

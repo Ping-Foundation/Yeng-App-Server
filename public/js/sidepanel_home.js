@@ -130,99 +130,8 @@ $(document).ready(function(){
     });
 });
 
-/*ABU Create ViewSyllabus 29-9-2017*/
-$(document).ready(function () {
-    $('#view-syllabus').on('click',function () {
-        $("#loading_gif").show();
-        $.ajax({
-            url:"/syllabus/course/view",
-            method:"GET",
-            data:{
 
-            },
-            success:function (data,txtStataus,jqXHR) {
-                console.log("succes");
-                console.log(data);
-                $("#loading_gif").hide();
-                $("#body").html(data);
-                $("#items li").css("background-color","transparent");
-                $("#view-syllabus").css("background-color","#18a39c");
 
-                $("#items a").css("color","black");
-                $("#view-syllabus a").css("color","#fff");
-            }
-            //$("#items li").css("background-color","transparent");
-            //$("#view-syllabus").css("background-color","#18a39c");
-        });
-
-    });
-});
-
-$(document).ready(function () {
-    $('#add-course').on('click',function () {
-        $('#loading_gif').show();
-        $.ajax({
-            url:"/syllabus/course/new",
-            method:"get",
-            data:{
-
-            },
-            success:function (data,txtStataus,jqXHR) {
-                console.log("create page enterd");
-                //console.log(data);
-                $("#loading_gif").hide();
-                $("#body").html(data);
-                $("#items li").css("background-color","transparent");
-                $("#view-syllabus").css("background-color","#18a39c");
-
-                $("#items a").css("color","black");
-                $("#view-syllabus a").css("color","#fff");
-            }
-        });
-
-    });
-
-});
-//Add Sem Created 7-10-2017 Abu//
-$(document).ready(function () {
-    $('#add-sem').on('click',function () {
-        var coursename=document.getElementById('ParantCourse').value;
-        $('#loading_gif').show();
-        $.ajax({
-            url:"/syllabus/course/addSem/"+coursename,
-            method:"get",
-            data:{
-
-            },
-            success:function (data,txtStataus,jqXHR) {
-                console.log("Create Sem page enetrd");
-                $("#loading_gif").hide();
-                $("#body").html(data);
-            }
-        });
-    });
-});
-$(document).ready(function () {
-    $('#create-sem').on('click',function () {
-        var courseName=document.getElementById('inputcs').value;
-        var semName=document.getElementById('inputsm').value;
-        $('#loading_gif').show();
-        $.ajax({
-            url:"/syllabus/course/addSem/B.tech",
-            type:"POST",
-            data:{
-                    name:courseName,
-                    sem:semName
-            },
-            success:function (data,txtStataus,jqXHR) {
-                console.log("Sem Created Succesfully");
-                $("#loading_gif").hide();
-                $("#body").html(data);
-                alert('Success!');
-            }
-        });
-    });
-});
 
 function parantCourse(objCourse){
     //console.log(objCourse.value);
@@ -244,9 +153,10 @@ function parantCourse(objCourse){
 }
 
 function parantSem(objSem) {
+    var course=document.getElementById('ParantCourse').value;
     $("#loading_gif").show();
     $.ajax({
-        url:"/syllabus/course/sem/branch/"+objSem.value,
+        url:"/syllabus/course/sem/branch/"+course+"_"+objSem.value,
         method:"get",
         data:{
 
@@ -259,54 +169,11 @@ function parantSem(objSem) {
 
     });
 }
-$(document).ready(function () {
-    $('#add-branch').on('click',function () {
-        $("#loading_gif").show();
-        var objParant=document.getElementById('branchParant').value;
-        $.ajax({
-            url:"/syllabus/course/sem/addbranch/"+objParant,
-            method:"get",
-            data:{
-                
-            },
-            success:function (data,txtStataus,jqXHR) {
-                console.log(" branch Add Page  enterd");
-                $("#loading_gif").hide();
-                $("#body").html(data);
-            }
-            
-        });
-    });
-});
-$(document).ready(function () {
-    $('#create-br').on('click',function () {
-        $("#loading_gif").show();
-        var objcourse=document.getElementById('inputcrs').value;
-        var objsem=document.getElementById('inputsm').value;
-        var objbr=document.getElementById('inputbr').value;
-        $.ajax({
-            url:"/syllabus/course/sem/addbranch/"+objcourse,
-            method:"post",
-            data:{
-                course:objcourse,
-                sem:objsem,
-                branch:objbr
-            },
-            success:function (data,txtStataus,jqXHR) {
-                console.log(" branch Added Succes");
-                $("#loading_gif").hide();
-                $("#body").html(data);
-                alert('Success!');
-            }
-        })
-    })
-
-});
-
 function parantbranch(objBranch) {
+    var brancch=document.getElementById('branchParant').value;
     $("#loading_gif").show();
     $.ajax({
-        url:"/syllabus/course/sem/branch/subj/"+objBranch.value,
+        url:"/syllabus/course/sem/branch/subj/"+brancch+"_"+objBranch.value,
         method:"get",
         data:{
 
@@ -336,11 +203,6 @@ $(document).ready(function () {
             }
         });
     });
-});
-
-
-
-$(document).ready(function () {
     $("#create-sub").on('click',function () {
         $("#loading_gif").show();
         var course=document.getElementById('inputcrs').value;
@@ -370,7 +232,127 @@ $(document).ready(function () {
             }
         });
     });
+    $('#create-br').on('click',function () {
+        $("#loading_gif").show();
+        var objcourse=document.getElementById('inputcrs').value;
+        var objsem=document.getElementById('inputsm').value;
+        var objbr=document.getElementById('inputbr').value;
+        $.ajax({
+            url:"/syllabus/course/sem/addbranch/"+objcourse,
+            method:"post",
+            data:{
+                course:objcourse,
+                sem:objsem,
+                branch:objbr
+            },
+            success:function (data,txtStataus,jqXHR) {
+                console.log(" branch Added Succes");
+                $("#loading_gif").hide();
+                $("#body").html(data);
+                alert('Success!');
+            }
+        });
+    });
+    $('#add-branch').on('click',function () {
+        $("#loading_gif").show();
+        var objParant=document.getElementById('branchParant').value;
+        $.ajax({
+            url:"/syllabus/course/sem/addbranch/"+objParant,
+            method:"get",
+            data:{
+
+            },
+            success:function (data,txtStataus,jqXHR) {
+                console.log(" branch Add Page  enterd");
+                $("#loading_gif").hide();
+                $("#body").html(data);
+            }
+
+        });
+    });
+    $('#create-sem').on('click',function () {
+        var courseName=document.getElementById('inputcs').value;
+        var semName=document.getElementById('inputsm').value;
+        $('#loading_gif').show();
+        $.ajax({
+            url:"/syllabus/course/addSem/B.tech",
+            type:"POST",
+            data:{
+                name:courseName,
+                sem:semName
+            },
+            success:function (data,txtStataus,jqXHR) {
+                console.log("Sem Created Succesfully");
+                $("#loading_gif").hide();
+                $("#body").html(data);
+                alert('Success!');
+            }
+        });
+    });
+    $('#add-sem').on('click',function () {
+        var coursename=document.getElementById('ParantCourse').value;
+        $('#loading_gif').show();
+        $.ajax({
+            url:"/syllabus/course/addSem/"+coursename,
+            method:"get",
+            data:{
+
+            },
+            success:function (data,txtStataus,jqXHR) {
+                console.log("Create Sem page enetrd");
+                $("#loading_gif").hide();
+                $("#body").html(data);
+            }
+        });
+    });
+    $('#add-course').on('click',function () {
+        $('#loading_gif').show();
+        $.ajax({
+            url:"/syllabus/course/new",
+            method:"get",
+            data:{
+
+            },
+            success:function (data,txtStataus,jqXHR) {
+                console.log("create page enterd");
+                //console.log(data);
+                $("#loading_gif").hide();
+                $("#body").html(data);
+                $("#items li").css("background-color","transparent");
+                $("#view-syllabus").css("background-color","#18a39c");
+
+                $("#items a").css("color","black");
+                $("#view-syllabus a").css("color","#fff");
+            }
+        });
+
+    });
+    $('#view-syllabus').on('click',function () {
+        $("#loading_gif").show();
+        $.ajax({
+            url:"/syllabus/course/view",
+            method:"GET",
+            data:{
+
+            },
+            success:function (data,txtStataus,jqXHR) {
+                console.log("succes");
+                console.log(data);
+                $("#loading_gif").hide();
+                $("#body").html(data);
+                $("#items li").css("background-color","transparent");
+                $("#view-syllabus").css("background-color","#18a39c");
+
+                $("#items a").css("color","black");
+                $("#view-syllabus a").css("color","#fff");
+            }
+            //$("#items li").css("background-color","transparent");
+            //$("#view-syllabus").css("background-color","#18a39c");
+        });
+
+    });
 });
+
 
 function editCourse(objButton) {
     console.log(objButton.value);

@@ -1,8 +1,8 @@
 <div class="panel breadcrumb" style="background-color: #ffffff">
     <li><a  href="#">Syllabus</a></li>
     <li><a href="#">Course</a></li>
-    <li><a href="#">Semester</a></li>
-    <li><a href="#">Branch</a></li>
+    <li><a href="#">{{course}}</a></li>
+    <li><a href="#">{{sem}}</a></li>
     <div class="panel-body sy-menu text-center  " style="color:#ffffff;font-size: 20px;">BRANCH DETAILS</div>
     <!--  Serch Box   -->
     <div id="custom-search-input">
@@ -22,16 +22,16 @@
             Create Branch
         </button>
     </div>
-    {{#each branchDetails}}
+
 
         <div class="input-group hide">
             <span class="input-group-addon"><i class="fa fa-graduation-cap" aria-hidden="true"></i></span>
-            <input id="branchParant" type="taxt" value="{{this._id}}" class="form-control" name="branchParant" placeholder="Course Name"
+            <input id="branchParant" type="taxt" value="{{course}}_{{sem}}" class="form-control" name="branchParant" placeholder="Course Name"
                    required="hello">
 
         </div>
         <div class="row">
-            {{#each this.children}}
+            {{#each branchDetails}}
                 <div class="col-sm-12 col-md-12">
                     <div class="thumbnail">
                         <button style="border:0px;width: 100%" value="{{this}}" onclick="parantbranch(this)" >
@@ -52,7 +52,6 @@
             {{/each}}
 
         </div>
-    {{/each}}
 
 </div>
 

@@ -8,7 +8,7 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-sm-8 col-md-6">
-              <!--  <form method="post" action="/syllabus/course/sem/branch/addsubj/{{brName}}" enctype="multipart/form-data">-->
+                <form id="uploadForm" enctype="multipart/form-data" action="/syllabus/course/sem/branch/addsubj/{{brName}}" method="post" name="uploadForm">
                     <div class="form-group">
                         <label for="inputsm">Course Name</label>
                         <input class="form-control input-sm" value="{{courseName}}" id="inputcrs" name="inputcrs"
@@ -25,22 +25,54 @@
                                disabled>
                     </div>
                     <div class="form-group">
+                        <label for="inputsm">Subject Code</label>
+                        <input class="form-control input-sm" id="inputsubcode" name="inputsubcode" type="text"
+                               placeholder="Subject Code" required>
+                    </div>
+                    <div class="form-group">
                         <label for="inputsm">Subject Name</label>
                         <input class="form-control input-sm" id="inputsub" name="inputsub" type="text"
                                placeholder="Subject Name" required>
                     </div>
 
                     <div class="fileinput fileinput-new" id="formInfo">
-                        <input type="file" name="pdffile" >
+                        <input name="myfile" type="file"/>
                     </div>
                     <div class="form-group">
-                        <button type="submit" id="create-sub" class="btn btn-success pull-right">Create Subject</button>
+                        <input type="submit" value="Upload" name="submit">
                     </div>
-                <!--</form>-->
+                    <div class="form-group">
+                        <span id="status"></span>
+                    </div>
+
+                </form>
 
             </div>
         </div>
     </div>
 </div>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+<script>
+    $(document).ready(function() {
+
+        $('#uploadForm').submit(function() {
+            $("#status").empty().text("File is uploading...");
+            $(this).ajaxSubmit({
+
+                error: function(xhr) {
+                    status('Error: ' + xhr.status);
+                },
+
+                success: function(response) {
+                    $("#status").empty().text(response);
+
+                    console.log(response);
+                }
+            });
+            //Very important line, it disable the page refresh.
+            return false;
+        });
+    });
+</script>
 
 <script src="/js/sidepanel_home.js"></script>
