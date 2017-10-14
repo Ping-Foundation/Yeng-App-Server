@@ -25,13 +25,13 @@
         <div class="news_box">
         <form id="NewsAndUpdates" method="get" action="" class="form-group">
             {{#each news}}
-                <ul class="list-group">
+                <ul class="list-group abc">
                     <a href="#" class="news" style="text-decoration: none"><li class="list-group-item news_items" id="{{this._id}}">
 
                         <h4>{{this.Tittle}}</h4>
-                        <p class="News">{{this.News}}</p>
+                        <p class="news{{this._id}}"></p>
                     <div class="d-flex w-100 justify-content-between">
-                        <small class="display_date" style="float: right;margin-top: -5px"></small>
+                        <small class="date{{this._id}}" style="float: right;margin-top: -5px"></small>
                     </div>
                    </li>
                     </a>
@@ -41,12 +41,15 @@
                    /* adjust date length*/
                     var time="{{this.DisplayDate}}".slice(3);
                     time=time.slice(0,-14);
-                    $(".display_date").html(time);
+                    $(".date{{this._id}}").html(time);
+                    console.log(time);
+                    console.log("{{this.DisplayDate}}");
+
                 </script>
                 <script>
                     var news="{{this.News}}";
                     news=news.substr(0,40)+"...";
-                    $(".News").html(news);
+                    $(".news{{this._id}}").html(news);
                 </script>
 
             {{/each}}

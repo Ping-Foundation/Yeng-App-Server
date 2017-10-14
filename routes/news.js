@@ -43,7 +43,7 @@ exports.doAdd=function (req,res) {
 exports.view=function (req,res) {
     if(req.session.loggedIn==false)
         res.redirect('/');
-    news.find(function(err, news) {
+    news.find({}).sort({DisplayDate:'desc'}).exec(function(err, news) {
         keys=Object.keys(news);
         l=keys.length;
         console.log(keys);
