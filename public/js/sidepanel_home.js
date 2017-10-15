@@ -351,6 +351,7 @@ $(document).ready(function () {
         });
 
     });
+
 });
 
 
@@ -418,6 +419,10 @@ $(document).ready(function () {
 });
 
 */
+function btnReset() {
+    alert("Reset All Course Details");
+    clearCourse();
+}
 function delet() {
     confirm("Confirm Delete?");
 }
@@ -441,9 +446,10 @@ $(document).ready(function () {
 /* Started new method for add syllabus (ABU 10-10-2017)*/
 
 function docr() {
-    $('#loading_gif').show();
+    $("#loading_gif").show();
     /* Loader not working */
     //debugger
+    $("#status").empty().text("Course Creating...");
     var objCourse=document.getElementById('txtCourse').value;
     $.ajax({
         url:"/syllabus/course/new",
@@ -452,51 +458,74 @@ function docr() {
             course:objCourse
 
         },success:function (data) {
-            alert("Poda");
-            for (var x =0;x <$('#semTable input.semobj').length;x++){
-                var sem=$('#semTable input.semobj')[x].value;
-                alert(sem);
-                $.ajax({
-                    url:"/syllabus/course/sem/new",
-                    method:"post",
-                    data:{
-                        course:objCourse,
-                        sem:sem
-                    },
-                    success:function (data) {
-                        //alert(data);
-                        for (var x = 0; x < $('#semTable input.semobj').length; x++) {
-                            var objsem = $('#semTable input.semobj')[x].value;
-                            for (var y = 0; y < $('#brTable input.semobj').length; y++) {
-                                var br = $('#brTable input.semobj')[y].value;
-                                alert(br);
-                                $.ajax({
-                                    url: "/syllabus/course/sem/branch/new",
-                                    method: "post",
-                                    data: {
-                                        course: objCourse,
-                                        sem: objsem,
-                                        branch: br
-                                    },
-                                    success: function (data, txtStataus, jqXHR) {
-                                        console.log("Done");
-                                    }
-                                });
+            if(data!='Course Alredy Exists') {
+                //alert("Poda");
 
+                for (var i = 0; i < $('#semTable input.semobj').length; i++) {
+                    var sem = $('#semTable input.semobj')[i].value;
+                    //alert(sem);
+                    $.ajax({
+                        url: "/syllabus/course/sem/new",
+                        method: "post",
+                        data: {
+                            course: objCourse,
+                            sem: sem
+                        },
+                        success: function (data) {
+                            //alert(data);
+                            for (var x = 0; x < $('#semTable input.semobj').length; x++) {
+                                var objsem = $('#semTable input.semobj')[x].value;
+                                debugger;
+                                for (var y = 0; y < $('#brTable input.semobj').length; y++) {
+                                    var br = $('#brTable input.semobj')[y].value;
+                                    //alert(br);
+                                    $.ajax({
+                                        url: "/syllabus/course/sem/branch/new",
+                                        method: "post",
+                                        data: {
+                                            course: objCourse,
+                                            sem: objsem,
+                                            branch: br
+                                        },
+                                        success: function (respone, txtStataus, jqXHR) {
+                                            //console.log("Done");
+                                            //$("#status").empty().text(respone);
+
+                                        }
+
+                                    });
+                                    if($('#semTable input.semobj').length-1==x && $('#brTable input.semobj').length-1==y){
+                                        clearCourse();
+                                        alert("Created Succes");
+                                        //clearCourse();
+                                    }
+
+                                }
                             }
                         }
-                    }
 
-                });
-                //console.log(    $('#semTable input.semobj')[x].value)
+                    });
+                    //console.log(    $('#semTable input.semobj')[x].value)
+
+                }
+                //alert("Kayinju mone");
             }
-            alert("Course Created Succes")
+            else{
+                $("#status").empty().text(data);
+            }
 
         }
     });
-
-
 }
+function clearCourse(){
+    $('#txtCourse').val("");
+    $("#loading_gif").hide();
+    $('#semTable tr.semobj').val("");
+    $('#semTable tr.classgenrow').remove();
+    $('#brTable tr.classgenrow').remove();
+    $('#brTable tr.semobj').val("");
+}
+
 
 
 

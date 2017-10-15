@@ -4,93 +4,87 @@
     <li><a href="#">Create New</a></li>
     <div class="panel-body sy-menu text-center  " style="color:#ffffff;font-size: 20px;">{{titlecr}}</div>
     <div class="panel-body">
-        <div class="col-sm-8 col-md-8 thumbnail" >
-            <!--<h2>Instruction</h2>-->
-           <!-- <p>The form below contains two input elements; one of type text and one of type password:</p>
-            <form method="post" action="/syllabus/course/new" data-toggle="validator">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="fa fa-graduation-cap" aria-hidden="true"></i></span>
-                    <input id="course" type="taxt" class="form-control" name="course" placeholder="Course Name"
-                           required="hello">
-
-                </div>
-                <div class="form-group" style="margin-top: 10px;">
-                    <button class="btn btn-danger" type="button">
-                        cancel
-                    </button>
-                    <button type="submit" id="docourse" class="btn btn-primary pull-right" type="button">
-                        Create Course
-                    </button>
-                </div>
-            </form>-->
+        <div class="col-sm-8 col-md-8 thumbnail">
+            <div class="form-group">
+                <span id="status"></span>
+            </div>
             <table class="table">
                 <thead>
                 </thead>
-                <tbody >
-                    <tr>
-                        <td class="td-left">
-                            <h5>Course</h5>
-                        </td>
-                        <td>
-                            <input type='text' id="txtCourse" name="txtCourse" placeholder="Enter Course Name">
-                        </td>
-                    </tr>
-                    <tr>
-                        <table  class="table" >
+                <tbody>
+                <tr>
+                    <td class="td-left">
+                        <h5>Course</h5>
+                    </td>
+                    <td>
+                        <input type='text' id="txtCourse" name="txtCourse" placeholder="Enter Course Name">
+                    </td>
+                </tr>
+                <tr>
+                    <table class="table">
+                        <thead>
 
-                            <tbody id="semTable" >
+                        </thead>
 
+                        <tbody id="semTable">
+                        <tr>
                             <td class="td-left">
                                 <h5>Sem Name</h5>
                             </td>
                             <td>
-                                <input type='text' class="semobj"  placeholder='ex:-S1,S2,etc' >
+                                <input type='text' class="semobj" placeholder='ex:-S1,S2,etc'>
                             </td>
-                            </tbody>
-                            <tfoot>
-                            <td></td>
-                            <td>
-                                <input type="button" style="margin:0px auto" value="+ add Sem" onClick="addRow('semTable','ex:-S1,S2,etc')"  />
-                            </td>
-                            </tfoot>
-                        </table>
-                    </tr>
-                    <tr>
-                        <table class="table" >
-                            <tbody id="brTable" >
+                        </tr>
 
-                                <td class="td-left">
-                                    <h5>Branch Name</h5>
-                                </td>
-                                <td>
-                                    <input type='text' class="semobj" placeholder="Enter Branch Name" >
-                                </td>
-                            </tbody>
-                            <tfoot>
-                            <td></td>
-                            <td>
-                                <input type="button" style="margin:0px auto" value="+ add Branch " onClick="addRow('brTable','EnterBranchName')" />
-                            </td>
-                            </tfoot>
+                        </tbody>
+                        <tfoot>
+                        <td></td>
+                        <td>
+                            <input type="button" style="margin:0px auto" value="+ add Sem"
+                                   onClick="addRow('semTable','ex:-S1,S2,etc')"/>
+                        </td>
+                        </tfoot>
+                    </table>
+                </tr>
+                <tr>
+                    <table class="table">
+                        <tbody id="brTable">
+                        <tr>
 
-                        </table>
-                    </tr>
-                    <tr>
-                        <table class="table" >
-                            <tbody id="brTable" >
                             <td class="td-left">
-                                <button>Cancel</button>
+                                <h5>Branch Name</h5>
                             </td>
                             <td>
-                                <button>Reset</button>
+                                <input type='text' class="semobj" placeholder="Enter Branch Name">
                             </td>
-                            <td>
-                                <button id="btnCreate" onclick="docr()">Create</button>
-                            </td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <td></td>
+                        <td>
+                            <input type="button" style="margin:0px auto" value="+ add Branch "
+                                   onClick="addRow('brTable','EnterBranchName')"/>
+                        </td>
+                        </tfoot>
 
-                            </tbody>
-                        </table>
-                    </tr>
+                    </table>
+                </tr>
+                <tr>
+                    <table class="table">
+                        <tbody id="brTable">
+                        <td class="td-left">
+                            <button>Cancel</button>
+                        </td>
+                        <td>
+                            <button onclick="btnReset()">Reset</button>
+                        </td>
+                        <td>
+                            <button id="btnCreate" onclick="docr()">Create</button>
+                        </td>
+
+                        </tbody>
+                    </table>
+                </tr>
                 </tbody>
 
             </table>
@@ -102,31 +96,34 @@
 
 
 <script>
-    function addRow(tableID,palceholder){
+    function addRow(tableID, palceholder) {
 
         var table = document.getElementById(tableID);
 
         var rowCount = table.rows.length;
         var row = table.insertRow(rowCount);
+        row.setAttribute('class','classgenrow');
 
-      //  var cell1 = row.insertCell(0);
-       //var element1 = document.createElement("input");
-       // element1.type = "checkbox";
-      //  element1.name="chkbox[]";
-       // cell1.appendChild(element1);
+        //  var cell1 = row.insertCell(0);
+        //var element1 = document.createElement("input");
+        // element1.type = "checkbox";
+        //  element1.name="chkbox[]";
+        // cell1.appendChild(element1);
+        //row.innerHTML('class')
 
         var cell0 = row.insertCell(0);
         //cell0.innerHTML = "";
 
         var cell1 = row.insertCell(1);
-        cell1.innerHTML = "<input type='text' class='semobj'   placeholder="+palceholder+" >";
+        cell1.innerHTML = "<input type='text' class='semobj'   placeholder=" + palceholder + " >";
 
         var cell2 = row.insertCell(2);
         cell2.innerHTML = "<input type='button' value='-' onClick='deleteRow(this)'>";
     }
+
     function deleteRow(obj) {
         try {
-            var i=$(obj).parent().parent();
+            var i = $(obj).parent().parent();
             i.remove();
             //document.getElementById('brTable').deleteRow(i);
             //var table = document.getElementById(tableID);
@@ -134,15 +131,15 @@
             //$(this).parent("tr").remove();
 
             //for(var i=1; i<rowCount; i++) {
-             //   var row = table.rows[i];
-             //   var chkbox = row.cells[0].childNodes[0];
-             //   if(null != chkbox && true == chkbox.checked) {
-             //       table.deleteRow(i);
-              //      rowCount--;
-              //      i--;
-              //  }
+            //   var row = table.rows[i];
+            //   var chkbox = row.cells[0].childNodes[0];
+            //   if(null != chkbox && true == chkbox.checked) {
+            //       table.deleteRow(i);
+            //      rowCount--;
+            //      i--;
+            //  }
             //}
-        }catch(e) {
+        } catch (e) {
             alert(e);
         }
     }

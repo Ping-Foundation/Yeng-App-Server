@@ -51,8 +51,17 @@ exports.coursecreate = function (req, res) {
 /*modified create 11-10-2017*/
 exports.docoursecreate = function (req, res) {
     var path = req.body.course;
+    console.log("Iam here");
     console.log(path);
-    CreateCourse("Syllabus", req.body.course, req, res, path);
+    syllabus.findOne({_id:req.body.course},function (err,data) {
+        console.log(data);
+        if(!data){
+            CreateCourse("Syllabus", req.body.course, req, res, path);
+        }
+        else{
+            res.send('Course Alredy Exists');
+        }
+    });
 }
 
 exports.editCourse = function (req, res) {
@@ -335,7 +344,8 @@ function CreateCourse(parant, child, req, res, path) {
                 if (!err) {
                     //var path=parant+"/"+child
                     createDirectory(path, child);
-                    res.redirect('#');
+                    res.send('Created')
+                    //res.redirect('#');
                     //return done(null, false, {message: 'syllabus Create succes'});
                     //return true;
 
@@ -359,7 +369,7 @@ function CreateCourse(parant, child, req, res, path) {
                     }, function (err, syllabus) {
                         if (!err) {
                             createDirectory(path, child);
-                            res.redirect('#');
+                            res.send('Course Succesflly Created')
                             //return done(null, false, {message: 'syllabus Create succes'});
                         }
                         else {
@@ -368,8 +378,8 @@ function CreateCourse(parant, child, req, res, path) {
                     });
             }
             else {
-                console.log("Course Allredy Exists");
-                res.redirect('#');
+                res.send('Course Alredy Exists');
+                //res.redirect('#');
                 //return done(null, false, {message: 'syllabus Create succes'});
             }
 
