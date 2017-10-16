@@ -447,6 +447,7 @@ $(document).ready(function () {
 
 function docr() {
     $("#loading_gif").show();
+    //var i,x,y;
     /* Loader not working */
     //debugger
     $("#status").empty().text("Course Creating...");
@@ -460,7 +461,7 @@ function docr() {
         },success:function (data) {
             if(data!='Course Alredy Exists') {
                 //alert("Poda");
-
+                //debugger;
                 for (var i = 0; i < $('#semTable input.semobj').length; i++) {
                     var sem = $('#semTable input.semobj')[i].value;
                     //alert(sem);
@@ -473,10 +474,11 @@ function docr() {
                         },
                         success: function (data) {
                             //alert(data);
+                            debugger;
                             for (var x = 0; x < $('#semTable input.semobj').length; x++) {
                                 var objsem = $('#semTable input.semobj')[x].value;
-                                debugger;
-                                for (var y = 0; y < $('#brTable input.semobj').length; y++) {
+                                //debugger;
+                                for ( var y = 0; y < $('#brTable input.semobj').length; y++) {
                                     var br = $('#brTable input.semobj')[y].value;
                                     //alert(br);
                                     $.ajax({
@@ -494,18 +496,29 @@ function docr() {
                                         }
 
                                     });
-                                    if($('#semTable input.semobj').length-1==x && $('#brTable input.semobj').length-1==y){
-                                        clearCourse();
-                                        alert("Created Succes");
-                                        //clearCourse();
-                                    }
+                                    var sem=$('#semTable input.semobj').length;
+                                    //
+                                    var br=$('#brTable input.semobj').length;
 
+                                    if($('#semTable input.semobj').length==x&&$('#brTable input.semobj').length==y){
+                                        //clearCourse();
+                                        $("#status").empty().text(data);
+                                        alert("Created Succes");
+
+                                        clearCourse();
+                                    }
                                 }
+                                //console.log($('#semTable input.semobj').length);
+                                //console.log($('#brTable input.semobj').length);
+
+
+
                             }
-                        }
+                       }
 
                     });
                     //console.log(    $('#semTable input.semobj')[x].value)
+
 
                 }
                 //alert("Kayinju mone");
@@ -520,10 +533,10 @@ function docr() {
 function clearCourse(){
     $('#txtCourse').val("");
     $("#loading_gif").hide();
-    $('#semTable tr.semobj').val("");
+    //$('#semTable tr.semobj').val("");
     $('#semTable tr.classgenrow').remove();
     $('#brTable tr.classgenrow').remove();
-    $('#brTable tr.semobj').val("");
+    //$('#brTable tr.semobj').val("");
 }
 
 
