@@ -1,49 +1,48 @@
 <div class="panel breadcrumb" style="background-color: #ffffff">
-    <li><a  href="#">Syllabus</a></li>
     <li><a href="#">Course</a></li>
-    <div class="panel-body sy-menu text-center  " style="color:#ffffff;font-size: 20px;">COURSE</div>
-    <!--  Serch Box   -->
-    <div id="custom-search-input">
-        <div class="input-group col-md-12" style="padding:20px;">
-            <input type="text" class="  search-query form-control" placeholder="Search"/>
-            <span class="input-group-btn">
-                <button class="btn btn-danger" type="button">
-                    <span class=" glyphicon glyphicon-search"></span>
-                </button>
-            </span>
+    <li><a href="#"></a></li>
+
+    <div class="top-bar">
+        <div class="search-container">
+            <input class="search" type="search" placeholder="Search">
+            <div style="margin: 8px;color: white">
+                <h4>COURSE</h4>
+            </div>
         </div>
     </div>
-    <!-- End Serch Box   -->
 
     <div class="panel-body">
-        <button class="btn col-xs-12" id="add-course" type="button">
+        <button class="btn" id="add-course" type="button">
             Create Course
         </button>
     </div>
-    {{#each course}}
-        <h6 name="parantAccount" >{{this._id}}</h6>
-    <div class="row">
-        {{#each this.children}}
-        <div class="col-sm-6 col-md-4">
-            <div class="thumbnail">
-                <button style="border:0px;width: 100%" value="{{this}}"  onclick="parantCourse(this)" >
-                <div class="caption" >
-                    <h3 class="text-center"  >{{this}}</h3>
-                </div>
-                </button>
-                <div class="panel-body sy-menu"  style="height: 40px;">
-                    <form  href="#">
-                        <span class="glyphicon glyphicon-trash pull-left" style="font-size:20px; margin-top: -5px"></span>
-                    </form >
-                    <a >
-                        <button type="submit"  value="{{this}}"  onclick="editCourse(this)" class="glyphicon glyphicon-edit pull-right" style="font-size:20px; margin-top: -5px;background: none;border: 0px;"></button>
-                    </a>
-                </div>
-            </div>
-        </div>
-        {{/each}}
 
-    </div>
+    {{#each course}}
+        <div class="row">
+            {{#each this.children}}
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <button style="border:0px;width: 100%" value="{{this}}" onclick="parantCourse(this)">
+                            <div class="caption">
+                                <h4 class="text-center">{{this}}</h4>
+                            </div>
+                        </button>
+                        <div class="panel-body sy-menu" style="height: 40px;">
+                            <form href="#">
+                                <span class="glyphicon glyphicon-trash pull-left"
+                                      style="font-size:20px; margin-top: -5px"></span>
+                            </form>
+                            <a>
+                                <button type="submit" value="{{this}}" onclick="editCourse(this)"
+                                        class="glyphicon glyphicon-edit pull-right"
+                                        style="font-size:20px; margin-top: -5px;background: none;border: 0px;"></button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+
+        </div>
     {{/each}}
 
 </div>

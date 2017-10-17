@@ -8,7 +8,7 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-sm-8 col-md-6">
-                <form id="uploadForm" enctype="multipart/form-data" action="/syllabus/course/sem/branch/addsubj/{{brName}}" method="post" name="uploadForm">
+                <form id="uploadForm" enctype="multipart/form-data" action="/syllabus/course/sem/branch/addsubj/{{courseName}}_{{semName}}_{{brName}}" method="post" name="uploadForm">
                     <div class="form-group">
                         <label for="inputsm">Course Name</label>
                         <input class="form-control input-sm" value="{{courseName}}" id="inputcrs" name="inputcrs"
@@ -41,6 +41,10 @@
                     <div class="form-group">
                         <input type="submit" value="Upload" name="submit">
                     </div>
+                    <div class="uploadBar"></div>
+                    <div id="myProgress">
+                        <div id="myBar"></div>
+                    </div>
                     <div class="form-group">
                         <span id="status"></span>
                     </div>
@@ -56,7 +60,7 @@
     $(document).ready(function() {
 
         $('#uploadForm').submit(function() {
-            $("#status").empty().text("File is uploading...");
+            $("#status").empty().text("");
             $(this).ajaxSubmit({
 
                 error: function(xhr) {
@@ -67,12 +71,41 @@
                     $("#status").empty().text(response);
 
                     console.log(response);
+                },
+                xhr: function() {
+                    var xhr = new window.XMLHttpRequest();
+                    //Upload progress
+                    xhr.upload.addEventListener("progress", function(evt) {
+                        if (evt.lengthComputable) {
+                            var percentComplete = evt.loaded / evt.total;
+                            //debugger;
+                            console.log("Hello : "+percentComplete)
+                            loader((percentComplete*100).toFixed(1))
+
+                        }
+                    }, false);
+                    return xhr;
                 }
             });
             //Very important line, it disable the page refresh.
             return false;
         });
     });
+    function loader(pesnt) {
+        var elem = document.getElementById("myBar");
+        var width = pesnt;
+        var id = setInterval(frame,0);
+        function frame() {
+            if (width >= 100) {
+                clearInterval(id);
+            } else {
+                width++;
+                console.log(width);
+                elem.style.width = pesnt + '%';
+                elem.innerHTML = pesnt * 1  + '%';
+            }
+        }
+    }
 </script>
 
 <script src="/js/sidepanel_home.js"></script>

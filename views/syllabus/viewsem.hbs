@@ -1,25 +1,19 @@
 <div class="panel breadcrumb" style="background-color: #ffffff">
-    <li><a  href="#">Syllabus</a></li>
     <li><a href="#">Course</a></li>
     <li><a href="#">{{Course}}</a></li>
-    <div class="panel-body sy-menu text-center  " style="color:#ffffff;font-size: 20px;">SEMESTER DETAILS</div>
-    <!--  Serch Box   -->
-    <div id="custom-search-input">
-        <div class="input-group col-md-12" style="padding:20px;">
-            <input type="text" class="  search-query form-control" placeholder="Search"/>
-            <span class="input-group-btn">
-                <button class="btn btn-danger" type="button">
-                    <span class=" glyphicon glyphicon-search"></span>
-                </button>
-            </span>
+    <div class="top-bar">
+        <div class="search-container">
+            <input class="search" type="search" placeholder="Search">
+            <div style="margin: 8px;color: white">
+                <h4>SEMESTER</h4>
+            </div>
         </div>
     </div>
-    <!-- End Serch Box   -->
 
     <div class="panel-body">
-        <button class="btn col-xs-12" id="add-sem" type="button">
-            Create Sem
-        </button>
+        <div class="alert alert-success">
+            <strong>{{Course}}</strong> semester Details Menton in Bellow.
+        </div>
     </div>
 
         <div class="input-group hide">

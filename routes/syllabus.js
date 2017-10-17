@@ -248,9 +248,9 @@ exports.addSubj = function (req, res) {
                         if (!err) {
                             res.render('syllabus/addsubj', {
                                 layout: false,
-                                brName: brdata._id,
-                                semName: semdata._id,
-                                courseName: coursedata._id
+                                brName: brdata._id.split("_")[2],
+                                semName: brdata._id.split("_")[1],
+                                courseName: brdata._id.split("_")[0]
                             });
                         } else {
                             console.log(err);
@@ -316,8 +316,10 @@ function uploadPDF(req,res,objFileName,Path){
         if (err) {
             console.log(err)
         } else {
-
-            res.send('file Uploaded !')
+            //var fileSize = req.files.myfile.size/1024;
+            //var msg = "File uploaded to "+Path+" ("+(fileSize.toFixed(2)) +" kb)";
+            var type="success";
+            res.send('file Uploaded !');
         }
     });
 }

@@ -210,6 +210,7 @@ $(document).ready(function () {
         var branch=document.getElementById('inputbr').value;
         var objbranch=document.getElementById('inputsub').value;
         var subject=document.getElementById('inputsub').value;
+        var idBranch=course+"_"+sem+"_"+objbranch
         //var pdf=document.getElementById('pdf').value;
         //var file=pdf.files[0];
         //var formData=new formData($(this).form);
@@ -460,11 +461,8 @@ function docr() {
 
         },success:function (data) {
             if(data!='Course Alredy Exists') {
-                //alert("Poda");
-                //debugger;
                 for (var i = 0; i < $('#semTable input.semobj').length; i++) {
                     var sem = $('#semTable input.semobj')[i].value;
-                    //alert(sem);
                     $.ajax({
                         url: "/syllabus/course/sem/new",
                         method: "post",
@@ -473,7 +471,6 @@ function docr() {
                             sem: sem
                         },
                         success: function (data) {
-                            //alert(data);
                             debugger;
                             for (var x = 0; x < $('#semTable input.semobj').length; x++) {
                                 var objsem = $('#semTable input.semobj')[x].value;
@@ -490,38 +487,23 @@ function docr() {
                                             branch: br
                                         },
                                         success: function (respone, txtStataus, jqXHR) {
-                                            //console.log("Done");
-                                            //$("#status").empty().text(respone);
-
                                         }
 
                                     });
-                                    var sem=$('#semTable input.semobj').length;
-                                    //
-                                    var br=$('#brTable input.semobj').length;
 
-                                    if($('#semTable input.semobj').length==x&&$('#brTable input.semobj').length==y){
-                                        //clearCourse();
-                                        $("#status").empty().text(data);
-                                        alert("Created Succes");
-
-                                        clearCourse();
-                                    }
                                 }
-                                //console.log($('#semTable input.semobj').length);
-                                //console.log($('#brTable input.semobj').length);
 
+                            }
 
-
+                            if($('#semTable input.semobj').length==x&&$('#brTable input.semobj').length==y){
+                                clearCourse();
                             }
                        }
 
                     });
-                    //console.log(    $('#semTable input.semobj')[x].value)
-
-
                 }
-                //alert("Kayinju mone");
+                $("#status").empty().text(data);
+                alert("Course Created Succesfully");
             }
             else{
                 $("#status").empty().text(data);
@@ -533,10 +515,10 @@ function docr() {
 function clearCourse(){
     $('#txtCourse').val("");
     $("#loading_gif").hide();
-    //$('#semTable tr.semobj').val("");
+    $('#sem-first-tahbleRow').val("");
     $('#semTable tr.classgenrow').remove();
     $('#brTable tr.classgenrow').remove();
-    //$('#brTable tr.semobj').val("");
+    $('#br-first-tahbleRow').val("");
 }
 
 

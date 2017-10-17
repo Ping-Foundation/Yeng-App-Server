@@ -3,24 +3,20 @@
     <li><a href="#">Course</a></li>
     <li><a href="#">{{course}}</a></li>
     <li><a href="#">{{sem}}</a></li>
-    <div class="panel-body sy-menu text-center  " style="color:#ffffff;font-size: 20px;">BRANCH DETAILS</div>
     <!--  Serch Box   -->
-    <div id="custom-search-input">
-        <div class="input-group col-md-12" style="padding:20px;">
-            <input type="text" class="  search-query form-control" placeholder="Search"/>
-            <span class="input-group-btn">
-                <button class="btn btn-danger" type="button">
-                    <span class=" glyphicon glyphicon-search"></span>
-                </button>
-            </span>
+    <div class="top-bar">
+        <div class="search-container">
+            <input class="search" type="search" placeholder="Search">
+            <div style="margin: 8px;color: white">
+                <h4>BRANCH</h4>
+            </div>
         </div>
     </div>
-    <!-- End Serch Box   -->
 
     <div class="panel-body">
-        <button class="btn col-xs-12" id="add-branch" type="button">
-            Create Branch
-        </button>
+        <div class="alert alert-success">
+            <strong>{{sem}}</strong> Branch Details Menton in Bellow.
+        </div>
     </div>
 
 
@@ -32,7 +28,7 @@
         </div>
         <div class="row">
             {{#each branchDetails}}
-                <div class="col-sm-12 col-md-12">
+                <div class="col-sm-12 col-md-6">
                     <div class="thumbnail">
                         <button style="border:0px;width: 100%" value="{{this}}" onclick="parantbranch(this)" >
                             <div class="caption" >
