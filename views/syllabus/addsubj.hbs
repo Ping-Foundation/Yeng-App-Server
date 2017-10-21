@@ -1,5 +1,4 @@
 <div class="panel breadcrumb" style="background-color: #ffffff">
-    <li><a href="#">Syllabus</a></li>
     <li><a href="#">Course</a></li>
     <li><a href="#">Sem</a></li>
     <li><a href="#">Subject</a></li>
@@ -36,7 +35,7 @@
                     </div>
 
                     <div class="fileinput fileinput-new" id="formInfo">
-                        <input name="myfile" type="file"/>
+                        <input name="myfile" type="file" accept="application/pdf"/>
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Upload" name="submit">
@@ -69,6 +68,9 @@
 
                 success: function(response) {
                     $("#status").empty().text(response);
+                    document.getElementById('myBar').style.width="100%"
+                    document.getElementById('myBar').innerHTML="100%"
+
 
                     console.log(response);
                 },
@@ -79,8 +81,12 @@
                         if (evt.lengthComputable) {
                             var percentComplete = evt.loaded / evt.total;
                             //debugger;
-                            console.log("Hello : "+percentComplete)
-                            loader((percentComplete*100).toFixed(1))
+                            console.log("Hello : "+
+                                    percentComplete)
+                            pdfloader((percentComplete*100).toFixed(1));
+                            $('#inputsubcode').val("");
+                            $('#inputsub').val("");
+
 
                         }
                     }, false);
@@ -91,21 +97,7 @@
             return false;
         });
     });
-    function loader(pesnt) {
-        var elem = document.getElementById("myBar");
-        var width = pesnt;
-        var id = setInterval(frame,0);
-        function frame() {
-            if (width >= 100) {
-                clearInterval(id);
-            } else {
-                width++;
-                console.log(width);
-                elem.style.width = pesnt + '%';
-                elem.innerHTML = pesnt * 1  + '%';
-            }
-        }
-    }
+
 </script>
 
 <script src="/js/sidepanel_home.js"></script>

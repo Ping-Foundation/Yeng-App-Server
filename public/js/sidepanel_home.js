@@ -130,9 +130,30 @@ $(document).ready(function(){
     });
 });
 
+/*cancel edit news*/
+$(document).ready(function () {
+    $("#cancel_edit").click(function () {
+        $("#news-details").hide();
+        console.log("success");
+    });
+});
+/*cancel change password*/
+$(document).ready(function () {
+    $("#cancel_change").click(function () {
+        $("#change_pswd").hide();
+        console.log("success");
+    });
+});
+function delet() {
+    confirm("Confirm Delete?");
+}
 
-
-
+//////////////////////////////////////
+///View Child of Course
+///Ceated Date  :
+///Updated Date : 20-10-2017
+///Created      :Abu
+//////////////////////////////////////
 function parantCourse(objCourse){
     //console.log(objCourse.value);
     $("#loading_gif").show();
@@ -151,42 +172,17 @@ function parantCourse(objCourse){
     });
 
 }
+///////////////////////////////////////
+//        OnClick Function          //
+/////////////////////////////////////
 
-function parantSem(objSem) {
-    var course=document.getElementById('ParantCourse').value;
-    $("#loading_gif").show();
-    $.ajax({
-        url:"/syllabus/course/sem/branch/"+course+"_"+objSem.value,
-        method:"get",
-        data:{
-
-        },
-        success:function (data,txtStataus,jqXHR) {
-            console.log(objSem.value+" view page enterd");
-            $("#loading_gif").hide();
-            $("#body").html(data);
-        }
-
-    });
-}
-function parantbranch(objBranch) {
-    var brancch=document.getElementById('branchParant').value;
-    $("#loading_gif").show();
-    $.ajax({
-        url:"/syllabus/course/sem/branch/subj/"+brancch+"_"+objBranch.value,
-        method:"get",
-        data:{
-
-        },
-        success:function (data,txtStataus,jqXHR) {
-            console.log(objBranch.value+" view page enterd");
-            $("#loading_gif").hide();
-            $("#body").html(data);
-        }
-
-    });
-}
 $(document).ready(function () {
+    //////////////////////////////////////
+    ///Enter Add Subject Page
+    ///Ceated Date  :
+    ///Updated Date : 20-10-2017
+    ///Created      :Abu
+    //////////////////////////////////////
     $('#add-subject').on('click',function () {
         $("#loading_gif").show();
         var objSubParant=document.getElementById('subjectParant').value;
@@ -203,109 +199,12 @@ $(document).ready(function () {
             }
         });
     });
-    $("#create-sub").on('click',function () {
-        $("#loading_gif").show();
-        var course=document.getElementById('inputcrs').value;
-        var sem=document.getElementById('inputsm').value;
-        var branch=document.getElementById('inputbr').value;
-        var objbranch=document.getElementById('inputsub').value;
-        var subject=document.getElementById('inputsub').value;
-        var idBranch=course+"_"+sem+"_"+objbranch
-        //var pdf=document.getElementById('pdf').value;
-        //var file=pdf.files[0];
-        //var formData=new formData($(this).form);
-        $.ajax({
-            url:"/syllabus/course/sem/branch/addsubj/"+objbranch,
-            method:"post",
-            data:{
-                inputsub:subject,
-                inputbr:branch,
-                inputsm:sem,
-                inputcrs:course,
-                //pdf:pdf
-
-            },
-            success:function (data,txtStataus,jqXHR) {
-                console.log(objbranch+" view page enterd");
-                $("#loading_gif").hide();
-                $("#body").html(data);
-                alert('Success!');
-            }
-        });
-    });
-    $('#create-br').on('click',function () {
-        $("#loading_gif").show();
-        var objcourse=document.getElementById('inputcrs').value;
-        var objsem=document.getElementById('inputsm').value;
-        var objbr=document.getElementById('inputbr').value;
-        $.ajax({
-            url:"/syllabus/course/sem/addbranch/"+objcourse,
-            method:"post",
-            data:{
-                course:objcourse,
-                sem:objsem,
-                branch:objbr
-            },
-            success:function (data,txtStataus,jqXHR) {
-                console.log(" branch Added Succes");
-                $("#loading_gif").hide();
-                $("#body").html(data);
-                alert('Success!');
-            }
-        });
-    });
-    $('#add-branch').on('click',function () {
-        $("#loading_gif").show();
-        var objParant=document.getElementById('branchParant').value;
-        $.ajax({
-            url:"/syllabus/course/sem/addbranch/"+objParant,
-            method:"get",
-            data:{
-
-            },
-            success:function (data,txtStataus,jqXHR) {
-                console.log(" branch Add Page  enterd");
-                $("#loading_gif").hide();
-                $("#body").html(data);
-            }
-
-        });
-    });
-    $('#create-sem').on('click',function () {
-        var courseName=document.getElementById('inputcs').value;
-        var semName=document.getElementById('inputsm').value;
-        $('#loading_gif').show();
-        $.ajax({
-            url:"/syllabus/course/addSem/B.tech",
-            type:"POST",
-            data:{
-                name:courseName,
-                sem:semName
-            },
-            success:function (data,txtStataus,jqXHR) {
-                console.log("Sem Created Succesfully");
-                $("#loading_gif").hide();
-                $("#body").html(data);
-                alert('Success!');
-            }
-        });
-    });
-    $('#add-sem').on('click',function () {
-        var coursename=document.getElementById('ParantCourse').value;
-        $('#loading_gif').show();
-        $.ajax({
-            url:"/syllabus/course/addSem/"+coursename,
-            method:"get",
-            data:{
-
-            },
-            success:function (data,txtStataus,jqXHR) {
-                console.log("Create Sem page enetrd");
-                $("#loading_gif").hide();
-                $("#body").html(data);
-            }
-        });
-    });
+    //////////////////////////////////////
+    ///entr Add Course
+    ///Ceated Date  :
+    ///Updated Date : 20-10-2017
+    ///Created      :Abu
+    //////////////////////////////////////
     $('#add-course').on('click',function () {
         $('#loading_gif').show();
         $.ajax({
@@ -328,6 +227,12 @@ $(document).ready(function () {
         });
 
     });
+    //////////////////////////////////////
+    ///View Syllabus
+    ///Ceated Date  :
+    ///Updated Date : 20-10-2017
+    ///Created      :Abu
+    //////////////////////////////////////
     $('#view-syllabus').on('click',function () {
         $("#loading_gif").show();
         $.ajax({
@@ -354,8 +259,58 @@ $(document).ready(function () {
     });
 
 });
+//////////////////////////////////////
+///View Child of Sem
+///Ceated Date  :
+///Updated Date : 20-10-2017
+///Created      :Abu
+//////////////////////////////////////
+function parantSem(objSem) {
+    var course=document.getElementById('ParantCourse').value;
+    $("#loading_gif").show();
+    $.ajax({
+        url:"/syllabus/course/sem/branch/"+course+"_"+objSem.value,
+        method:"get",
+        data:{
 
+        },
+        success:function (data,txtStataus,jqXHR) {
+            console.log(objSem.value+" view page enterd");
+            $("#loading_gif").hide();
+            $("#body").html(data);
+        }
 
+    });
+}
+//////////////////////////////////////
+///View Child of Branch
+///Ceated Date  :
+///Updated Date : 20-10-2017
+///Created      :Abu
+//////////////////////////////////////
+function parantbranch(objBranch) {
+    var brancch=document.getElementById('branchParant').value;
+    $("#loading_gif").show();
+    $.ajax({
+        url:"/syllabus/course/sem/branch/subj/"+brancch+"_"+objBranch.value,
+        method:"get",
+        data:{
+
+        },
+        success:function (data,txtStataus,jqXHR) {
+            console.log(objBranch.value+" view page enterd");
+            $("#loading_gif").hide();
+            $("#body").html(data);
+        }
+
+    });
+}
+//////////////////////////////////////
+///Entering Edit Course
+///Ceated Date  :
+///Updated Date : 20-10-2017
+///Created      :Abu
+//////////////////////////////////////
 function editCourse(objButton) {
     console.log(objButton.value);
     $("#loading_gif").show();
@@ -378,74 +333,99 @@ function editCourse(objButton) {
         }
 
     });
-    //console.log(data);
 }
-
-
+//////////////////////////////////////
+///Update Course Name
+///Ceated Date  :
+///Updated Date : 20-10-2017
+///Created      :Abu
+///Updated      :Abu
+//////////////////////////////////////
 function doeditCourse(){
     $("#loading_gif").show();
-    var coursename=document.getElementById('coursevalue').value;
-    console.log(coursename);
+    var objCourse=document.getElementById('hiddencourse').value;
+    var editedCourse=document.getElementById('txtCourse').value;
+    //console.log(coursename);
     $.ajax({
-        url:"/syllabus/course/"+coursename,
+        url:"/syllabus/course/"+objCourse,
         method:"POST",
         data: {
-            coursename:coursename
+            newcoursename:editedCourse
         },
         success:function(data,txtStataus,jqXHR){
-            console.log(data);
+            $("#status").empty().text(data);
         }
     });
 
 }
+//////////////////////////////////////
+///Downlod PDF
+///Ceated Date  :
+///Updated Date : 20-10-2017
+///Created      :Abu
+///                     not Compleated
+//////////////////////////////////////
+function dnldpdf(SubjectName) {
+    $("#loading_gif").show();
+    var course=document.getElementById('course').innerHTML;
+    var sem=document.getElementById('sem').innerHTML;
+    var branch=document.getElementById('branch').innerHTML;
+    var subject=SubjectName.value;
+    $.ajax({
+        url:"/syllabus/course/sem/branch/subj/download/"+subject,
+        type:'POST',
+        data:{
+            course:course,
+            sem:sem,
+            branch:branch,
+            subject:subject
+        },
+        success:function (data) {
+            $("#loading_gif").hide();
+           // window.location=data;
+            alert(data);
 
-/*
-$(document).ready(function () {
-    $('#editCoursetext').click(function () {
-        var coursename=$('#coursevalue').value;
-        console.log(coursename);
-        $("#loading_gif").show();
-        $.ajax({
-            url:"/syllabus/course/docourseedit",
-            method:"POST",
-            data:{
-               //course:$('#editCoursetext').value
-            },
-            success:function (data) {
-                console.log("");
-            }
-        })
-
+        }
     });
-});
 
-*/
+}
+//////////////////////////////////////
+///Button Rest
+///Ceated Date  :
+///Updated Date : 20-10-2017
+///Created      :Abu
+//////////////////////////////////////
 function btnReset() {
     alert("Reset All Course Details");
     clearCourse();
 }
-function delet() {
-    confirm("Confirm Delete?");
+//////////////////////////////////////
+///PDF Uploading Loader For CLient Side
+///Ceated Date  :
+///Updated Date : 20-10-2017
+///Created      :Abu
+//////////////////////////////////////
+function pdfloader(pesnt) {
+    var objloder = document.getElementById("myBar");
+    var width = pesnt;
+    var id = setInterval(frame,0);
+    function frame() {
+        if (width >= 100) {
+            clearInterval(id);
+        } else {
+            width++;
+            console.log(width);
+            objloder.style.width = pesnt + '%';
+            objloder.innerHTML = pesnt * 1  + '%';
+        }
+    }
 }
-
-/*cancel edit news*/
-$(document).ready(function () {
-    $("#cancel_edit").click(function () {
-        $("#news-details").hide();
-        console.log("success");
-    });
-});
-/*cancel change password*/
-$(document).ready(function () {
-    $("#cancel_change").click(function () {
-        $("#change_pswd").hide();
-        console.log("success");
-    });
-});
-
-
-/* Started new method for add syllabus (ABU 10-10-2017)*/
-
+//////////////////////////////////////
+///Create Course (add course /add semester/add Branch/
+///Ceated Date  :10-10-2017
+///Updated Date : 20-10-2017
+///Created      :Abu
+//////////////////////////////////////
 function docr() {
     $("#loading_gif").show();
     //var i,x,y;
@@ -512,6 +492,12 @@ function docr() {
         }
     });
 }
+//////////////////////////////////////
+///Function For All Text Field and Table
+///Ceated Date  :10-10-2017
+///Updated Date : 20-10-2017
+///Created      :Abu
+//////////////////////////////////////
 function clearCourse(){
     $('#txtCourse').val("");
     $("#loading_gif").hide();

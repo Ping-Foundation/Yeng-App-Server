@@ -5,6 +5,7 @@
     <div class="panel-body sy-menu text-center  " style="color:#ffffff;font-size: 20px;">{{titlecr}}</div>
     <div class="panel-body">
         <div class="col-sm-8 col-md-12">
+            <input id="hiddencourse" class="hidden"value="{{courseName}}" type="text" value="Update">
             <h2>Course Edit</h2>
             <table class="table">
                 <thead></thead>
@@ -12,16 +13,19 @@
                 <tr>
                     <td class="td-left">
                         <h5>Course</h5>
+                        <strong id="status"></strong>
                     </td>
                     <td>
                         <input type='text' id="txtCourse" value="{{courseName}}" name="txtCourse"
                                placeholder="Enter Course Name">
+
                     </td>
                     <td>
-                        <input type="button" value="Update">
+                        <input type="button" onclick="doeditCourse()" value="Update">
                         <input type="button" value="Delete">
                     </td>
                 </tr>
+
                 <tr>
                     <table class="table">
                         <thead></thead>

@@ -1,9 +1,8 @@
 <div class="panel breadcrumb" style="background-color: #ffffff">
-    <li><a href="#">Syllabus</a></li>
     <li><a href="#">Course</a></li>
-    <li><a href="#">{{course}}</a></li>
-    <li><a href="#">{{sem}}</a></li>
-    <li><a href="#">{{branch}}</a></li>
+    <li><a id="course" href="#">{{course}}</a></li>
+    <li><a id="sem" href="#">{{sem}}</a></li>
+    <li><a id="branch" href="#">{{branch}}</a></li>
     <div class="top-bar">
         <div class="search-container">
             <input class="search" type="search" placeholder="Search">
@@ -33,19 +32,19 @@
                    required="hello">
 
         </div>
+        <img src="/images/loading.gif" class="img-responsive" id="loading_gif">
     <div class="row">
     {{#each this.files}}
 
                 <div class="thumbnail">
                     <div class="stbody">
 
-                        <div class="stimg">
-
-                        </div>
-                        <div class="sttext">
+                        <button target="_self" value="{{this}}"  onClick="dnldpdf(this)" class="stimg" >
+                        </button>
+                        <div id="objsub" class="sttext">
                             {{this}}
-                            <div class="sttime">Click here for download</div>
                         </div>
+                        <div class="sttime">Click icon for download</div>
 
                     </div>
                 </div>

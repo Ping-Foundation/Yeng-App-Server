@@ -77,6 +77,8 @@ app.post('/syllabus/course/:course',syllabus.doeditCourse);
 app.post('/syllabus/course/sem/new',syllabus.doaddSemester);
 app.post('/syllabus/course/sem/branch/new',syllabus.doaddbranch);
 app.post('/syllabus/course/sem/branch/addsubj/:branch',syllabus.doaddSubj);
+app.post('/syllabus/course/sem/branch/subj/download/:subj',syllabus.dodownloadsub);
+
 
 
 // catch 404 and forward to error handler
