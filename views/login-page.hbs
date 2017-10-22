@@ -15,6 +15,11 @@
 
                 <button type="submit" class="btn btn-success">Login</button>
             </form>
+            {{#if msg}}
+                <div class="alert alert-danger">
+                    {{msg}}
+                </div>
+            {{/if}}
         </div>
     </div>
 

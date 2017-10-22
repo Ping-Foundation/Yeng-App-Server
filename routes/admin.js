@@ -1,17 +1,17 @@
-/**
- * Created by navina on 11/10/16.
- */
+
 var mongoose=require('mongoose');
 var admin=mongoose.model('admin');
+var passport=require('passport');
 
 
 
 
 // GET login page
-exports.login = function (req, res) {
-    res.render('login-page', {title: 'Log in'});
+exports.login = function (req, res,next) {
+    var messages=req.flash('error');
+    res.render('login-page', {title: 'Log in',msg:messages});
 };
-exports.doLogin=function (req,res) {
+/*exports.doLogin=function (req,res, next) {
     console.log("entered into doLogin");
     if(req.body.Email){
         admin.findOne(
@@ -50,8 +50,19 @@ exports.doLogin=function (req,res) {
         res.redirect('/login?404=error');
     }
 
-};
-exports.index = function (req, res,next) {
+};*/
+
+/*passport authentication*/
+exports.doLogin=passport.authenticate('local.signin',{
+    failureRedirect:'/',
+    successRedirect:'/adminhome',
+    failureFlash:true
+})
+
+
+
+exports.index =function (req, res, next) {
+
     if(req.session.loggedIn){
         res.render('adminhome-page', {
             title: req.session.admin.email,
@@ -63,8 +74,6 @@ exports.index = function (req, res,next) {
     }
 };
 exports.create= function (req,res) {
-    if(!req.session.loggedIn)
-        res.redirect('/');
     res.render('addadmin', {
         title: 'Create admin',
         buttonText: "Add",layout:false
@@ -74,7 +83,10 @@ exports.doCreate=function (req,res) {
     if(!req.session.loggedIn)
         res.redirect('/');
     admin.create({
+        FirstName:req.body.FirstName,
+        LastName:req.body.LastName,
         Email: req.body.Email,
+        Mobile:req.body.Mobile,
         Password:req.body.Password,
         ModifiedOn: Date.now(),
         LastLogin: Date.now()
@@ -137,13 +149,19 @@ exports.dochangepassword=function (req,res) {
                             console.log("found admin");
                             console.log(admin);
                             console.log(req.body.Password);
+                            var id=admin._id;
+
                             admin.update(
-                                {_id:admin._id},
-                                { $set: {Password:req.body.Password } },
-                            function(){
+                                {Email:req.body.id},
+                                {$set:{Password:"5555" }},
+                            function(err,data){
+                                    if(!err)
+                                    console.log("password changed");
+                                    console.log(data);
                                 res.redirect( '/adminhome' );
-                            }
-                            )
+                            });
+
+
                         }
 
                     }
@@ -154,10 +172,10 @@ exports.dochangepassword=function (req,res) {
 
 
     }
+    else
+        res.redirect('/changepassword?404=error');
 };
 exports.delete=function (req,res) {
-    if(!req.session.loggedIn)
-        res.redirect('/');
     console.log(req.params.id);
     admin.remove({_id:req.params.id}, function(err,removed) {
           if (!err){
@@ -169,8 +187,6 @@ exports.delete=function (req,res) {
 
 };
 exports.details=function (req,res,next) {
-    if(!req.session.loggedIn)
-        res.redirect('/');
     console.log(req.params.id);
     admin.findById(req.params.id,function (err,admin) {
         if(!err){
@@ -183,7 +199,22 @@ exports.details=function (req,res,next) {
     })
 }
 exports.logout=function (req,res,next) {
-    req.session.admin=null;
-    req.session.loggedIn=false;
+    req.session.destroy();
+    req.logout();
+    res.redirect('/');
+}
+
+
+function isLoggedIn(req,res,next) {
+    if (req.isAuthenticated()){
+        return next();
+    }
+    else
+        res.redirect('/');
+}
+function notLoggedIn(req,res,next) {
+    if (!req.isAuthenticated()){
+        return next();
+    }
     res.redirect('/');
 }

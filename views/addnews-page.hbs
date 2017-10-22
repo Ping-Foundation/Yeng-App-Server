@@ -6,16 +6,16 @@
     <br><textarea name="News" id="News" class="form-control" placeholder="Type News" required></textarea>
     <br><!--<input type="text" name="DisplayDate" id="DisplayDate" class="date" placeholder="Display Date" required>-->
     <div class="form-group">
-        <div class='input-group date' id='datetimepicker1'>
-            <input type='date' class="form-control" name="DisplayDate" placeholder="Display Date" required>
+        <div class='input-group date' id='display_date'>
+            <input type='text' class="display_date form-control" name="DisplayDate" placeholder="Display Date" required>
             <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
         </div>
     </div>
     <div class="form-group">
-        <div class='input-group date' id='datetimepicker2'>
-            <input type='date' class="form-control" name="EndDate" placeholder="End Date" required>
+        <div class='input-group date' id='end_date'>
+            <input type='text' class="end_date form-control" name="EndDate" placeholder="End Date" required>
             <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -30,13 +30,34 @@
 
     <script type="text/javascript">
         $(function () {
-            $('#datetimepicker1').datetimepicker();
+            $('#display_date').datetimepicker();
         });
         $(function () {
-            $('#datetimepicker2').datetimepicker();
+            $('#end_date').datetimepicker();
         });
     </script>
 
 </div>
+
+<!--check end date is after the display date-->
+<!--
+<script>
+    $(document).ready(function () {
+        $(".end_date").on('input',function () {
+
+
+        var disp_date=$(".display_date").val();
+        disp_date=new Date(disp_date);
+        console.log(disp_date);
+        var end_date=$(".end_date").val();
+        end=new Date(end_date);
+        if(end_date<disp_date){
+            console.log("date error");
+        }
+        })
+
+    })
+</script>
+-->
 
 
