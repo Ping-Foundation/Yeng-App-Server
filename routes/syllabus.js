@@ -7,7 +7,8 @@ var multer = require('multer');
 var fileUpload = require('express-fileupload')
 var mkdir = require('mkdirp');
 var path=require('path');
-var fs=require('fs')
+var download=require('download-file');
+
 
 //var fs=require('fs-extra');
 //var syllabus_flow=mongoose.model('syllabus');
@@ -28,13 +29,7 @@ exports.getChildById = function (req, res) {
         }
     })
 };
-//////////////////////////////////////
-///View Course
-///Ceated Date  :29-09-2017
-///Updated Date : 20-10-2017
-///Created      :Abu
-///Updated      :Abu
-//////////////////////////////////////
+/* ABU Created for viewing Course 29-9-2017*/
 exports.viewcourse = function (req, res) {
     syllabus.find({_id: "Syllabus"}, function (err, data) {
         if (!err) {
@@ -45,23 +40,18 @@ exports.viewcourse = function (req, res) {
     });
 
 }
-//////////////////////////////////////
-///Entering Create course page
-///Ceated Date  :1-10-2017
-///Updated Date : 20-10-2017
-///Created      :Abu
-///Updated      :Abu
-//////////////////////////////////////
+/* ABU Created for creating Sem 7-10-2017*/
+exports.createSem = function (req, res) {
+    syllabus.find({_id:""}, function (err, data) {
+
+    });
+}
+/*Abu Created Create Course 1-10-2017*/
 exports.coursecreate = function (req, res) {
     res.render('syllabus/addcourse', {layout: false, titlecr: "Create Course"});
 }
-/////////////////////////////////////
-///Create Course
-///Ceated Date  :1-10-2017
-///Updated Date : 20-10-2017
-///Created      :Abu
-///Updated      :Abu
-//////////////////////////////////////
+/*Abu Created Create Course 1-10-2017*/
+/*modified create 11-10-2017*/
 exports.docoursecreate = function (req, res) {
     var path = req.body.course;
     console.log("Iam here");
@@ -76,13 +66,6 @@ exports.docoursecreate = function (req, res) {
         }
     });
 }
-//////////////////////////////////////
-///Entering Edit Course Page
-///Ceated Date  :
-///Updated Date : 20-10-2017
-///Created      :Abu
-///Updated      :Abu
-//////////////////////////////////////
 exports.editCourse = function (req, res) {
     console.log(req.params.course);
     var semsep=[];
@@ -122,33 +105,37 @@ exports.editCourse = function (req, res) {
         }
     });
 }
-//////////////////////////////////////
-///Edit Course
-///Ceated Date  :11-10-2017
-///Updated Date : 20-10-2017
-///Created      :Abu
-///Updated      :Abu
-//////////////////////////////////////
 exports.doeditCourse = function (req, res, data) {
-    var newCourse=req.body.newcoursename;
-    syllabus.findOne({children: newCourse}, function (err, data) {
-        if(!data){
-            console.log("new : "+newCourse);
-            console.log("oild : "+req.params.course);
-            editCourse(req.params.course,newCourse,res);
-        }else{
-            res.send("Course Name Alredy Exists");
+    syllabus.findOne({children: req.params.course}, function (err, data) {
+        //console.log(data);
+        //var test="MBA"
+        if (!err) {
+            if (!data) {
+                syllabus.update({
+                    _id: "Syllabus"
+                }, {
+                    $set: {
+
+                        "MBA": req.params.course
+
+                    }
+
+
+                }, function (err, data) {
+                    console.log(err);
+                    console.log(data);
+                });
+            }
+            else {
+                console.log("Course Name Alredy Exist");
+            }
+        }
+        else {
+            console.log("Course Name Alredy Exist");
         }
     });
 
 }
-//////////////////////////////////////
-///View Semester
-///Ceated Date  :11-10-2017
-///Updated Date : 20-10-2017
-///Created      :Abu
-///Updated      :Abu
-//////////////////////////////////////
 exports.viewSemester = function (req, res) {
     var objsem=[];
     syllabus.findOne({_id: req.params.course}, function (err, data) {
@@ -165,13 +152,6 @@ exports.viewSemester = function (req, res) {
         }
     });
 }
-//////////////////////////////////////
-///Enter Create Semester Page
-///Ceated Date  :11-10-2017
-///Updated Date : 20-10-2017
-///Created      :Abu
-///Updated      :Abu
-//////////////////////////////////////
 exports.addSemester = function (req, res) {
     var objParantCourse = req.params.courseparant;
     syllabus.findOne({_id: objParantCourse}, function (err, data) {
@@ -181,25 +161,18 @@ exports.addSemester = function (req, res) {
     })
     console.log(objParantCourse);
 }
-//////////////////////////////////////
-///Create Semester
-///Ceated Date  :11-10-2017
-///Updated Date : 20-10-2017
-///Created      :Abu
-///Updated      :Abu
-//////////////////////////////////////
+/*modified create 11-10-2017*/
 exports.doaddSemester = function (req, res) {
+    //console.log("i am here");
+    //console.log(req.body.course);
+    //console.log(req.body.sem);
     var semNAme = req.body.course + "_" + req.body.sem
+    //var path=req.body.name+"/"+req.body.sem; // under folder name same like Sem Name no extension
     var path = req.body.course + "/" + req.body.sem;
     CreateCourse(req.body.course, semNAme, req, res, path);
+
+
 }
-//////////////////////////////////////
-///View Created Branch
-///Ceated Date  :
-///Updated Date : 20-10-2017
-///Created      :Abu
-///Updated      :Abu
-//////////////////////////////////////
 exports.viewbranch = function (req, res) {
     var br=[];
     var course=req.params.sem.split("_")[0];
@@ -216,13 +189,6 @@ exports.viewbranch = function (req, res) {
         }
     })
 }
-//////////////////////////////////////
-///Entering Create Branch
-///Ceated Date  :
-///Updated Date : 20-10-2017
-///Created      :Abu
-///Updated      :Abu
-//////////////////////////////////////
 exports.addbranch = function (req, res) {
     syllabus.findOne({_id: req.params.sem}, function (err1, semdata) {
         if (!err1) {
@@ -241,13 +207,7 @@ exports.addbranch = function (req, res) {
         }
     });
 }
-//////////////////////////////////////
-///Create Branch
-///Ceated Date  :11-10-2017
-///Updated Date : 20-10-2017
-///Created      :Abu
-///Updated      :Abu
-//////////////////////////////////////
+/*modified create 11-10-2017*/
 exports.doaddbranch = function (req, res) {
     //console.log(req.body.course);
     //console.log(req.body.sem);
@@ -258,13 +218,6 @@ exports.doaddbranch = function (req, res) {
     CreateCourse(req.body.course + "_" + req.body.sem, brname, req, res, path);
 
 }
-//////////////////////////////////////
-///View Created Subject
-///Ceated Date  :
-///Updated Date : 20-10-2017
-///Created      :Abu
-///Updated      :Abu
-//////////////////////////////////////
 exports.viewSubj = function (req, res) {
     var course=req.params.subj.split("_")[0];
     var sem=req.params.subj.split("_")[1];
@@ -286,13 +239,6 @@ exports.viewSubj = function (req, res) {
     })
 
 }
-//////////////////////////////////////
-///Entering create Subject
-///Ceated Date  :
-///Updated Date : 20-10-2017
-///Created      :Abu
-///Updated      :Abu
-//////////////////////////////////////
 exports.addSubj = function (req, res) {
     syllabus.findOne({_id: req.params.subj}, function (err, brdata) {
         if (!err) {
@@ -320,13 +266,7 @@ exports.addSubj = function (req, res) {
         }
     });
 }
-//////////////////////////////////////
-///Cerate Subject
-///Ceated Date  :
-///Updated Date : 20-10-2017
-///Created      :Abu
-///Updated      :Abu
-//////////////////////////////////////
+
 exports.doaddSubj = function (req, res) {
     if(!req.files){
         res.send("Error Message : Selected File Empty");
@@ -360,61 +300,58 @@ exports.doaddSubj = function (req, res) {
             else {
                 res.send('Erro :'+err);
             }
-        });
+        })
     }
+    //REF_
+    //REF_
+    //REF_
+    //REF_
+    //console.log(objbr.split("_").splice(-1));
+    //console.log(objbr.split("_")[1]);
 }
 //////////////////////////////////////
-///Download PDF From Server
-///Ceated Date  :
-///Updated Date : 20-10-2017
+///Downlod PDF
+///Ceated Date  :18-10-2017
+///Updated Date : 23-10-2017
 ///Created      :Abu
-///Updated      :Abu
-///                     Not Compleated
+///                     not Compleated
 //////////////////////////////////////
 exports.dodownloadsub=function (req,res) {
     console.log("i am here");
-    var course=req.body.course;
-    var sem=req.body.sem;
-    var branch=req.body.branch;
+    var course=req.query.course;
+    var sem=req.query.sem;
+    var branch=req.query.branch;
     var subject=req.params.subj;
-    var file="public/Syllabus/"+course+"/"+sem+"/"+branch+"/"+subject+".pdf";
+    //var file="public/Syllabus/"+course+"/"+sem+"/"+branch+"/"+subject+".pdf";
+    var path="public/Syllabus/"+course+"/"+sem+"/"+branch+"/"+subject+".pdf";
     syllabus.findOne({files:subject},function (err,data) {
         if(!err){
             if(data){
-                res.download( path.resolve(file),subject+".pdf",function (err,datas) {
-                //res.download( file,subject+".pdf",function (err,datas) {
-                    if(err){
-                        console.log("hello"+err);
-                        //res.send(data);
+                res.header('Content-Type', 'text/event-stream');
+                res.download(path,subject+".pdf",function (err,data) {
+                    if(!err){
+                        //res.status(304).send();
+                        console.log("Downloading..."+data);
+                    }else{
+                        console.log("faild Download.."+err);
                     }
-                    console.log("Me"+datas);
-
-                    res.send(datas);
-                });
-               // next();
-                //fs.readFile(file,function (err,data) {
-                 //   res.contentType("application/pdf");
-                 //   res.end(data, 'binary');
-                 //   res.writeHead(200, {
-                  //      'Content-Type': 'application/pdf',
-                  //      'Content-Disposition': 'attachment;'+subject+'.pdf',
-                   //     'Content-Length': data.length
-                  //  });
-                  //  res.end(data);
-                    //res.send(data);
-                //})
+                })
+                //res.download( path.resolve(file),subject+".pdf",function (err,datas) {
+                 //   if(!err){
+                  //      console.log("hello"+err)
+                   // }
+                 //   console.log("Me"+datas)
+                    //res.render("#");
+               // });
             }
         }
 
     });
+
+
+
 }
-//////////////////////////////////////
-///Upload PDF file From Client Side
-///Ceated Date  :
-///Updated Date : 20-10-2017
-///Created      :Abu
-///Updated      :Abu
-//////////////////////////////////////
+
 function uploadPDF(req,res,objFileName,Path){
     var selectedFile = req.files.myfile;
     selectedFile.mv('public/Syllabus/'+Path+"/"+objFileName +'.pdf', function (err) {
@@ -428,13 +365,8 @@ function uploadPDF(req,res,objFileName,Path){
         }
     });
 }
-//////////////////////////////////////
-///Function Create Directory While Creating Course
-///Ceated Date  :2-10-2017
-///Updated Date : 20-10-2017
-///Created      :Abu
-///Updated      :Abu
-//////////////////////////////////////
+
+/*Create Directory for Creating Course (Abu 2-10-2017)*/
 function createDirectory(path, child) {
     mkdir('public/Syllabus/' + path, function (err) {
         if (!err)
@@ -444,13 +376,8 @@ function createDirectory(path, child) {
         console.log("Created Succes");
     });
 }
-//////////////////////////////////////
-///Function For Create Corse
-///Ceated Date  :
-///Updated Date : 20-10-2017
-///Created      :Abu
-///Updated      :Abu
-//////////////////////////////////////
+
+
 function CreateCourse(parant, child, req, res, path) {
     syllabus.findOne({_id: parant}, function (err, data) {
         if (!data) {
@@ -502,35 +429,6 @@ function CreateCourse(parant, child, req, res, path) {
 
         }
     });
-}
-//////////////////////////////////////
-//Function Edit Course
-///Ceated Date  :
-///Updated Date : 20-10-2017
-///Created      :Abu
-///Updated      :Abu
-//                      Not Compleated
-//////////////////////////////////////
-function editCourse(oldCourseName,NewCourseName,res){
-    syllabus.update(
-        {
-            _id:oldCourseName
-        },
-        {
-            $set:
-                {
-                    _id:NewCourseName
-                }
-        },function (err,data) {
-            if(err){
-                res.send("Err : "+err);
-            }else{
-                fs.rename('Syllabus/oldCourseName','Syllabus/NewCourseName',function () {
-                    res.send("Course Updated ");
-                })
-            }
-        });
-
 }
 
 

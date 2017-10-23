@@ -1,8 +1,8 @@
 <div class="panel breadcrumb" style="background-color: #ffffff">
     <li><a href="#">Course</a></li>
-    <li><a id="course" href="#">{{course}}</a></li>
-    <li><a id="sem" href="#">{{sem}}</a></li>
-    <li><a id="branch" href="#">{{branch}}</a></li>
+    <li><a id="course" name="course" href="#">{{course}}</a></li>
+    <li><a id="sem" name="sem" href="#">{{sem}}</a></li>
+    <li><a id="branch" name="branch" href="#">{{branch}}</a></li>
     <div class="top-bar">
         <div class="search-container">
             <input class="search" type="search" placeholder="Search">
@@ -23,6 +23,7 @@
             Create Subject
         </button>
     </div>
+    <div id="middle"></div>
 {{#each subjData}}
 
         <div class="input-group hide">

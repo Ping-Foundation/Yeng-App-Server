@@ -368,12 +368,13 @@ function doeditCourse(){
 function dnldpdf(SubjectName) {
     $("#loading_gif").show();
     var course=document.getElementById('course').innerHTML;
+    //console.log(course);
     var sem=document.getElementById('sem').innerHTML;
     var branch=document.getElementById('branch').innerHTML;
     var subject=SubjectName.value;
     $.ajax({
         url:"/syllabus/course/sem/branch/subj/download/"+subject,
-        type:'POST',
+        type:'get',
         data:{
             course:course,
             sem:sem,
@@ -382,8 +383,12 @@ function dnldpdf(SubjectName) {
         },
         success:function (data) {
             $("#loading_gif").hide();
-           // window.location=data;
-            alert(data);
+            //window.open('/syllabus/course/sem/branch/subj/download/?foo=bar&xxx=yyy');
+            //alert(data);
+            //$("#middle").attr('src','url');
+            //window.open(url, '_blank');
+            //window.location=
+            console.log(data);
 
         }
     });
