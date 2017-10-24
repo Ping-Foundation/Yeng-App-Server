@@ -324,18 +324,25 @@ exports.dodownloadsub=function (req,res) {
     var subject=req.params.subj;
     //var file="public/Syllabus/"+course+"/"+sem+"/"+branch+"/"+subject+".pdf";
     var path="public/Syllabus/"+course+"/"+sem+"/"+branch+"/"+subject+".pdf";
+    //res.download("public/Syllabus/M.Tech/S1/A/123S_ABCDEFGHT.pdf","file.pdf");
+
     syllabus.findOne({files:subject},function (err,data) {
         if(!err){
             if(data){
-                res.header('Content-Type', 'text/event-stream');
-                res.download(path,subject+".pdf",function (err,data) {
-                    if(!err){
-                        //res.status(304).send();
-                        console.log("Downloading..."+data);
-                    }else{
-                        console.log("faild Download.."+err);
-                    }
-                })
+
+                res.send(path);
+                //res.header('Content-Type', 'text/event-stream');
+                //res.download(path,subject+".pdf",function (err) {
+                //    if(!err){
+                 //       //res.status(304).send();
+                //        console.log("Downloading...");
+                        //next();
+                //        //res.sendStatus(304);
+
+                //    }else{
+                 //       console.log("faild Download..");
+                 //   }
+                //});
                 //res.download( path.resolve(file),subject+".pdf",function (err,datas) {
                  //   if(!err){
                   //      console.log("hello"+err)

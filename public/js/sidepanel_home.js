@@ -383,12 +383,50 @@ function dnldpdf(SubjectName) {
         },
         success:function (data) {
             $("#loading_gif").hide();
-            //window.open('/syllabus/course/sem/branch/subj/download/?foo=bar&xxx=yyy');
-            //alert(data);
-            //$("#middle").attr('src','url');
-            //window.open(url, '_blank');
-            //window.location=
             console.log(data);
+            window.open(data);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //window.open("/")
 
         }
     });
