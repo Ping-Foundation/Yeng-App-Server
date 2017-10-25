@@ -71,13 +71,15 @@ app.get('/syllabus/course/sem/branch/:sem',syllabus.viewbranch);
 app.get('/syllabus/course/sem/addbranch/:sem',syllabus.addbranch);
 app.get('/syllabus/course/sem/branch/subj/:subj',syllabus.viewSubj);
 app.get('/syllabus/course/sem/branch/addsubj/:subj',syllabus.addSubj);
+app.get('/syllabus/course/sem/branch/subj/download/:subj',syllabus.dodownloadsub);
+app.get('/syllabus/find',syllabus.findsyllabus);
 
 app.post('/syllabus/course/new',syllabus.docoursecreate);
 app.post('/syllabus/course/:course',syllabus.doeditCourse);
 app.post('/syllabus/course/sem/new',syllabus.doaddSemester);
 app.post('/syllabus/course/sem/branch/new',syllabus.doaddbranch);
 app.post('/syllabus/course/sem/branch/addsubj/:branch',syllabus.doaddSubj);
-app.get('/syllabus/course/sem/branch/subj/download/:subj',syllabus.dodownloadsub);
+
 
 
 

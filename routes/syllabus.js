@@ -106,32 +106,32 @@ exports.editCourse = function (req, res) {
     });
 }
 exports.doeditCourse = function (req, res, data) {
-    syllabus.findOne({children: req.params.course}, function (err, data) {
-        //console.log(data);
-        //var test="MBA"
+    var courseName=req.body.newcoursename;
+    syllabus.findOne({children: courseName}, function (err, data) {
+        var course=req.params.course
         if (!err) {
             if (!data) {
-                syllabus.update({
-                    _id: "Syllabus"
-                }, {
-                    $set: {
-
-                        "MBA": req.params.course
-
+                syllabus.findOneAndUpdate(
+                    {
+                        _id:req.params.course
+                    },{
+                        $set:{"_id":courseName}
                     }
-
-
-                }, function (err, data) {
-                    console.log(err);
-                    console.log(data);
-                });
+                    ,function (err) {
+                        if(!err){
+                            res.send("Updated");
+                        }else{
+                            res.send("Error Message : "+err);
+                        }
+                    }
+                );
             }
             else {
-                console.log("Course Name Alredy Exist");
+                res.send("Course Name Alredy Exist");
             }
         }
         else {
-            console.log("Course Name Alredy Exist");
+            res.send(err);
         }
     });
 
@@ -330,7 +330,8 @@ exports.dodownloadsub=function (req,res) {
         if(!err){
             if(data){
 
-                res.send(path);
+                res.download(path,subject+".pdf");
+
                 //res.header('Content-Type', 'text/event-stream');
                 //res.download(path,subject+".pdf",function (err) {
                 //    if(!err){
@@ -357,6 +358,18 @@ exports.dodownloadsub=function (req,res) {
 
 
 
+}
+
+exports.findsyllabus=function (req,res) {
+    console.log("hello");
+    syllabus.distinct('_id',function (err,data) {
+        if(!err){
+            res.send(data);
+        }
+        else{
+            console.log(err);
+        }
+    });
 }
 
 function uploadPDF(req,res,objFileName,Path){

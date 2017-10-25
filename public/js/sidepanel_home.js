@@ -383,50 +383,8 @@ function dnldpdf(SubjectName) {
         },
         success:function (data) {
             $("#loading_gif").hide();
-            console.log(data);
-            window.open(data);
+            window.open("/syllabus/course/sem/branch/subj/download/"+subject+"?course="+course+"&sem="+sem+"&branch="+branch+"&subject="+subject);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            //window.open("/")
 
         }
     });
@@ -548,6 +506,26 @@ function clearCourse(){
     $('#semTable tr.classgenrow').remove();
     $('#brTable tr.classgenrow').remove();
     $('#br-first-tahbleRow').val("");
+}
+
+
+function BindControls() {
+    $.ajax({
+        url:"/syllabus/find",
+        type:"get",
+        data:{},
+        success:function (data) {
+            var syllabus = data;
+            $('#tbCountries').autocomplete({
+                source: syllabus,
+                minLength: 0,
+                scroll: true
+            }).focus(function() {
+                $(this).autocomplete("search", "");
+            });
+        }
+    });
+
 }
 
 
