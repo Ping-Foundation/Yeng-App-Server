@@ -7,15 +7,17 @@
     <br><!--<input type="text" name="DisplayDate" id="DisplayDate" class="date" placeholder="Display Date" required>-->
     <div class="form-group">
         <div class='input-group date' id='display_date'>
-            <input type='text' class="display_date form-control" name="DisplayDate" placeholder="Display Date" required>
+            <input type='text' class="display_date form-control inputText" name="DisplayDate" id="DisplayDate" placeholder="Display Date" required>
+
             <span class="input-group-addon">
+
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
         </div>
     </div>
     <div class="form-group">
         <div class='input-group date' id='end_date'>
-            <input type='text' class="end_date form-control" name="EndDate" placeholder="End Date" required>
+            <input type='text' class="end_date form-control" name="EndDate" id="EndDate" placeholder="End Date" required>
             <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -25,8 +27,8 @@
     <br><br><!--<input type="text" name="EndDate" id="EndDate" class="date"  placeholder="End Date" required>-->
     <br><br><button type="submit" value="Submit" class="btn btn-success"><b>Submit</b></button>
 
-    <!--calender function-->
 </form>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
 
     <script type="text/javascript">
         $(function () {
@@ -38,7 +40,6 @@
     </script>
 
 </div>
-
 <!--check end date is after the display date-->
 <!--
 <script>
@@ -61,3 +62,29 @@
 -->
 
 
+<script>
+    $(document).ready(function () {
+        $("#addnewsandupdates").validate({
+            rules:{
+                Tittle:{
+                    required:true,
+                    minlength:5,
+                    maxlength:50
+                },
+                News:{
+                    required:true,
+                    minlength:15,
+                    maxlength:500
+
+                }
+            },
+            messsages:{
+
+            },
+            submitHandler: function(form){
+                form.submit();
+            }
+
+        })
+    })
+</script>

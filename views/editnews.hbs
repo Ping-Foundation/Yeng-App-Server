@@ -3,7 +3,7 @@
         <div>
 
         <h1>Edit News</h1>
-        <form method='post' action='/news/edit' class="form-group">
+        <form method='post' id="editNews" action='/news/edit' class="form-group">
             <input type="hidden" name="id" value="{{_id}}">
             <br>
             <input type="text" name="Tittle" id="Tittle" value="{{Tittle}}" class="form-control" required>
@@ -60,6 +60,34 @@
     })
 
 </script>
+<!--validate form fields-->
+<script>
+    $(document).ready(function () {
+        $("#editNews").validate({
+            rules:{
+                Tittle:{
+                    required:true,
+                    minlength:5,
+                    maxlength:50
+                },
+                News:{
+                    required:true,
+                    minlength:15,
+                    maxlength:500
+
+                }
+            },
+            messsages:{
+
+            },
+            submitHandler: function(form){
+                form.submit();
+            }
+
+        })
+    })
+</script>
+
 
 <script>
     $(document).ready(function () {

@@ -67,7 +67,7 @@ exports.index =function (req, res, next) {
         res.render('adminhome-page', {
             title: req.session.admin.email,
             email: req.session.admin.email,
-            adminID: req.session.admin._id
+            adminID: req.session.admin._id,login:"true"
         })
     }else{
         res.redirect('/');
@@ -80,8 +80,6 @@ exports.create= function (req,res) {
     });
 };
 exports.doCreate=function (req,res) {
-    if(!req.session.loggedIn)
-        res.redirect('/');
     admin.create({
         FirstName:req.body.FirstName,
         LastName:req.body.LastName,
@@ -108,8 +106,6 @@ exports.doCreate=function (req,res) {
 
 };
 exports.view=function (req,res) {
-    if(!req.session.loggedIn)
-        res.redirect('/');
     admin.find(function (err,admin) {
         keys=Object.keys(admin);
         console.log(keys);
@@ -125,15 +121,11 @@ exports.view=function (req,res) {
 };
 
 exports.changepassword= function (req,res) {
-    if(!req.session.loggedIn)
-        res.redirect('/');
     res.render('changepassword',{
         name:req.params.id,layout:false
     });
 };
 exports.dochangepassword=function (req,res) {
-    if(!req.session.loggedIn)
-        res.redirect('/');
     console.log("entered into changepassword");
     if (req.body.upassword==req.session.admin.Password){
         console.log("entered into loop");

@@ -14,8 +14,6 @@ exports.add=function (req,res) {
     res.render("addnews-page",{layout:false});
 };
 exports.doAdd=function (req,res) {
-    if(!req.session.loggedIn)
-        res.redirect('/');
     news.create({
         Tittle: req.body.Tittle,
         News:req.body.News,
@@ -185,6 +183,20 @@ var onEditSave = function (req, res, err, news) {
         res.redirect('/adminhome')
     }
 };
+
+function isLoggedIn(req,res,next) {
+    if (req.isAuthenticated()){
+        return next();
+    }
+    else
+        res.redirect('/');
+}
+function notLoggedIn(req,res,next) {
+    if (!req.isAuthenticated()){
+        return next();
+    }
+    res.redirect('/');
+}
 
 
 

@@ -35,3 +35,53 @@
         </form>
     </div>
 </div>
+
+<!--
+validate form fields-->
+
+<script>
+    $(document).ready(function () {
+        $("#frmAdminProfile").validate({
+
+            rules:{
+                FirstName:{
+                    required:true,
+                    minlength:4
+                },
+                LastName:{
+                    required:true
+                },
+                Email:{
+                    required:true,
+                    email:true
+                },
+                Mobile:{
+                    required:true,
+                    minlength:10,
+                    maxlength:10
+                },
+                Password:{
+                    minlength:6
+                },
+                RePassword:{
+                    equalTo:"#Password"
+                }
+            },
+            messages:{
+                Mobile:{
+                    minlength:"Enter a valid mobile number",
+                    maxlength:"Enter a valid mobile number"
+                },
+                Password:{
+                    minlength:"Password contain atleast 6 characters"
+                },
+                RePassword:{
+                   equalTo:"Password do not match"
+                }
+            },
+            submitHandler: function(form){
+                form.submit();
+            }
+        })
+    })
+</script>

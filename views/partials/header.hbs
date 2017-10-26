@@ -17,9 +17,10 @@
     <div class="col-xs-10 col-md-8">
         <h1 class="heading">Yeng Admin Panel</h1>
     </div>
+    {{#if login}}
     <div class="col-md-2">
         <li class="dropdown account">
-            <a href="#" class="dropdown-toggle white" data-toggle="dropdown"><b>Account</b> <span class="caret"></span></a>
+            <a href="#" style="text-decoration: none" class="dropdown-toggle white" data-toggle="dropdown"><b>Account</b> <span class="caret"></span></a>
             <ul id="login-dp" class="dropdown-menu">
                 <li>
                     <div class="row">
@@ -40,6 +41,7 @@
             </ul>
         </li>
     </div>
+    {{/if}}
     </div>
 
 </div>

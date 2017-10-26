@@ -115,10 +115,10 @@
   font-weight: 700;
 }
 #color{
-  color:#cc0052;
+  color:#0F3C3F;
 }
 .news{
-  color: #cc0052;
+  color: #0F3C3F;
 
 
 
@@ -181,10 +181,13 @@
   width:60%;
 }
 .admin_li{
-  color: #cc0052;
+  color: #0F3C3F;
 }
 .add_admin_form{
   width:200%;
 }
 
-
+.error{
+  color: #CD0019;
+  font-weight: 100;
+}
