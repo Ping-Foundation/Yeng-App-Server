@@ -1,11 +1,11 @@
 <div class="panel breadcrumb" style="background-color: #ffffff">
-    <li><a href="#">Course</a></li>
-    <li><a href="#">{{course}}</a></li>
-    <li><a href="#">{{sem}}</a></li>
+    <li><a id="rootsyllabus" href="#">Course</a></li>
+    <li><a id="rootcourse" href="#">{{course}}</a></li>
+    <li><a id="rootsem" href="#">{{sem}}</a></li>
     <!--  Serch Box   -->
     <div class="top-bar">
         <div class="search-container">
-            <input class="search" type="search" placeholder="Search">
+            <input class="search" type="search" id="tbserch" onfocus="BindControls()" placeholder="Search">
             <div style="margin: 8px;color: white">
                 <h4>BRANCH</h4>
             </div>
@@ -50,6 +50,6 @@
 
 </div>
 
-<script src="/js/sidepanel_home.js"></script>
+<script src="/js/syllabus.js"></script>
 
 

@@ -29,7 +29,12 @@ exports.getChildById = function (req, res) {
         }
     })
 };
-/* ABU Created for viewing Course 29-9-2017*/
+//////////////////////////////////////
+///View Course Details
+///Created Date  :
+///Updated Date : 29-09-2017
+///Created      :Abu
+//////////////////////////////////////
 exports.viewcourse = function (req, res) {
     syllabus.find({_id: "Syllabus"}, function (err, data) {
         if (!err) {
@@ -40,18 +45,32 @@ exports.viewcourse = function (req, res) {
     });
 
 }
-/* ABU Created for creating Sem 7-10-2017*/
+//////////////////////////////////////
+///Create Semester
+///Created Date  :07-10-2017
+///Updated Date : 26-10-2017
+///Created      :Abu
+//////////////////////////////////////
 exports.createSem = function (req, res) {
     syllabus.find({_id:""}, function (err, data) {
 
     });
 }
-/*Abu Created Create Course 1-10-2017*/
+//////////////////////////////////////
+///Enter Create Course Page
+///Created Date  :1-10-2017
+///Updated Date : 26-10-2017
+///Created      :Abu
+//////////////////////////////////////
 exports.coursecreate = function (req, res) {
     res.render('syllabus/addcourse', {layout: false, titlecr: "Create Course"});
 }
-/*Abu Created Create Course 1-10-2017*/
-/*modified create 11-10-2017*/
+//////////////////////////////////////
+///Create Course
+///Created Date  :1-10-2017
+///Updated Date : 11-10-2017
+///Created      :Abu
+//////////////////////////////////////
 exports.docoursecreate = function (req, res) {
     var path = req.body.course;
     console.log("Iam here");
@@ -66,6 +85,12 @@ exports.docoursecreate = function (req, res) {
         }
     });
 }
+//////////////////////////////////////
+///Enter Edit Course Page
+///Created Date  :1-10-2017
+///Updated Date : 11-10-2017
+///Created      :Abu
+//////////////////////////////////////
 exports.editCourse = function (req, res) {
     console.log(req.params.course);
     var semsep=[];
@@ -105,6 +130,13 @@ exports.editCourse = function (req, res) {
         }
     });
 }
+//////////////////////////////////////
+///Do Edit Course
+///Created Date  :1-10-2017
+///Updated Date : 26-10-2017
+///Created      :Abu
+///                         Not Finished
+//////////////////////////////////////
 exports.doeditCourse = function (req, res, data) {
     var courseName=req.body.newcoursename;
     syllabus.findOne({children: courseName}, function (err, data) {
@@ -136,7 +168,14 @@ exports.doeditCourse = function (req, res, data) {
     });
 
 }
+//////////////////////////////////////
+///View Semester
+///Created Date  :1-10-2017
+///Updated Date : 10-10-2017
+///Created      :Abu
+//////////////////////////////////////
 exports.viewSemester = function (req, res) {
+    console.log("Hello")
     var objsem=[];
     syllabus.findOne({_id: req.params.course}, function (err, data) {
         for(var i=0;data.children.length>i;i++){
@@ -152,6 +191,13 @@ exports.viewSemester = function (req, res) {
         }
     });
 }
+//////////////////////////////////////
+///enter Create Semester page
+///Created Date  :1-10-2017
+///Updated Date : 10-10-2017
+///Created      :Abu
+///      This Removed From Our Project
+//////////////////////////////////////
 exports.addSemester = function (req, res) {
     var objParantCourse = req.params.courseparant;
     syllabus.findOne({_id: objParantCourse}, function (err, data) {
@@ -161,7 +207,12 @@ exports.addSemester = function (req, res) {
     })
     console.log(objParantCourse);
 }
-/*modified create 11-10-2017*/
+//////////////////////////////////////
+///Create Semester
+///Created Date  :1-10-2017
+///Updated Date : 11-10-2017
+///Created      :Abu
+//////////////////////////////////////
 exports.doaddSemester = function (req, res) {
     //console.log("i am here");
     //console.log(req.body.course);
@@ -173,6 +224,12 @@ exports.doaddSemester = function (req, res) {
 
 
 }
+//////////////////////////////////////
+///View Branch
+///Ceated Date  :1-10-2017
+///Updated Date : 11-10-2017
+///Created      :Abu
+//////////////////////////////////////
 exports.viewbranch = function (req, res) {
     var br=[];
     var course=req.params.sem.split("_")[0];
@@ -189,6 +246,12 @@ exports.viewbranch = function (req, res) {
         }
     })
 }
+//////////////////////////////////////
+///Enter Create Branch page
+///Created Date  :10-10-2017
+///Updated Date : 16-10-2017
+///Created      :Abu
+//////////////////////////////////////
 exports.addbranch = function (req, res) {
     syllabus.findOne({_id: req.params.sem}, function (err1, semdata) {
         if (!err1) {
@@ -207,17 +270,24 @@ exports.addbranch = function (req, res) {
         }
     });
 }
-/*modified create 11-10-2017*/
+//////////////////////////////////////
+///Create Branch
+///Created Date  :6-10-2017
+///Updated Date : 11-10-2017
+///Created      :Abu
+//////////////////////////////////////
 exports.doaddbranch = function (req, res) {
-    //console.log(req.body.course);
-    //console.log(req.body.sem);
-    //console.log(req.body.branch);
-
     var brname = req.body.course + "_" + req.body.sem + "_" + req.body.branch
     var path = req.body.course + "/" + req.body.sem + "/" + req.body.branch;
     CreateCourse(req.body.course + "_" + req.body.sem, brname, req, res, path);
 
 }
+//////////////////////////////////////
+///View Subject
+///Created Date  :15-10-2017
+///Updated Date : 24-10-2017
+///Created      :Abu
+//////////////////////////////////////
 exports.viewSubj = function (req, res) {
     var course=req.params.subj.split("_")[0];
     var sem=req.params.subj.split("_")[1];
@@ -239,6 +309,12 @@ exports.viewSubj = function (req, res) {
     })
 
 }
+//////////////////////////////////////
+///Enter Create Subject Page
+///Created Date  :6-10-2017
+///Updated Date : 20-10-2017
+///Created      :Abu
+//////////////////////////////////////
 exports.addSubj = function (req, res) {
     syllabus.findOne({_id: req.params.subj}, function (err, brdata) {
         if (!err) {
@@ -266,7 +342,12 @@ exports.addSubj = function (req, res) {
         }
     });
 }
-
+//////////////////////////////////////
+///Create Subject
+///Created Date  :6-10-2017
+///Updated Date : 20-10-2017
+///Created      :Abu
+//////////////////////////////////////
 exports.doaddSubj = function (req, res) {
     if(!req.files){
         res.send("Error Message : Selected File Empty");
@@ -310,11 +391,10 @@ exports.doaddSubj = function (req, res) {
     //console.log(objbr.split("_")[1]);
 }
 //////////////////////////////////////
-///Downlod PDF
-///Ceated Date  :18-10-2017
+///Download PDF
+///Created Date  :18-10-2017
 ///Updated Date : 23-10-2017
 ///Created      :Abu
-///                     not Compleated
 //////////////////////////////////////
 exports.dodownloadsub=function (req,res) {
     console.log("i am here");
@@ -359,11 +439,22 @@ exports.dodownloadsub=function (req,res) {
 
 
 }
-
+//////////////////////////////////////
+///Search All _id
+///Created Date  :18-10-2017
+///Updated Date : 25-10-2017
+///Created      :Abu
+//////////////////////////////////////
 exports.findsyllabus=function (req,res) {
+    var serch=[];
     console.log("hello");
     syllabus.distinct('_id',function (err,data) {
         if(!err){
+            //  console.log(data);
+            //for(var i=0;data.length>i;i++){
+                //console.log(data[i].split("_"));
+              //  serch[i]=data[i].split("_");
+            //}
             res.send(data);
         }
         else{
@@ -371,7 +462,12 @@ exports.findsyllabus=function (req,res) {
         }
     });
 }
-
+//////////////////////////////////////
+///Function for upload pdf
+///Created Date  :18-10-2017
+///Updated Date : 20-10-2017
+///Created      :Abu
+//////////////////////////////////////
 function uploadPDF(req,res,objFileName,Path){
     var selectedFile = req.files.myfile;
     selectedFile.mv('public/Syllabus/'+Path+"/"+objFileName +'.pdf', function (err) {
@@ -385,8 +481,12 @@ function uploadPDF(req,res,objFileName,Path){
         }
     });
 }
-
-/*Create Directory for Creating Course (Abu 2-10-2017)*/
+//////////////////////////////////////
+///Function Create Directory
+///Created Date  :2-10-2017
+///Updated Date : 10-10-2017
+///Created      :Abu
+//////////////////////////////////////
 function createDirectory(path, child) {
     mkdir('public/Syllabus/' + path, function (err) {
         if (!err)
@@ -396,8 +496,12 @@ function createDirectory(path, child) {
         console.log("Created Succes");
     });
 }
-
-
+//////////////////////////////////////
+///Function for create Course
+///Created Date  :18-10-2017
+///Updated Date : 25-10-2017
+///Created      :Abu
+//////////////////////////////////////
 function CreateCourse(parant, child, req, res, path) {
     syllabus.findOne({_id: parant}, function (err, data) {
         if (!data) {
