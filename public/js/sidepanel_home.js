@@ -38,7 +38,7 @@ $(document).ready(function(){
 $(document).ready(function () {
     $("#news_add").click(function () {
         $(".news_items").css("background","#fff");
-        $(".news_items").css("color","#cc0052");
+        $(".news_items").css("color","#23527c");
         $.ajax({
             url: '/news/add',
             method: "GET",
@@ -63,7 +63,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     $("#admin_add").click(function () {
         $(".admin_li").css("background","#fff");
-        $(".admin_li").css("color","#cc0052");
+        $(".admin_li").css("color","#23527c");
 
         $.ajax({
             url: '/admin/new',
