@@ -10,9 +10,14 @@ var session=require('express-session');
 var passport=require('passport');
 var flash=require('connect-flash');
 var validator=require('express-validator');
+var hbs=require('express-handlebars');
+
+
 var admin=require('./routes/admin');
 var news=require('./routes/news');
-var hbs=require('express-handlebars');
+var syllabus=require('./routes/syllabus');
+
+var seed=require('./routes/seed');
 
 
 
@@ -72,6 +77,10 @@ app.use(function (req,res,next) {
     res.locals.session=req.session;
     next();
 });
+
+
+app.get('/syllabus/getChildById/:path',syllabus.getChildById);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
