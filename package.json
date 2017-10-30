@@ -13,12 +13,9 @@
     "debug": "~2.2.0",
     "express": "^4.13.4",
     "express-handlebars": "^3.0.0",
-<<<<<<< HEAD
     "express-session": "^1.15.6",
     "express-validator": "^3.2.1",
-=======
     "express-session": "^1.15.3",
->>>>>>> 178a3ae94c748990b4ed0ba77a324a3b15b10b2c
     "hbs": "~4.0.1",
     "jquery": "^1.12.4",
     "mongoose": "^4.9.9",
