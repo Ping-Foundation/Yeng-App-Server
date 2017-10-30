@@ -450,6 +450,7 @@ function BindControls() {
                 scroll: true
             }).focus(function() {
                 $(this).autocomplete("search", "");
+
             });
         }
     });
