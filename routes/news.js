@@ -1,6 +1,4 @@
-/**
- * Created by navina on 11/10/16.
- */
+
 var mongoose=require('mongoose');
 var news=mongoose.model('news');
 
@@ -12,6 +10,7 @@ var collections = ['news'];
 
 
 exports.add=function (req,res) {
+
     res.render("addnews-page",{layout:false});
 };
 exports.doAdd=function (req,res) {
@@ -19,9 +18,8 @@ exports.doAdd=function (req,res) {
         Tittle: req.body.Tittle,
         News:req.body.News,
         CreatedOn: Date.now(),
-        DisplayDate:Date.now(),
-        EndDate:Date.now(),
-        ModifiedOn: Date.now()
+        DisplayDate:req.body.DisplayDate,
+        EndDate:req.body.EndDate
     },function (err,news) {
         if(err){
             console.log(err);
@@ -40,11 +38,17 @@ exports.doAdd=function (req,res) {
     })
 };
 exports.view=function (req,res) {
-    news.find(function(err, news) {
+    news.find({}).sort({DisplayDate:'desc'}).exec(function(err, news) {
         keys=Object.keys(news);
         l=keys.length;
         console.log(keys);
         console.log(l);
+        for(var i=0;i<news.length;i++){
+            news[i].News=news[i].News.replace(/(\r\n)/gm," ");
+            if(news[i].News.length>30)
+                news[i].News=news[i].News.slice(0,30)+"...";
+        }
+        console.log(news);
         res.render('viewnews-page',{
             news: news,
             keys:keys,layout:false
@@ -179,3 +183,20 @@ var onEditSave = function (req, res, err, news) {
         res.redirect('/adminhome')
     }
 };
+
+function isLoggedIn(req,res,next) {
+    if (req.isAuthenticated()){
+        return next();
+    }
+    else
+        res.redirect('/');
+}
+function notLoggedIn(req,res,next) {
+    if (!req.isAuthenticated()){
+        return next();
+    }
+    res.redirect('/');
+}
+
+
+

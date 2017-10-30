@@ -5,7 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var db=require('./model/db');
+
 var session=require('express-session');
+var passport=require('passport');
+var flash=require('connect-flash');
+var validator=require('express-validator');
 var hbs=require('express-handlebars');
 
 
@@ -18,6 +22,7 @@ var seed=require('./routes/seed');
 
 
 var app = express();
+require('./config/passport');
 
 // view engine setup
 app.engine('hbs',hbs({extname:'hbs',defaultLayout:'layout',layoutsDir:__dirname + '/views/layouts/',partialsDir:__dirname + '/views/partials/'}));
@@ -32,14 +37,21 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(validator());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret: 'secretkey'}));
+
+
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.get('/getnews',news.getnews);
 app.get('/getspecificnews/:id',news.getspecificnews);
 app.get('/news/delete/:id',news.delete);
 app.get('/news/edit/:id',news.edit);
 app.post('/news/edit',news.doEdit);
+
 
 app.get('/', admin.login);//first load login page
 app.post('/login', admin.doLogin);
@@ -56,6 +68,15 @@ app.get('/admin/view',admin.view);
 app.get('/admin/changepassword/:id',admin.changepassword);
 app.post('/admin/changepassword',admin.dochangepassword);
 app.get('/admin/delete/:id',admin.delete);
+app.get('/admin/details/:id',admin.details);
+app.get('/logout',admin.logout);
+
+/*passport authentication*/
+app.use(function (req,res,next) {
+    res.locals.login=req.isAuthenticated();
+    res.locals.session=req.session;
+    next();
+});
 
 
 app.get('/syllabus/getChildById/:path',syllabus.getChildById);

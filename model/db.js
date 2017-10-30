@@ -29,7 +29,11 @@ process.on('SIGINT', function() {
 });
 
 var adminSchema = new mongoose.Schema({
+    FirstName:String,
+    LastName:String,
     Email: {type: String, unique:true},
+    Mobile:Number,
+    Role:String,
     Password:String,
     CreatedOn: { type: Date, default: Date.now },
     ModifiedOn: Date,
