@@ -1,0 +1,53 @@
+<div class="panel breadcrumb" style="background-color: #ffffff">
+    <li><a id="rootsyllabus" href="#">Course</a></li>
+    <li><a href="#"></a></li>
+
+    <div class="top-bar">
+        <div class="search-container">
+            <input class="search" id="tbserch" onfocus="BindControls()" type="search" placeholder="Search">
+            <div style="margin: 8px;color: white">
+                <h4>COURSE</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <button class="btn" id="add-course" type="button">
+            Create Course
+        </button>
+    </div>
+
+
+    {{#each course}}
+        <div class="row">
+            {{#each this.children}}
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <button style="border:0px;width: 100%" value="{{this}}" onclick="parantCourse(this)">
+                            <div class="caption">
+                                <h4 class="text-center">{{this}}</h4>
+                            </div>
+                        </button>
+                        <div class="panel-body sy-menu" style="height: 40px;">
+                            <form href="#">
+                                <span class="glyphicon glyphicon-trash pull-left"
+                                      style="font-size:20px; margin-top: -5px"></span>
+                            </form>
+                            <a>
+                                <button type="submit" value="{{this}}" onclick="editCourse(this)"
+                                        class="glyphicon glyphicon-edit pull-right"
+                                        style="font-size:20px; margin-top: -5px;background: none;border: 0px;"></button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+
+        </div>
+    {{/each}}
+
+</div>
+
+<script src="/js/syllabus.js"></script>
+
+

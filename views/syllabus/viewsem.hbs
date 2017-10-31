@@ -1,0 +1,52 @@
+<div class="panel breadcrumb" style="background-color: #ffffff">
+    <li><a id="rootsyllabus" href="#">Course</a></li>
+    <li><a id="rootcourse"  href="#">{{Course}}</a></li>
+    <div class="top-bar">
+        <div class="search-container">
+            <input class="search" type="search" id="tbserch" onfocus="BindControls()" placeholder="Search">
+            <div style="margin: 8px;color: white">
+                <h4>SEMESTER</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <div class="alert alert-success">
+            <strong>{{Course}}</strong> semester Details Menton in Bellow.
+        </div>
+    </div>
+
+        <div class="input-group hide">
+            <span class="input-group-addon"><i class="fa fa-graduation-cap" aria-hidden="true"></i></span>
+            <input id="ParantCourse" type="taxt" value="{{Course}}" class="form-control" name="ParantCourse" placeholder="Course Name"
+                   required="hello">
+        </div>
+        <div class="row">
+        {{#each SemDetails}}
+                <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <button style="border:0px;width: 100%" value="{{this}}" onclick="parantSem(this)">
+                            <div class="caption" >
+
+                                <h3 class="text-center" >{{this}}</h3>
+                            </div>
+                        </button>
+                        <div class="panel-body sy-menu"  style="height: 40px;">
+                            <form  href="#">
+                                <span class="glyphicon glyphicon-trash pull-left" style="font-size:20px; margin-top: -5px"></span>
+                            </form >
+                            <a >
+                                <button type="submit"   class="glyphicon glyphicon-edit pull-right" style="font-size:20px; margin-top: -5px;background: none;border: 0px;"></button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+        {{/each}}
+        </div>
+
+
+</div>
+
+<script src="/js/syllabus.js"></script>
+
+

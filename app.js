@@ -11,6 +11,7 @@ var passport=require('passport');
 var flash=require('connect-flash');
 var validator=require('express-validator');
 var hbs=require('express-handlebars');
+var fileUpload=require('express-fileupload');
 
 
 var admin=require('./routes/admin');
@@ -40,6 +41,7 @@ app.use(cookieParser());
 app.use(validator());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({secret: 'secretkey'}));
+app.use(fileUpload());
 
 
 app.use(flash());
@@ -80,6 +82,26 @@ app.use(function (req,res,next) {
 
 
 app.get('/syllabus/getChildById/:path',syllabus.getChildById);
+//Syllabus - Course view abu
+app.get('/syllabus/course/view',syllabus.viewcourse);
+app.get('/syllabus/course/new',syllabus.coursecreate);
+app.get('/syllabus/course/:course',syllabus.editCourse);
+app.get('/syllabus/course/sem/:course',syllabus.viewSemester);
+app.get('/syllabus/course/addSem/:courseparant',syllabus.addSemester);
+app.get('/syllabus/course/sem/branch/:sem',syllabus.viewbranch);
+app.get('/syllabus/course/sem/addbranch/:sem',syllabus.addbranch);
+app.get('/syllabus/course/sem/branch/subj/:subj',syllabus.viewSubj);
+app.get('/syllabus/course/sem/branch/addsubj/:subj',syllabus.addSubj);
+app.get('/syllabus/course/sem/branch/subj/download/:subj',syllabus.dodownloadsub);
+app.get('/syllabus/find',syllabus.findsyllabus);
+
+app.post('/syllabus/course/new',syllabus.docoursecreate);
+app.post('/syllabus/course/:course',syllabus.doeditCourse);
+app.post('/syllabus/course/sem/new',syllabus.doaddSemester);
+app.post('/syllabus/course/sem/branch/new',syllabus.doaddbranch);
+app.post('/syllabus/course/sem/branch/addsubj/:branch',syllabus.doaddSubj);
+
+
 
 
 // catch 404 and forward to error handler
