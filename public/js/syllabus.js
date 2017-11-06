@@ -3,7 +3,7 @@
 $(document).ready(function () {
     //////////////////////////////////////
     ///Enter Add Subject Page
-    ///Ceated Date  :
+    ///Created Date  :
     ///Updated Date : 20-10-2017
     ///Created      :Abu
     //////////////////////////////////////
@@ -24,8 +24,8 @@ $(document).ready(function () {
         });
     });
     //////////////////////////////////////
-    ///entr Add Course
-    ///Ceated Date  :
+    ///enter Add Course
+    ///Created Date  :
     ///Updated Date : 20-10-2017
     ///Created      :Abu
     //////////////////////////////////////
@@ -53,7 +53,7 @@ $(document).ready(function () {
     });
     //////////////////////////////////////
     ///View Syllabus
-    ///Ceated Date  :
+    ///Created Date  :
     ///Updated Date : 20-10-2017
     ///Created      :Abu
     //////////////////////////////////////
@@ -83,7 +83,7 @@ $(document).ready(function () {
     });
     //////////////////////////////////////
     ///Root Menu for Syllabus
-    ///Ceated Date  :26-10-2017
+    ///Created Date  :26-10-2017
     ///Updated Date : 26-10-2017
     ///Created      :Abu
     //////////////////////////////////////
@@ -109,7 +109,7 @@ $(document).ready(function () {
     })
     //////////////////////////////////////
     ///Root Menu for Course
-    ///Ceated Date  :26-10-2017
+    ///Created Date  :26-10-2017
     ///Updated Date : 26-10-2017
     ///Created      :Abu
     //////////////////////////////////////
@@ -134,7 +134,7 @@ $(document).ready(function () {
     });
     //////////////////////////////////////
     ///Root Menu for Sem
-    ///Ceated Date  :26-10-2017
+    ///Created Date  :26-10-2017
     ///Updated Date : 26-10-2017
     ///Created      :Abu
     //////////////////////////////////////
@@ -159,7 +159,7 @@ $(document).ready(function () {
 });
 //////////////////////////////////////
 ///View Child of Course
-///Ceated Date  :
+///Created Date  :
 ///Updated Date : 20-10-2017
 ///Created      :Abu
 //////////////////////////////////////
@@ -183,7 +183,7 @@ function parantCourse(objCourse){
 }
 //////////////////////////////////////
 ///View Child of Sem
-///Ceated Date  :
+///Created Date  :
 ///Updated Date : 20-10-2017
 ///Created      :Abu
 //////////////////////////////////////
@@ -206,7 +206,7 @@ function parantSem(objSem) {
 }
 //////////////////////////////////////
 ///View Child of Branch
-///Ceated Date  :
+///Created Date  :
 ///Updated Date : 20-10-2017
 ///Created      :Abu
 //////////////////////////////////////
@@ -229,7 +229,7 @@ function parantbranch(objBranch) {
 }
 //////////////////////////////////////
 ///Entering Edit Course
-///Ceated Date  :
+///Created Date  :
 ///Updated Date : 20-10-2017
 ///Created      :Abu
 //////////////////////////////////////
@@ -244,7 +244,7 @@ function editCourse(objButton) {
         },
         success:function (data,txtStataus,jqXHR) {
             console.log("Edit page enterd");
-            //console.log(data);
+            //console.log(data);Ceated
             $("#loading_gif").hide();
             $("#body").html(data);
             $("#items li").css("background-color","transparent");
@@ -258,7 +258,7 @@ function editCourse(objButton) {
 }
 //////////////////////////////////////
 ///Update Course Name
-///Ceated Date  :
+///Created Date  :
 ///Updated Date : 20-10-2017
 ///Created      :Abu
 ///Updated      :Abu
@@ -281,8 +281,8 @@ function doeditCourse(){
 
 }
 //////////////////////////////////////
-///Downlod PDF
-///Ceated Date  :
+///Download PDF
+///Created Date  :
 ///Updated Date : 20-10-2017
 ///Created      :Abu
 ///                     not Compleated
@@ -314,7 +314,7 @@ function dnldpdf(SubjectName) {
 }
 //////////////////////////////////////
 ///Button Rest
-///Ceated Date  :
+///Created Date  :
 ///Updated Date : 20-10-2017
 ///Created      :Abu
 //////////////////////////////////////
@@ -324,7 +324,7 @@ function btnReset() {
 }
 //////////////////////////////////////
 ///PDF Uploading Loader For CLient Side
-///Ceated Date  :
+///Created Date  :
 ///Updated Date : 20-10-2017
 ///Created      :Abu
 //////////////////////////////////////
@@ -345,8 +345,8 @@ function pdfloader(pesnt) {
 }
 //////////////////////////////////////
 ///Create Course (add course /add semester/add Branch/
-///Ceated Date  :10-10-2017
-///Updated Date : 20-10-2017
+///Created Date  :10-10-2017
+///Updated Date : 06-11-2017
 ///Created      :Abu
 //////////////////////////////////////
 function docr() {
@@ -355,7 +355,7 @@ function docr() {
     /* Loader not working */
     //debugger
     $("#status").empty().text("Course Creating...");
-    var objCourse=document.getElementById('txtCourse').value;
+    var objCourse=document.getElementById('txtCourse').value.trim();
     $.ajax({
         url:"/syllabus/course/new",
         method:"post",
@@ -365,7 +365,7 @@ function docr() {
         },success:function (data) {
             if(data!='Course Alredy Exists') {
                 for (var i = 0; i < $('#semTable input.semobj').length; i++) {
-                    var sem = $('#semTable input.semobj')[i].value;
+                    var sem = $('#semTable input.semobj')[i].value.trim();
                     $.ajax({
                         url: "/syllabus/course/sem/new",
                         method: "post",
@@ -374,12 +374,13 @@ function docr() {
                             sem: sem
                         },
                         success: function (data) {
-                            debugger;
+                            //debugger;
                             for (var x = 0; x < $('#semTable input.semobj').length; x++) {
-                                var objsem = $('#semTable input.semobj')[x].value;
+                                var objsem = $('#semTable input.semobj')[x].value.trim();
                                 //debugger;
                                 for ( var y = 0; y < $('#brTable input.semobj').length; y++) {
-                                    var br = $('#brTable input.semobj')[y].value;
+                                    var br = $('#brTable input.semobj')[y].value.trim();
+                                    //var ansbr = br.replace(/(^[\s]+|[\s]+$)/g, '');
                                     //alert(br);
                                     $.ajax({
                                         url: "/syllabus/course/sem/branch/new",
@@ -417,7 +418,7 @@ function docr() {
 }
 //////////////////////////////////////
 ///Function For All Text Field and Table
-///Ceated Date  :10-10-2017
+///Created Date  :10-10-2017
 ///Updated Date : 20-10-2017
 ///Created      :Abu
 //////////////////////////////////////
@@ -430,8 +431,8 @@ function clearCourse(){
     $('#br-first-tahbleRow').val("");
 }
 //////////////////////////////////////
-///Serch Syllabus
-///Ceated Date  :26-10-2017
+///Search Syllabus
+///Created Date  :26-10-2017
 ///Updated Date : 26-10-2017
 ///Created      :Abu
 //////////////////////////////////////

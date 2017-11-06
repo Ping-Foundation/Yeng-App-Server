@@ -294,6 +294,7 @@ exports.viewSubj = function (req, res) {
     var branch=req.params.subj.split("_")[2];
 
     syllabus.findOne({_id: req.params.subj}, function (err, data) {
+        console.log(req.params.subj);
         if (!err) {
             res.render("syllabus/viewsubj",
                 {
