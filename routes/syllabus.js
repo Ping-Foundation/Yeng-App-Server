@@ -321,18 +321,19 @@ exports.addSubj = function (req, res) {
         if (!err) {
             syllabus.findOne({children: req.params.subj}, function (err, semdata) {
                 if (!err) {
-                    syllabus.findOne({children: semdata._id}, function (err, coursedata) {
-                        if (!err) {
-                            res.render('syllabus/addsubj', {
-                                layout: false,
-                                brName: brdata._id.split("_")[2],
-                                semName: brdata._id.split("_")[1],
-                                courseName: brdata._id.split("_")[0]
-                            });
-                        } else {
-                            console.log(err);
-                        }
-                    })
+                    // syllabus.findOne({children: semdata._id}, function (err, coursedata) {
+                    //  if (!err) {
+                    res.render('syllabus/addsubj', {
+                        layout: false,
+                        brName: brdata._id.split("_")[2],
+                        semName: brdata._id.split("_")[1],
+                        courseName: brdata._id.split("_")[0]
+                        //  });
+                        //  } else {
+                        //      console.log(err)}
+                        //})
+                    });
+
                 } else {
                     console.log(err);
                 }
