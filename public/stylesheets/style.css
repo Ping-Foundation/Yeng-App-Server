@@ -191,3 +191,8 @@
   color: #CD0019;
   font-weight: 100;
 }
+
+.file {
+  visibility: hidden;
+  position: absolute;
+}

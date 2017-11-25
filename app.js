@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var db=require('./model/db');
+var multer  = require('multer');
+var upload = multer({ dest: 'public/news' });
 
 var session=require('express-session');
 var passport=require('passport');
@@ -28,6 +30,7 @@ require('./config/passport');
 app.engine('hbs',hbs({extname:'hbs',defaultLayout:'layout',layoutsDir:__dirname + '/views/layouts/',partialsDir:__dirname + '/views/partials/'}));
 
 app.set('views', path.join(__dirname, 'views'));
+app.set('public', path.join(__dirname, 'public'));
 //app.set('view engine', 'jade');
 app.set('view engine', 'hbs');
 
@@ -57,7 +60,7 @@ app.get('/', admin.login);//first load login page
 app.post('/login', admin.doLogin);
 app.get('/adminhome', admin.index);
 app.get('/news/add',news.add);
-app.post('/news/add',news.doAdd);
+app.post('/news/add',upload.any(),news.doAdd);
 app.get('/news/view',news.view);
 app.get('/news/detailedview/:id',news.detailedview);
 // Add admin profile

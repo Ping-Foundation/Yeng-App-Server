@@ -1,6 +1,8 @@
 
 var mongoose=require('mongoose');
 var news=mongoose.model('news');
+var multer  = require('multer');
+var upload = multer({ dest: 'public/news' });
 
 
 
@@ -14,6 +16,8 @@ exports.add=function (req,res) {
     res.render("addnews-page",{layout:false});
 };
 exports.doAdd=function (req,res) {
+    var a=upload.any();
+    console.log(req.files);
     news.create({
         Tittle: req.body.Tittle,
         News:req.body.News,
@@ -48,7 +52,6 @@ exports.view=function (req,res) {
             if(news[i].News.length>30)
                 news[i].News=news[i].News.slice(0,30)+"...";
         }
-        console.log(news);
         res.render('viewnews-page',{
             news: news,
             keys:keys,layout:false
