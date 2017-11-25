@@ -1,0 +1,86 @@
+.sy-menu{
+    background-color: #18a39c;
+}
+.td-left{
+    width:200px;
+}
+.pdf-icon {
+    width: 70px;
+    height: 70px;
+    background: url("/images/pdf_icon.png") no-repeat;
+    background-size: 100% 100%;
+
+}
+.stbody
+{
+    min-height:70px;
+    margin-bottom:8px;
+    border-bottom:dashed 1px #18a39c;
+}
+.stimg
+{
+    float:left;
+    height:70px;
+    width:70px;
+    border:solid 0px #dedede;
+    padding:5px;
+    background: url("/images/pdf_icon.png") no-repeat;
+    background-size: 100% 100%;
+}
+.sttext
+{
+    margin-left:70px;
+    min-height:50px;
+    word-wrap:break-word;
+    overflow:hidden;
+    padding:5px;
+    display:block;
+    font-family:'Georgia', Times New Roman, Times, serif
+}
+
+.top-bar {
+    height: 50px;
+    width: 100%;
+    padding-top: 5px;
+    background-color: #18a39c;
+}
+.search-container {
+    max-width: 950px;
+    margin: auto;
+    padding-right: 10px;
+}
+.search {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background: #ffffff;
+    background-size: 30px 30px;
+    padding: 2px;
+    width: 50px;
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    transition: all .5s ease;
+    float: right;
+}
+.search:focus {
+    width: 70%;
+}
+.search:focus ~ button {
+    display:none;
+}
+
+.uploadBar {
+    background-image:url("/images/pageUploader.gif");
+    background-position: -1px;
+    background-repeat:no-repeat;
+    background-size:0% 100%; width:100%;
+    position: relative; overflow: hidden;
+}
+#myBar {
+    width:0%;
+    height: 30px;
+    background-color: #4CAF50;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+}
+
