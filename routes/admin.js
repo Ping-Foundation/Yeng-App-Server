@@ -67,7 +67,8 @@ exports.index =function (req, res, next) {
         res.render('adminhome-page', {
             title: req.session.admin.email,
             email: req.session.admin.email,
-            adminID: req.session.admin._id,login:"true"
+            adminID:
+            req.session.admin._id,login:"true"
         })
     }else{
         res.redirect('/');

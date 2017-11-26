@@ -8,6 +8,7 @@ var fileUpload = require('express-fileupload')
 var mkdir = require('mkdirp');
 var path=require('path');
 var download=require('download-file');
+var rmdir = require('rimraf');
 
 
 //var fs=require('fs-extra');
@@ -321,18 +322,19 @@ exports.addSubj = function (req, res) {
         if (!err) {
             syllabus.findOne({children: req.params.subj}, function (err, semdata) {
                 if (!err) {
-                    syllabus.findOne({children: semdata._id}, function (err, coursedata) {
-                        if (!err) {
-                            res.render('syllabus/addsubj', {
-                                layout: false,
-                                brName: brdata._id.split("_")[2],
-                                semName: brdata._id.split("_")[1],
-                                courseName: brdata._id.split("_")[0]
-                            });
-                        } else {
-                            console.log(err);
-                        }
-                    })
+                    // syllabus.findOne({children: semdata._id}, function (err, coursedata) {
+                    //  if (!err) {
+                    res.render('syllabus/addsubj', {
+                        layout: false,
+                        brName: brdata._id.split("_")[2],
+                        semName: brdata._id.split("_")[1],
+                        courseName: brdata._id.split("_")[0]
+                        //  });
+                        //  } else {
+                        //      console.log(err)}
+                        //})
+                    });
+
                 } else {
                     console.log(err);
                 }
@@ -448,7 +450,6 @@ exports.dodownloadsub=function (req,res) {
 //////////////////////////////////////
 exports.findsyllabus=function (req,res) {
     var serch=[];
-    console.log("hello");
     syllabus.distinct('_id',function (err,data) {
         if(!err){
             //  console.log(data);
@@ -461,6 +462,41 @@ exports.findsyllabus=function (req,res) {
         else{
             console.log(err);
         }
+    });
+}
+//////////////////////////////////////
+///Course Delete
+///Created Date  :24-11-2017
+///Updated Date : 25-11-2017
+///Created      :Abu
+//////////////////////////////////////
+exports.doDelete=function (req,res) {
+    var objCourse=req.params.id;
+    var myquery = {_id: {"$regex":objCourse,"$options":"i"}};
+    syllabus.deleteMany(myquery,function (err,data) {
+        if (err) throw err;
+        console.log(data.result.n + " document(s) deleted");
+        syllabus.update(
+            {
+                _id:"Syllabus"
+            },
+            {
+                $pull:{
+                    children:{
+                        $in:[objCourse]
+                    }
+                }
+            },function (err,obj) {
+                if(!err){
+                    console.log(obj.result);
+                    var path="public/Syllabus/"+objCourse
+                    removeDirectory(path,objCourse,res)
+                }else{
+                    console.log(err)
+                }
+            }
+
+        );
     });
 }
 //////////////////////////////////////
@@ -552,6 +588,21 @@ function CreateCourse(parant, child, req, res, path) {
                 //return done(null, false, {message: 'syllabus Create succes'});
             }
 
+        }
+    });
+}
+//////////////////////////////////////
+///Function for Remove Directory
+///Created Date  :25-11-2017
+///Updated Date : 25-11-2017
+///Created      :Abu
+//////////////////////////////////////
+function removeDirectory(path,corsename,res) {
+    rmdir(path,function (err) {
+        if(!err){
+            res.send("Succesfully Deleted Course "+corsename);
+        }else{
+            res.send(err+":  Removing "+corsename);
         }
     });
 }

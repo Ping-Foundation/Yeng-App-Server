@@ -67,7 +67,7 @@ $(document).ready(function () {
             },
             success:function (data,txtStataus,jqXHR) {
                 console.log("succes");
-                console.log(data);
+                //console.log(data);
                 $("#loading_gif").hide();
                 $("#body").html(data);
                 $("#items li").css("background-color","transparent");
@@ -456,4 +456,23 @@ function BindControls() {
         }
     });
 
+}
+//////////////////////////////////////
+///Delete Course
+///Created Date  :25-11-2017
+///Updated Date : 25-11-2017
+///Created      :Abu
+//////////////////////////////////////
+function delpetecourse(objcourse) {
+    $("#loading_gif").show();
+    $.ajax({
+        url: "/syllabus/course/delete/" + objcourse.value,
+        type: "post",
+        data: {
+            //date:$('button').val()
+        }, success: function (data) {
+            alert(data);
+            location.reload();
+        }
+    });
 }
