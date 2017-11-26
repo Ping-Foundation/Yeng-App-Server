@@ -56,13 +56,14 @@ app.get('/getspecificnews/:id',news.getspecificnews);
 app.get('/news/delete/:id',news.delete);
 app.get('/news/edit/:id',news.edit);
 app.post('/news/edit',news.doEdit);
+app.post('/news/del_attach',news.delAttach);
 
 
 app.get('/', admin.login);//first load login page
 app.post('/login', admin.doLogin);
 app.get('/adminhome', admin.index);
 app.get('/news/add',news.add);
-app.post('/news/add',upload.any(),news.doAdd);
+app.post('/news/add',news.doAdd);
 app.get('/news/view',news.view);
 app.get('/news/detailedview/:id',news.detailedview);
 // Add admin profile

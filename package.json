@@ -22,11 +22,7 @@
     "hbs": "~4.0.1",
     "jquery": "^1.12.4",
     "mongoose": "^4.9.9",
-<<<<<<< HEAD
-    "morgan": "^1.7.0",
-=======
     "morgan": "~1.7.0",
->>>>>>> a2a96f0063eb59fca4d0e4d24ded1a996abea7ec
     "multer": "^1.3.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",

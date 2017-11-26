@@ -196,3 +196,22 @@
   visibility: hidden;
   position: absolute;
 }
+.upload{
+  background: #18a39c;
+}
+.upload-label{
+  color: #52939b;
+  font-size: 13px;
+  font-weight:600;
+}
+.att-p{
+  font-size: 13px;
+  font-weight:600;
+}
+#del-att{
+  height: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  padding-top: 3px;
+  margin-top: -21px;
+}

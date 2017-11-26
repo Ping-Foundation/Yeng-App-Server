@@ -18,6 +18,12 @@
         </div>
         <p class="dis" style="font-size: 12px">Display Date: {{Startdate}}</p>
         <p class="end" style="font-size: 12px">Ending Date :{{Enddate}}</p>
+        {{#if Attachment}}
+           <div> <p class="att-p">Attachment : {{Attachment}}</p>
+           <button class="btn" id="del-att" value="{{Attachment}}" >Delete Attachment</button>
+           </div>
+
+        {{/if}}
         <button class="btn admin_det_btn" id="edit{{_id}}"><b>Edit</b></button>
 
         <form method='get' action='/news/delete/{{_id}}' style="float: right" onsubmit="return confirm('Confirm Delete?');">
@@ -61,6 +67,26 @@ edit news display-->
     });
     });
 
+</script>
+<!--delete news attachment-->
+<script>
+    $(document).ready(function () {
+        $("#del-att").click(function () {
+            var name=this.value;
+            console.log(name);
+            $.ajax({
+                url:"/news/del_attach",
+                method:"POST",
+                data:{
+                    "Name":name
+                },
+                success:function (data) {
+
+                }
+            })
+
+        })
+    })
 </script>
 
 

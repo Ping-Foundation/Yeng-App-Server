@@ -7,7 +7,7 @@ var multer = require('multer');
 var fileUpload = require('express-fileupload')
 var mkdir = require('mkdirp');
 var path=require('path');
-var download=require('download-file');
+
 
 
 //var fs=require('fs-extra');
