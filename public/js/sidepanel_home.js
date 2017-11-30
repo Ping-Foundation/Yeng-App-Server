@@ -33,7 +33,7 @@ $(document).ready(function(){
     });
 });
 
-
+/*add-news page view*/
 $(document).ready(function () {
     $("#news_add").click(function () {
         $(".news_items").css("background","#fff");
@@ -58,7 +58,7 @@ $(document).ready(function () {
     })
 })
 //////////////////////////
-/*add admin page*/
+/*add_admin page view*/
 $(document).ready(function () {
     $("#admin_add").click(function () {
         $(".admin_li").css("background","#fff");

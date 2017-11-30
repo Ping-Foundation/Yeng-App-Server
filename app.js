@@ -53,7 +53,7 @@ app.use(passport.session());
 
 app.get('/getnews',news.getnews);
 app.get('/getspecificnews/:id',news.getspecificnews);
-app.get('/news/delete/:id',news.delete);
+app.post('/news/delete/:id',news.delete);
 app.get('/news/edit/:id',news.edit);
 app.post('/news/edit',news.doEdit);
 app.post('/news/del_attach',news.delAttach);

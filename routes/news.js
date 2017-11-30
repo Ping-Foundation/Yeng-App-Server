@@ -20,20 +20,57 @@ exports.add=function (req,res) {
     res.render("addnews-page",{layout:false});
 };
 exports.doAdd=function (req,res) {
-    if(req.files.NewsAttachment) {
-        console.log(req.files.NewsAttachment);
+    console.log("add news");
+
+        news.create({
+            Tittle: req.body.Tittle,
+            News:req.body.News,
+            CreatedOn: Date.now(),
+            DisplayDate:req.body.DisplayDate,
+            EndDate:req.body.EndDate
+        },function (err,news) {
+            if (err){
+                console.log(err);
+            }
+            else if(req.files.NewsAttachment) {
+                    console.log("have file");
+                    var uploadFile = req.files.NewsAttachment;
+                    var fileName = news._id + ".pdf";
+                    var path = "public/news";
+                    console.log(path + fileName);
+                    var source = path + "/" + fileName;
+                    uploadFile.mv(path + "/" + fileName, function (err, data) {
+                        news.AttachmentPath = source;
+                        news.AttachmentName = fileName;
+                        news.save(function (err, data) {
+                            if (err) {
+                               console.log("err on file");
+                               console.log(err);
+                            }
+                            else {
+                                res.redirect('/adminhome');
+                            }
+                        })
+                    });
+                }
+                else res.redirect("/adminhome");
+
+
+        })
+        /*console.log(req.files.NewsAttachment);
         var uploadFile = req.files.NewsAttachment;
         var fileName = req.files.NewsAttachment.name + ".pdf";
         var path = "public/news";
         console.log(path + fileName);
         uploadFile.mv(path + "/" + fileName);
-        var source = path + "/" + fileName
-    }
-    else{
-        var source=null;
-        var fileName=null;
-    }
-    news.create({
+        var source = path + "/" + fileName*/
+
+    /*else{
+        news.create({
+
+        })
+    }*/
+   /* news.create({
         Tittle: req.body.Tittle,
         News:req.body.News,
         CreatedOn: Date.now(),
@@ -56,7 +93,7 @@ exports.doAdd=function (req,res) {
             res.redirect('/adminhome')
         }
 
-    })
+    })*/
 };
 
 
@@ -143,6 +180,7 @@ exports.delete=function (req,res) {
                  console.log(err);
                  return res.redirect('/news?error=deleting');
              }else {
+                 fs.unlink(news.AttachmentPath);
                  console.log("news deleted");
                  res.redirect('/adminhome')
              }
@@ -174,15 +212,21 @@ exports.edit = function(req, res){
     }
 };
 exports.doEdit=function (req,res) {
+    if (req.files.NewsAttachment){
+        var attachment=req.files.NewsAttachment
+    }
+    else
+        attachment=null;
+        console.log("no file");
     console.log(req.body.id);
     news.findById( req.body.id,
         function (err, news) {
             console.log(news);
-            doEditSave (req, res, err, news);
+            doEditSave (req, res, err, news,attachment);
         }
     );
 };
-var doEditSave = function(req, res, err, news) {
+var doEditSave = function(req, res, err, news,attachment) {
     if(err){
         console.log(err);
         res.redirect( '/user?error=finding');
@@ -194,7 +238,19 @@ var doEditSave = function(req, res, err, news) {
         news.EndDate=req.body.EndDate;
         news.save(
             function (err, news) {
-                onEditSave (req, res, err, news);
+                if (attachment){
+                    fs.unlink(news.AttachmentPath);
+                    var path="public/news/"+news._id+".pdf";
+                    attachment.mv(path,function (err,data) {
+                        news.AttachmentPath=path;
+                        news.AttachmentName=news._id;
+                        news.save(function (err,news) {
+                            onEditSave (req, res, err, news);
+                        })
+                    })
+
+                }
+
             }
         );
     }

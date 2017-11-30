@@ -26,9 +26,10 @@
         {{/if}}
         <button class="btn admin_det_btn" id="edit{{_id}}"><b>Edit</b></button>
 
-        <form method='get' action='/news/delete/{{_id}}' style="float: right" id="del-news" >
+        <!--<form method='post' action='/news/delete/{{_id}}' style="float: right" id="del-news" >
             <button type="submit" class="btn admin_det_btn"><b>Delete</b></button>
-        </form>
+        </form>-->
+        <button type="submit" class="btn admin_det_btn" id="news_del_btn"><b>Delete</b></button>
     </div>
 
 </div>
@@ -72,13 +73,6 @@ edit news display-->
 <script>
     $(document).ready(function () {
         $("#del-att").click(function () {
-            swal({
-                title: "Are you sure?",
-                text: "The attached file will be deleted!",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
             var name=this.value;
             console.log(name);
             $.ajax({
@@ -94,12 +88,26 @@ edit news display-->
             })
 
         })
+
+
     })
 </script>
 <script>
     $(document).ready(function () {
-        $("#del-news").on('submit',function () {
-            swal("done","Attachment file deleted","success");
+        $("#news_del_btn").click(function () {
+            $.ajax({
+            url:"/news/delete/{{_id}}",
+                method:"POST",
+                data:{
+                "value":"1"
+                },
+                success:function (data) {
+
+                    swal("Done","News deleted","success");
+                    $(".default").click();
+                }
+
+            })
         })
     })
 
