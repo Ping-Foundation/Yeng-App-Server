@@ -1,6 +1,18 @@
+<style>
+    a.list-group-item {
+        height:auto;
+        min-height:75px;
+    }
+    a.list-group-item.active small {
+        color:#fff;
+    }
+    .stars {
+        margin:20px auto 1px;
+    }
+</style>
 <div class="panel breadcrumb" style="background-color: #ffffff">
     <li><a id="rootsyllabus" href="#">Course</a></li>
-    <li><a id="rootcourse" name="course" href="#">{{course}}</a></li>
+    <li><a id="rootcourse" value="{{course}}" name="course" href="#">{{course}}</a></li>
     <li><a id="rootsem" name="sem" href="#">{{sem}}</a></li>
     <li><a id="branch" name="branch" href="#">{{branch}}</a></li>
     <div class="top-bar">
@@ -19,11 +31,36 @@
     </div>
 
     <div class="panel-body">
-        <button class="btn col-xs-12" id="add-subject" type="button">
+        <button class="btn col-sm-3 " id="add-subject" type="button">
             Create Subject
+        </button>
+        <button class="btn col-xs-3 pull-right" id="addFolderElective" type="button">
+            Create Folder
         </button>
     </div>
     <div id="middle"></div>
+    <div class="row">
+        {{#each Fldr}}
+            <div class="col-sm-12 col-md-6">
+                <div class="thumbnail">
+                    <button style="border:0px;width: 100%" value="{{this}}" onclick="btnel(this)" >
+                        <div class="caption" >
+                            <h3 class="text-center"  >{{this}}</h3>
+                        </div>
+                    </button>
+                    <div class="panel-body sy-menu"  style="height: 40px;">
+                        <form  href="#">
+                            <span class="glyphicon glyphicon-trash pull-left" style="font-size:20px; margin-top: -5px"></span>
+                        </form >
+                        <a >
+                            <button type="submit"   class="glyphicon glyphicon-edit pull-right" style="font-size:20px; margin-top: -5px;background: none;border: 0px;"></button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+
+    </div>
 {{#each subjData}}
 
         <div class="input-group hide">
@@ -34,7 +71,10 @@
 
         </div>
         <img src="/images/loading.gif" class="img-responsive" id="loading_gif">
+
+
     <div class="row">
+
     {{#each this.files}}
 
                 <div class="thumbnail">
@@ -49,6 +89,8 @@
 
                     </div>
                 </div>
+
+
 
             <!--<div class="col-sm-8 col-md-12">
                     <div class="thumbnail">

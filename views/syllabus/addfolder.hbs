@@ -1,0 +1,40 @@
+<div class="panel breadcrumb" style="background-color: #ffffff">
+    <li><a href="#">Syllabus</a></li>
+    <li><a href="#">{{course}}</a></li>
+    <li><a href="#">{{sem}}</a></li>
+    <li><a href="#">{{branch}}</a></li>
+    <li><a href="#">New Folder</a></li>
+    <div class="panel-body sy-menu text-center  " style="color:#ffffff;font-size: 20px;">CRETAE ELECTIVE SUBJECT</div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-sm-8 col-md-6">
+                <div class="form-group">
+                    <label for="inputsm">Course Name</label>
+                    <input class="form-control input-sm" value="{{course}}" id="inputcrs" name="inputcrs" type="text" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="inputsm">Semester Name</label>
+                    <input class="form-control input-sm" value="{{sem}}" id="inputsm" name="inputsm" type="text" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="inputsm">Branch Name</label>
+                    <input class="form-control input-sm" value="{{branch}}" id="inputBranch" name="inputsm" type="text" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="inputsm">Elective Subject Name</label>
+                    <input class="form-control input-sm" id="inputElective" name="inputElective" type="text" placeholder="Name" required>
+                    <div class=" alert-danger" id="inpterr"  role="alert">
+                        <strong>Required</strong> <a href="#" class="alert-link">Must contain a value</a> and try submitting again.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="button" id="create-el" class="btn btn-success pull-right">Create Folder</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById('inpterr').style.display = "none";
+</script>
+<script src="/js/syllabus.js"></script>

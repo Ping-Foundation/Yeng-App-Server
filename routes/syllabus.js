@@ -290,17 +290,22 @@ exports.doaddbranch = function (req, res) {
 ///Created      :Abu
 //////////////////////////////////////
 exports.viewSubj = function (req, res) {
+    var fldr=[];
     var course=req.params.subj.split("_")[0];
     var sem=req.params.subj.split("_")[1];
     var branch=req.params.subj.split("_")[2];
 
     syllabus.findOne({_id: req.params.subj}, function (err, data) {
-        console.log(req.params.subj);
+        //console.log(req.params.subj);
+        for(var i=0;data.children.length>i;i++){
+            fldr[i]=data.children[i].split("_")[3];
+        }
         if (!err) {
             res.render("syllabus/viewsubj",
                 {
                     layout: false,
                     subjData: data,
+                    Fldr:fldr,
                     course:course,
                     sem:sem,
                     branch:branch
@@ -363,6 +368,52 @@ exports.doaddSubj = function (req, res) {
                 if(!data){
                     syllabus.update({
                             _id:objbr
+                    },  {
+                        $addToSet: {
+                            files: objSubjName
+                        }
+
+                    }, function (err, syllabus) {
+                        if (!err) {
+                            uploadPDF(req,res,objSubjName,uploadingPath)
+                        }
+                        else {
+                            res.send('Error while Uploading file :'+err);
+                        }
+                    });
+
+                }else {
+                    res.send('Warning :Suject Name Alredy Exists');
+                }
+            }
+            else {
+                res.send('Erro :'+err);
+            }
+        })
+    }
+    //REF_
+    //REF_
+    //REF_
+    //REF_
+    //console.log(objbr.split("_").splice(-1));
+    //console.log(objbr.split("_")[1]);
+}
+
+exports.doaddElSubj = function (req, res) {
+    console.log("Hello Me here")
+    if(!req.files){
+        res.send("Error Message : Selected File Empty");
+    }else {
+        console.log(req.params.elSub);
+        var objsm = req.params.elSub;
+        var objSubjName = req.body.inputsubcode+"_"+req.body.inputsub;
+        var uploadingPath = objsm.split("_")[0] + "/" + objsm.split("_")[1] + "/" + objsm.split("_")[2]+ "/" + objsm.split("_")[3];
+        console.log(uploadingPath);
+        syllabus.findOne({files:objSubjName},function (err,data) {
+            if(!err){
+                if(!data){
+                    syllabus.update({
+                        _id:objsm
                     },  {
                         $addToSet: {
                             files: objSubjName
@@ -500,6 +551,84 @@ exports.doDelete=function (req,res) {
     });
 }
 //////////////////////////////////////
+///Add Elective Subject
+///Created Date  :29-11-2017
+///Updated Date : 29-11-2017
+///Created      :Abu
+//////////////////////////////////////
+exports.addElectiveFldr=function (req,res) {
+    var odjId=req.params.id;
+    var objCourse=req.params.id.split("_")[0]
+    var objSem=req.params.id.split("_")[1]
+    var objBranch=req.params.id.split("_")[2]
+    //console.log(odjId);
+    res.render("syllabus/addfolder", {
+        layout: false,
+        course:objCourse,
+        sem:objSem,
+        branch:objBranch
+
+    });
+}
+
+exports.doaddElectiveFldr=function(req,res){
+    var id=req.body.ID;
+    var fldrname=req.body.fldrname;
+    var course=req.body.course;
+    var sem=req.body.sem;
+    var branch=req.body.branch;
+    var parantid=course+"_"+sem+"_"+branch;
+    var path=course+"/"+sem+"/"+branch+"/"+fldrname;
+    syllabus.findOne({_id:id},function (err,data) {
+        if(!err){
+            if(!data){
+                CreateCourse(parantid,id,req,res,path);
+                //res.render('syllabus/viewsubj');
+            }else{
+                res.send("Folder Name Alredy Exists !");
+            }
+        }
+    });
+}
+
+exports.viewElectiveFldr=function (req,res) {
+    console.log(req.params.id);
+    var course = req.params.id.split("_")[0];
+    var sem = req.params.id.split("_")[1];
+    var branch = req.params.id.split("_")[2];
+    var folder = req.params.id.split("_")[3];
+    //var folderName=req.params.fldrName;
+    //var id=red.params.id;
+    syllabus.findOne({_id:req.params.id}, function (err, data) {
+        //console.log(data);
+        res.render("syllabus/viewFolder", {
+            layout: false,
+            Course: course,
+            Sem: sem,
+            Branch: branch,
+            Folder: folder,
+            file: data
+        });
+
+    });
+}
+
+exports.addElectiveSub=function (req,res) {
+    //var id=req.params.id;
+    //console.log("hello"+req.params.id)
+    var course=req.params.id.split("_")[0];
+    var sem=req.params.id.split("_")[1];
+    var branch=req.params.id.split("_")[2];
+    var folder=req.params.id.split("_")[3];
+    res.render("syllabus/addElctiveSubj",{
+        layout: false,
+        Course:course,
+        Sem:sem,
+        Branch:branch,
+        Folder:folder
+    });
+}
+//////////////////////////////////////
 ///Function for upload pdf
 ///Created Date  :18-10-2017
 ///Updated Date : 20-10-2017
@@ -525,13 +654,19 @@ function uploadPDF(req,res,objFileName,Path){
 ///Created      :Abu
 //////////////////////////////////////
 function createDirectory(path, child) {
-    mkdir('public/Syllabus/' + path, function (err) {
-        if (!err)
-            syllabus.create({
-                _id: child
-            });
-        console.log("Created Succes");
-    });
+    try {
+        console.log(child);
+        mkdir('public/Syllabus/' + path, function (err) {
+            console.log(child);
+            if (!err)
+                syllabus.create({
+                    _id: child
+                });
+            console.log("Created Succes");
+        });
+    }catch (ex){
+        console.log(ex.message);
+    }
 }
 //////////////////////////////////////
 ///Function for create Course
@@ -574,7 +709,7 @@ function CreateCourse(parant, child, req, res, path) {
                     }, function (err, syllabus) {
                         if (!err) {
                             createDirectory(path, child);
-                            res.send('Course Succesflly Created')
+                            res.send('Succesflly Created')
                             //return done(null, false, {message: 'syllabus Create succes'});
                         }
                         else {

@@ -94,13 +94,18 @@ app.get('/syllabus/course/sem/branch/subj/:subj',syllabus.viewSubj);
 app.get('/syllabus/course/sem/branch/addsubj/:subj',syllabus.addSubj);
 app.get('/syllabus/course/sem/branch/subj/download/:subj',syllabus.dodownloadsub);
 app.get('/syllabus/find',syllabus.findsyllabus);
+app.get('/syllabus/course/sem/branc/addElectiveFldr/:id',syllabus.addElectiveFldr);
+app.get('/syllabus/course/sem/branc/viewElectiveFldr/:id',syllabus.viewElectiveFldr);
+app.get('/syllabus/course/sem/branc/addElectiveSubject/:id',syllabus.addElectiveSub);
 
 app.post('/syllabus/course/new',syllabus.docoursecreate);
 app.post('/syllabus/course/:course',syllabus.doeditCourse);
 app.post('/syllabus/course/sem/new',syllabus.doaddSemester);
 app.post('/syllabus/course/sem/branch/new',syllabus.doaddbranch);
 app.post('/syllabus/course/sem/branch/addsubj/:branch',syllabus.doaddSubj);
+app.post('/syllabus/course/sem/branch/addElsubj/:elSub',syllabus.doaddElSubj);
 app.post('/syllabus/course/delete/:id',syllabus.doDelete);
+app.post('/syllabus/course/sem/branc/addElectiveFldr/:fldrName',syllabus.doaddElectiveFldr);
 
 
 
