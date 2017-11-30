@@ -20,14 +20,19 @@ exports.add=function (req,res) {
     res.render("addnews-page",{layout:false});
 };
 exports.doAdd=function (req,res) {
-
-    console.log(req.files.NewsAttachment);
-    var uploadFile=req.files.NewsAttachment;
-    var fileName=req.files.NewsAttachment.name+".pdf";
-    var path="public/news";
-    console.log(path+fileName);
-    uploadFile.mv(path+"/"+fileName);
-    var source=path+"/"+fileName
+    if(req.files.NewsAttachment) {
+        console.log(req.files.NewsAttachment);
+        var uploadFile = req.files.NewsAttachment;
+        var fileName = req.files.NewsAttachment.name + ".pdf";
+        var path = "public/news";
+        console.log(path + fileName);
+        uploadFile.mv(path + "/" + fileName);
+        var source = path + "/" + fileName
+    }
+    else{
+        var source=null;
+        var fileName=null;
+    }
     news.create({
         Tittle: req.body.Tittle,
         News:req.body.News,
@@ -216,16 +221,32 @@ exports.delAttach=function (req,res) {
                     console.log("file deletion failed")
                }
                else{
-                  news.update({AttachmentName:name},
-                      {$set:{AttachmentPath:"a",AttachmentName:"b"}},function (err,data) {
+                   console.log("file delete");
+                   news.AttachmentPath=null;
+                   news.AttachmentName=null;
+                   news.save(function (err,data) {
+                       if (err){
+                           console.log("error on deletion of file info");
+                       }
+                       else{
+                           console.log("file info deleted");
+                           res.redirect('/adminhome');
+                       }
+                   })
+
+
+              /*    news.update({_id:news._id},
+                      {$set:{"AttachmentPath":"a","AttachmentName":"b"}},function (err,data) {
                           if (err){
                               console.log("error on deletion of file info");
                           }
                           else{
                               console.log("file info deleted");
+                              console.log(data);
+                              res.redirect('/adminhome');
                           }
                       }
-                      )
+                      )*/
 
                }
            })

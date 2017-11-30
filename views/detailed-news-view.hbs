@@ -26,7 +26,7 @@
         {{/if}}
         <button class="btn admin_det_btn" id="edit{{_id}}"><b>Edit</b></button>
 
-        <form method='get' action='/news/delete/{{_id}}' style="float: right" onsubmit="return confirm('Confirm Delete?');">
+        <form method='get' action='/news/delete/{{_id}}' style="float: right" id="del-news" >
             <button type="submit" class="btn admin_det_btn"><b>Delete</b></button>
         </form>
     </div>
@@ -50,7 +50,7 @@ edit news display-->
     },
 
     success: function(data, textStatus, jqXHR) {
-    console.log("succes");
+    console.log("success");
     console.log(data);
         $("#loading_gif").hide();
     $("#news_details").show();
@@ -72,6 +72,13 @@ edit news display-->
 <script>
     $(document).ready(function () {
         $("#del-att").click(function () {
+            swal({
+                title: "Are you sure?",
+                text: "The attached file will be deleted!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
             var name=this.value;
             console.log(name);
             $.ajax({
@@ -81,12 +88,21 @@ edit news display-->
                     "Name":name
                 },
                 success:function (data) {
-
+                 swal("done","Attachment file deleted","success");
+                 $("#news_details").hide();
                 }
             })
 
         })
     })
+</script>
+<script>
+    $(document).ready(function () {
+        $("#del-news").on('submit',function () {
+            swal("done","Attachment file deleted","success");
+        })
+    })
+
 </script>
 
 

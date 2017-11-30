@@ -28,6 +28,7 @@
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "random-bytes": "^1.0.0",
-    "serve-favicon": "^2.3.2"
+    "serve-favicon": "^2.3.2",
+    "sweetalert": "^2.0.8"
   }
 }
