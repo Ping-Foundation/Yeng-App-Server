@@ -1,0 +1,77 @@
+<div class="panel breadcrumb" style="background-color: #ffffff">
+    <li><a id="rootsyllabus" href="#">Course</a></li>
+    <li><a id="rootcourse" href="#">{{Course}}</a></li>
+    <li><a id="rootsem" href="#">{{Sem}}</a></li>
+    <li><a id="rootbr" href="#">{{Branch}}</a></li>
+    <li><a id="rooFldr" href="#">{{Folder}}</a></li>
+    <!--  Serch Box   -->
+    <div class="top-bar">
+        <div class="search-container">
+            <input class="search" type="search" id="tbserch" onfocus="BindControls()" placeholder="Search">
+            <div style="margin: 8px;color: white">
+                <h4>Elective Subject</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <div class="alert alert-success">
+            <strong>{{Folder}}</strong> Folder Details Mention in Below.
+        </div>
+    </div>
+    <div class="panel-body">
+        <button class="btn col-sm-3 " id="add-elsubject" type="button">
+            Create Subject
+        </button>
+    </div>
+
+
+    <div class="input-group hide">
+        <span class="input-group-addon"><i class="fa fa-graduation-cap" aria-hidden="true"></i></span>
+        <input id="fldrSubjID" type="taxt" value="{{Course}}_{{Sem}}_{{Branch}}_{{Folder}}" class="form-control" name="branchParant" placeholder="Course Name"
+               required="hello">
+
+    </div>
+    <div class="row">
+{{#each file}}
+
+        <div class="input-group hide">
+            <span class="input-group-addon"><i class="fa fa-graduation-cap" aria-hidden="true"></i></span>
+            <input id="subjectParant" type="taxt" value="{{this._id}}" class="form-control" name="subjectParant"
+                   placeholder="Course Name"
+                   required="hello">
+
+        </div>
+        <img src="/images/loading.gif" class="img-responsive" id="loading_gif">
+
+
+    <div class="row">
+
+    {{#each this.files}}
+
+            <div class="thumbnail">
+                <div class="stbody">
+
+                    <button target="_self" value="{{this}}"  onClick="dnldpdf(this)" class="stimg" >
+                    </button>
+                    <div id="objsub" class="sttext">
+                        {{this}}
+                    </div>
+                    <div class="sttime">Click icon for download</div>
+
+                </div>
+            </div>
+
+        </div>
+        </div>
+    {{/each}}
+
+    </div>
+{{/each}}
+    </div>
+
+</div>
+
+<script src="/js/syllabus.js"></script>
+
+

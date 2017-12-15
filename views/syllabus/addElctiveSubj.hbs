@@ -1,27 +1,32 @@
 <div class="panel breadcrumb" style="background-color: #ffffff">
-    <li><a id="rootsyllabus" href="#">Course</a></li>
-    <li><a id="rootcourse" href="#">{{courseName}}</a></li>
-    <li><a id="rootsem"href="#">{{semName}}</a></li>
-    <li><a href="#">{{brName}}</a></li>
+    <li><a id="rootcourse" href="#">{{Course}}</a></li>
+    <li><a id="rootsem"href="#">{{Sem}}</a></li>
+    <li><a href="#">{{Branch}}</a></li>
+    <li><a href="#">{{Folder}}</a></li>
     <li><a href="#">Create Subject</a></li>
     <div class="panel-body sy-menu text-center  " style="color:#ffffff;font-size: 20px;">CRETAE SUBJECT</div>
     <div class="panel-body">
         <div class="row">
             <div class="col-sm-8 col-md-6">
-                <form id="uploadForm" enctype="multipart/form-data" action="/syllabus/course/sem/branch/addsubj/{{courseName}}_{{semName}}_{{brName}}" method="post" name="uploadForm">
+                <form id="uploadForm" enctype="multipart/form-data" action="/syllabus/course/sem/branch/addElsubj/{{Course}}_{{Sem}}_{{Branch}}_{{Folder}}" method="post" name="uploadForm">
                     <div class="form-group">
                         <label for="inputsm">Course Name</label>
-                        <input class="form-control input-sm" value="{{courseName}}" id="inputcrs" name="inputcrs"
+                        <input class="form-control input-sm" value="{{Course}}" id="inputcrs" name="inputcrs"
                                type="text" disabled>
                     </div>
                     <div class="form-group">
                         <label for="inputsm">Semester Name</label>
-                        <input class="form-control input-sm" value="{{semName}}" id="inputsm" name="inputsm" type="text"
+                        <input class="form-control input-sm" value="{{Sem}}" id="inputsm" name="inputsm" type="text"
                                disabled>
                     </div>
                     <div class="form-group">
                         <label for="inputsm">Branch Name</label>
-                        <input class="form-control input-sm" value="{{brName}}" id="inputbr" name="inputsm" type="text"
+                        <input class="form-control input-sm" value="{{Branch}}" id="inputbr" name="inputsm" type="text"
+                               disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputsm">Folder Name</label>
+                        <input class="form-control input-sm" value="{{Folder}}" id="inputfldr" name="inputsm" type="text"
                                disabled>
                     </div>
                     <div class="form-group">

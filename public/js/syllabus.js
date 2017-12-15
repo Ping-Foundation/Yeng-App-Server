@@ -156,7 +156,88 @@ $(document).ready(function () {
 
         });
     })
+
+    $('#addFolderElective').on('click',function () {
+        var parantId=document.getElementById('subjectParant').value;
+        $("#loading_gif").show();
+        $.ajax({
+            url:"/syllabus/course/sem/branc/addElectiveFldr/"+parantId,
+            method:"get",
+            data:{
+                ParantID:parantId
+            },
+            success:function (data) {
+                $("#loading_gif").hide();
+                $("#body").html(data);
+            }
+        })
+    })
+
+    $('#add-elsubject').on('click',function () {
+        //alert(document.getElementById('fldrSubjID').value);
+        $("#loading_gif").show();
+        $.ajax({
+            url:"/syllabus/course/sem/branc/addElectiveSubject/"+document.getElementById('fldrSubjID').value,
+            method:"get",
+            data:{},
+            success:function (data) {
+                $("#loading_gif").hide();
+                $("#body").html(data);
+            }
+        });
+    });
+
+    $('#create-el').on('click',function () {
+        if(document.getElementById('inputElective').value.trim()!=""){
+            var course=document.getElementById('inputcrs').value;
+            var sem=document.getElementById('inputsm').value;
+            var branch=document.getElementById('inputBranch').value;
+            var Electivefldr=document.getElementById('inputElective').value;
+            var id=course+"_"+sem+"_"+branch+"_"+Electivefldr
+            document.getElementById('inpterr').style.display = "none";
+            $.ajax({
+                url:"/syllabus/course/sem/branc/addElectiveFldr/"+document.getElementById('inputElective').value,
+                method:'post',
+                data:{
+                    ID:id,
+                    course:course,
+                    sem:sem,
+                    branch:branch,
+                    fldrname:Electivefldr
+                },
+                success:function (data) {
+                    if(data){
+                        alert(data);
+                        var Electivefldr=document.getElementById('inputElective').value="";
+                    }else{
+                        alert('error');
+                    }
+                }
+            });
+        }else{
+            document.getElementById('inpterr').style.display = "block";
+        }
+    })
+
+
 });
+function btnel(objref) {
+    var course=document.getElementById('rootcourse').innerHTML;
+    var sem=document.getElementById('rootsem').innerHTML;
+    var branch=document.getElementById('branch').innerHTML;
+    var id=course+"_"+sem+"_"+branch+"_"+objref.value;
+    //alert(id);
+    $.ajax({
+        url:"/syllabus/course/sem/branc/viewElectiveFldr/"+id,
+        method:'get',
+        data:{
+            //objId:id
+        },
+        success:function(data){
+            $("#body").html(data);
+        }
+    })
+}
 //////////////////////////////////////
 ///View Child of Course
 ///Created Date  :
@@ -173,7 +254,6 @@ function parantCourse(objCourse){
 
         },
         success:function (data,txtStataus,jqXHR) {
-            console.log(objCourse.value+" Viw page enterd");
             $("#loading_gif").hide();
             $("#body").html(data);
         }
