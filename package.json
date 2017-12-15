@@ -28,12 +28,8 @@
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "random-bytes": "^1.0.0",
-<<<<<<< HEAD
     "rimraf": "^2.6.2",
-    "serve-favicon": "^2.3.2"
-=======
     "serve-favicon": "^2.3.2",
     "sweetalert": "^2.0.8"
->>>>>>> e5c2c4033767d53af348008c96538b1f4efb615b
   }
 }
