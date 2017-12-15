@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var db=require('./model/db');
+var multer  = require('multer');
+var upload = multer({ dest: 'public/news' });
 
 var session=require('express-session');
 var passport=require('passport');
@@ -29,6 +31,7 @@ require('./config/passport');
 app.engine('hbs',hbs({extname:'hbs',defaultLayout:'layout',layoutsDir:__dirname + '/views/layouts/',partialsDir:__dirname + '/views/partials/'}));
 
 app.set('views', path.join(__dirname, 'views'));
+app.set('public', path.join(__dirname, 'public'));
 //app.set('view engine', 'jade');
 app.set('view engine', 'hbs');
 
@@ -50,9 +53,10 @@ app.use(passport.session());
 
 app.get('/getnews',news.getnews);
 app.get('/getspecificnews/:id',news.getspecificnews);
-app.get('/news/delete/:id',news.delete);
+app.post('/news/delete/:id',news.delete);
 app.get('/news/edit/:id',news.edit);
 app.post('/news/edit',news.doEdit);
+app.post('/news/del_attach',news.delAttach);
 
 
 app.get('/', admin.login);//first load login page

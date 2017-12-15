@@ -45,7 +45,9 @@ var newsSchema = new mongoose.Schema({
     CreatedOn: { type: Date, default: Date.now },
     DisplayDate:Date,
     EndDate:Date,
-    ModifiedOn: Date
+    ModifiedOn: Date,
+    AttachmentPath:{type: String},
+    AttachmentName:{type:String}
 });
 
 var syllabusSchema=new mongoose.Schema({

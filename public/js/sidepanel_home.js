@@ -33,7 +33,7 @@ $(document).ready(function(){
     });
 });
 
-
+/*add-news page view*/
 $(document).ready(function () {
     $("#news_add").click(function () {
         $(".news_items").css("background","#fff");
@@ -58,7 +58,7 @@ $(document).ready(function () {
     })
 })
 //////////////////////////
-/*add admin page*/
+/*add_admin page view*/
 $(document).ready(function () {
     $("#admin_add").click(function () {
         $(".admin_li").css("background","#fff");
@@ -138,6 +138,13 @@ if(!!window.performance && window.performance.navigation.type == 2)
     window.location.reload();
 }
 
+$(document).on('click', '.browse', function(){
+    var file = $(this).parent().parent().parent().find('.file');
+    file.trigger('click');
+});
+$(document).on('change', '.file', function(){
+    $(this).parent().find('.form-control').val($(this).val().replace(/C:\\fakepath\\/i, ''));
+});
 
 ///////////////////////////////////////
 //        OnClick Function          //

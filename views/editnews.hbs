@@ -3,7 +3,7 @@
         <div>
 
         <h1>Edit News</h1>
-        <form method='post' id="editNews" action='/news/edit' class="form-group">
+        <form method='post' id="editNews" action='/news/edit' class="form-group" encType="multipart/form-data">
             <input type="hidden" name="id" value="{{_id}}">
             <br>
             <input type="text" name="Tittle" id="Tittle" value="{{Tittle}}" class="form-control" required>
@@ -30,6 +30,7 @@
                         </span>
                 </div>
             </div>
+            <input class="btn upload" id="input-b1" name="NewsAttachment" id="NewsAttachment" type="file">
             <br><button type="submit" class="btn btn-success"><b>Save</b></button>
 
 
