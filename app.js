@@ -17,6 +17,7 @@ var fileUpload=require('express-fileupload');
 var admin=require('./routes/admin');
 var news=require('./routes/news');
 var syllabus=require('./routes/syllabus');
+var roles=require('./routes/rolemanagment');
 
 var seed=require('./routes/seed');
 
@@ -97,6 +98,7 @@ app.get('/syllabus/find',syllabus.findsyllabus);
 app.get('/syllabus/course/sem/branc/addElectiveFldr/:id',syllabus.addElectiveFldr);
 app.get('/syllabus/course/sem/branc/viewElectiveFldr/:id',syllabus.viewElectiveFldr);
 app.get('/syllabus/course/sem/branc/addElectiveSubject/:id',syllabus.addElectiveSub);
+app.get('/role/admin/view',roles.viewRole);
 
 app.post('/syllabus/course/new',syllabus.docoursecreate);
 app.post('/syllabus/course/:course',syllabus.doeditCourse);
