@@ -1,8 +1,16 @@
 .sy-menu{
     background-color: #18a39c;
 }
+.sy-pdf-footer{
+    background-color:#cccccc;
+}
 .td-left{
     width:200px;
+}
+.folder{
+    background: url("/images/folder.png")no-repeat;
+    background-size: contain;
+    border:0px;width: 100%
 }
 .pdf-icon {
     width: 70px;
@@ -15,7 +23,7 @@
 {
     min-height:70px;
     margin-bottom:8px;
-    border-bottom:dashed 1px #18a39c;
+
 }
 .stimg
 {
@@ -82,5 +90,10 @@
     text-align: center;
     line-height: 30px;
     color: white;
+}
+.img_pdf_icon{
+    width:100px;
+    height: 70px;
+    float: left;
 }
 

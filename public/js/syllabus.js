@@ -556,3 +556,14 @@ function delpetecourse(objcourse) {
         }
     });
 }
+//////////////////////////////////////
+///Edit Folder page enter
+///Created Date  :18-12-2017
+///Updated Date : 18-12-2017
+///Created      :Abu
+//////////////////////////////////////
+function editElPlage(objFolder) {
+    //var ObjElSubName=document.getElementById('edtelSub').value;
+    alert(objFolder.value);
+}
+
