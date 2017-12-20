@@ -16,31 +16,37 @@
         <td><input type="text"></td>
         <td></td>
     </tr>
+    </tbody>
+</table>
+<table class="table table-striped" >
+    <thead>
     <tr>
         <th>Menu</th>
         <th>Full</th>
         <th>Modify</th>
         <th>Read Only</th>
     </tr>
-    <tr>
+    </thead>
+    <tbody id="tblRole">
+    <tr >
         <td>News and Updates</td>
         <td><input type="checkbox" class="subject-News" value="1"></td>
         <td><input type="checkbox" class="subject-News" value="0"></td>
         <td><input type="checkbox" class="subject-News" value="-1"></td>
     </tr>
-    <tr>
+    <tr class="roleRolw">
         <td>Admin Management</td>
         <td><input type="checkbox" class="subject-admin" value="1"></td>
         <td><input type="checkbox" class="subject-admin" value="0"></td>
         <td><input type="checkbox" class="subject-admin" value="-1"></td>
     </tr>
-    <tr>
+    <tr class="roleRolw">
         <td>Syllabus</td>
         <td><input type="checkbox" class="subject-syllabus" value="1"></td>
         <td><input type="checkbox" class="subject-syllabus" value="0"></td>
         <td><input type="checkbox" class="subject-syllabus" value="-1"></td>
     </tr>
-    <tr>
+    <tr class="roleRolw">
         <td>Manage Role</td>
         <td><input type="checkbox" class="subject-role" value="1"></td>
         <td><input type="checkbox" class="subject-role" value="0"></td>
@@ -51,7 +57,7 @@
         <td></td>
         <td></td>
         <td>
-            <input type="button" value="Submit">
+            <input type="button" onclick="docrRole()" value="Submit">
             <input type="button" value="Reset">
         </td>
     </tr>

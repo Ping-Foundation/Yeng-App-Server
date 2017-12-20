@@ -99,6 +99,7 @@ app.get('/syllabus/course/sem/branc/addElectiveFldr/:id',syllabus.addElectiveFld
 app.get('/syllabus/course/sem/branc/viewElectiveFldr/:id',syllabus.viewElectiveFldr);
 app.get('/syllabus/course/sem/branc/addElectiveSubject/:id',syllabus.addElectiveSub);
 app.get('/role/admin/view',roles.viewRole);
+app.get('/role/admin/addnew',roles.addRole);
 
 app.post('/syllabus/course/new',syllabus.docoursecreate);
 app.post('/syllabus/course/:course',syllabus.doeditCourse);

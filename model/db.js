@@ -61,6 +61,15 @@ var seedSchema=new mongoose.Schema({
     _id:mongoose.Schema.Types.Mixed
 });
 
+var roleSchema=new mongoose.Schema({
+    RoleName:String,
+    Description:String,
+    News_and_Updates:[],
+    Admin_Management:[],
+    Syllabus:[],
+    Manage_Role:[]
+})
+
 
 mongoose.model( 'admin', adminSchema );
 mongoose.model( 'news', newsSchema);
