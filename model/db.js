@@ -64,14 +64,15 @@ var seedSchema=new mongoose.Schema({
 var roleSchema=new mongoose.Schema({
     RoleName:String,
     Description:String,
-    News_and_Updates:[],
-    Admin_Management:[],
-    Syllabus:[],
-    Manage_Role:[]
+    News_and_Updates:Number,
+    Admin_Management:Number,
+    Syllabus:Number,
+    Manage_Role:Number
 })
 
 
 mongoose.model( 'admin', adminSchema );
 mongoose.model( 'news', newsSchema);
 mongoose.model('syllabus_pdf',syllabusSchema);
+mongoose.model('UserRole',roleSchema);
 mongoose.model('test',seedSchema);
