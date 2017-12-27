@@ -10,7 +10,8 @@
                                     <div class="sidebar-nav">
                                         <div class="navbar navbar-default" role="navigation">
                                             <div class="navbar-header">
-                                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+                                                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                                        data-target=".sidebar-navbar-collapse">
                                                     <span class="sr-only">Toggle navigation</span>
                                                     <span class="icon-bar"></span>
                                                     <span class="icon-bar"></span>
@@ -19,12 +20,31 @@
                                                 <span class="visible-xs navbar-brand">{{email}}</span>
                                             </div>
                                             <div class="navbar-collapse collapse sidebar-navbar-collapse">
+
                                                 <ul class="nav navbar-nav" id="items">
-                                                    <li><button class="side_menu default" value="/news/view">News & Updates</button> </li>
-                                                    <li><button class="side_menu" value="/admin/view">Admin Management</button> </li>
-                                                    <li><button class="side_menu" value="/syllabus/course/view">Syllabus</button> </li>
-                                                    <li><button class="side_menu" value="/role/admin/view">Manage Role</button> </li>
+                                                    <li>
+                                                        <button id="sbtnnews" class="side_menu default" value="/news/view">News &
+                                                            Updates
+                                                        </button>
+                                                    </li>
+                                                        <li>
+                                                            <button id="sbtnadmin" class="side_menu" value="/admin/view">Admin
+                                                                Management
+                                                            </button>
+                                                        </li>
+                                                    <li>
+                                                        <button id="sbtnsyllabus" class="side_menu" value="/syllabus/course/view">
+                                                            Syllabus
+                                                        </button>
+                                                    </li>
+                                                    <li>
+                                                        <button id="sbtnrole" class="side_menu" value="/role/admin/view">Manage
+                                                            Roles
+                                                        </button>
+                                                    </li>
+
                                                 </ul>
+
                                             </div><!--/.nav-collapse -->
                                         </div>
                                     </div>
@@ -33,7 +53,7 @@
 
                                     <div id="body">
                                         <img src="/images/loading.gif" class="img-responsive" id="loading_gif">
-                                 <!-- div for Expand the pages by ajax-->
+                                        <!-- div for Expand the pages by ajax-->
                                     </div>
 
                                 </div>
@@ -48,32 +68,112 @@
 </div>
 
 <script>
-$(document).ready(function(){
+    $(document).ready(function () {
 
-$(window).on('load',function(){
-    $("#loading_gif").show();
-    $("#items li").css("background-color","transparent");
-    $("#items a").css("color","black");
-    $(".default").css("background-color","#18a39c");
-    $(".default").css("color","#fff");
-$.ajax({
-url: "/news/view",
-method: "GET",
-data: {
+        $(window).on('load', function () {
+            $("#items li").css("background-color", "transparent");
+            $("#items a").css("color", "black");
+            $(".default").css("background-color", "#18a39c");
+            $(".default").css("color", "#fff");
+            var objnews ={{rlNews}};
+            var objAdmin={{rlAdmin}};
+            var objSyllabus={{rlSyllabus}}
+            var objRole={{rlRole}}
+            //var username= "<%= Session["role"]%>";
+            if(objAdmin <'0')
+            {
+                $("#sbtnadmin").css("display","none");
+            }
+            if(objSyllabus <'0')
+            {
+                $("#sbtnsyllabus").css("display","none");
+            }
+            if(objRole <'0')
+            {
+                $("#sbtnrole").css("display","none");
+            }
+            if(objnews <'0')
+            {
+                $("#sbtnnews").css("display","none");
+            }
+            else {
+                $("#loading_gif").show();
+                $.ajax({
+                    url: "/news/view",
+                    method: "GET",
+                    data: {},
 
-},
+                    success: function (data, textStatus, jqXHR) {
+                        console.log("succes");
 
-success: function(data, textStatus, jqXHR) {
-console.log("succes");
+                        $("#loading_gif").hide();
+                        $("#body").html(data);
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log("error");
+                    }
+                });
+            }
 
-    $("#loading_gif").hide();
-$("#body").html(data);
-},
-error: function(jqXHR, textStatus, errorThrown) {
-console.log("error");
-}
-});
+        });
+    });
+    /*
+    Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
 
-});
-});
+        switch (operator) {
+            case '==':
+                return (v1 == v2) ? options.fn(this) : options.inverse(this);
+            case '!=':
+                return (v1 != v2) ? options.fn(this) : options.inverse(this);
+            case '===':
+                return (v1 === v2) ? options.fn(this) : options.inverse(this);
+            case '<':
+                return (v1 < v2) ? options.fn(this) : options.inverse(this);
+            case '<=':
+                return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+            case '>':
+                return (v1 > v2) ? options.fn(this) : options.inverse(this);
+            case '>=':
+                return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+            case '&&':
+                return (v1 && v2) ? options.fn(this) : options.inverse(this);
+            case '||':
+                return (v1 || v2) ? options.fn(this) : options.inverse(this);
+            default:
+                return options.inverse(this);
+        }
+    });*/
+    (function() {
+        function checkCondition(v1, operator, v2) {
+            switch(operator) {
+                case '==':
+                    return (v1 == v2);
+                case '===':
+                    return (v1 === v2);
+                case '!==':
+                    return (v1 !== v2);
+                case '<':
+                    return (v1 < v2);
+                case '<=':
+                    return (v1 <= v2);
+                case '>':
+                    return (v1 > v2);
+                case '>=':
+                    return (v1 >= v2);
+                case '&&':
+                    return (v1 && v2);
+                case '||':
+                    return (v1 || v2);
+                default:
+                    return false;
+            }
+        }
+
+        Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
+            return checkCondition(v1, operator, v2)
+                    ? options.fn(this)
+                    : options.inverse(this);
+        });
+    }());
+
 </script>

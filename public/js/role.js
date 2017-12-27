@@ -18,27 +18,77 @@ function fnccratenewRole() {
 
 }
 function docrRole(){
-    //for (var i = 0; i < $('#tblRole').length; i++){
-    //$("#some_id")[0].checked
-    //}
-    var news=$('#tblRole input.subject-News:checked').val();
-    var admin=$('#tblRole input.subject-admin:checked').val();
-    var syllabus=$('#tblRole input.subject-syllabus:checked').val();
-    var role=$('#tblRole input.subject-role:checked').val();
-    if(!news){
-        news="404";
+    var objRoleName=document.getElementById('txtRoleName').value;
+    var objRoleDscription=document.getElementById('txtescription').value;
+    var objnews=$('#tblRole input.subject-News:checked').val();
+    var objadmin=$('#tblRole input.subject-admin:checked').val();
+    var objSyllabus=$('#tblRole input.subject-syllabus:checked').val();
+    var objRole=$('#tblRole input.subject-role:checked').val();
+    if(!objnews){
+        objnews="-1";
     }
-    if(!admin){
-        admin="404";
+    if(!objadmin){
+        objadmin="-1";
     }
-    if(!syllabus){
-        syllabus="404";
+    if(!objSyllabus){
+        objSyllabus="-1";
     }
-    if(!role){
-        role="404";
+    if(!objRole){
+        objRole="-1";
+    }
+    if(objRoleName.trim()!="") {
+        $.ajax({
+            url: "/role/admin/doaddRole/" + objRoleName,
+            method: "post",
+            data: {
+                objRoleName: objRoleName,
+                objRoleDscription: objRoleDscription,
+                objnews: objnews,
+                objadmin: objadmin,
+                objSyllabus: objSyllabus,
+                objRole: objRole
+
+            }, success: function (data) {
+                if (data == '1') {
+                    $("#success-body").show();
+                    $("#fail-body").hide();
+                    $("#success").empty().text("Role " + objRoleName);
+                    Resetpage();
+                    //alert("Role "+objRoleName+" Succesfully Created ");
+                }
+                else if (data == '0') {
+                    $("#success-body").hide();
+                    $("#fail-body").show();
+                    $("#fail").empty().text("Role " + objRoleName);
+                    $("#txtRoleName").focus();
+                    //alert("Role "+objRoleName+" Alredy Exists");
+                }
+                else if (data == '-1') {
+                    alert("Error While creating Role " + objRoleName + " Please Try Again");
+                }
+
+            }
+        });
+    }
+    else{
+        $('[data-toggle="rolenameover"]').popover();
     }
 
 
     //console.log(checkedElements);
-    alert("news : "+news +"admin : "+admin +"syllabus : "+syllabus+"role : "+role );
+    //alert("news : "+news +"admin : "+admin +"syllabus : "+syllabus+"role : "+role );
+}
+function btnResetOnPress() {
+    Resetpage();
+    $("#success-body").hide();
+    $("#fail-body").hide();
+}
+
+function Resetpage(){
+    $('#txtRoleName').val("");
+    $('#txtescription').val("");
+    $('input[type=checkbox]').each(function () {
+        this.checked=false;
+    });
+    $("#txtRoleName").focus();
 }

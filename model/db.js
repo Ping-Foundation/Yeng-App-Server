@@ -33,11 +33,11 @@ var adminSchema = new mongoose.Schema({
     LastName:String,
     Email: {type: String, unique:true},
     Mobile:Number,
-    Role:String,
     Password:String,
     CreatedOn: { type: Date, default: Date.now },
     ModifiedOn: Date,
-    LastLogin: Date
+    LastLogin: Date,
+    UserRole_id:String
 });
 var newsSchema = new mongoose.Schema({
     Tittle: String,

@@ -2,7 +2,7 @@
  * Created by nikhil on 13/6/17.
  */
 var mongoose = require('mongoose');
-var syllabus = mongoose.model('syllabus_pdf');
+    var syllabus = mongoose.model('syllabus_pdf');
 var multer = require('multer');
 var fileUpload = require('express-fileupload')
 var mkdir = require('mkdirp');
