@@ -5,7 +5,7 @@
             <tr><td><h5><span id="color">Email:</span></h5></td><td><h5>{{admin.Email}}</h5></td></tr>
             <tr><td><h5><span id="color">Mobile:</span></h5></td><td><h5>{{admin.Mobile}}</h5></td></tr>
             <tr><td><h5><span id="color">Role:</span></h5></td><td>
-                <select name="ddlRole" id="ddlRole" class="form-control" selected="{{admin.UserRole_id}}" >
+                <select name="ddlRole" id="ddlRole" class="form-control" >
                     <option value="{{admin.UserRole_id}}">{{RoleName}}</option>
                     {{#each role}}
                         <option value="{{this._id}}">{{this.RoleName}}</option>

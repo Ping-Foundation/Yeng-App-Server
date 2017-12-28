@@ -82,9 +82,10 @@ passport.use('local.signin',new LocalStrategy({
         role.findOne({_id:admin.UserRole_id},function (roleerr,roles) {
             if(!roleerr){
                 if(!roles){
-                    return done("Please Contact Administrator");
+                    return done(null,false,req.flash('error',"Please Contact Administrator"));
                 }
                 else{
+                    req.session.roleError=false;
                     //console.log(roles);
                     req.session.loggedIn=true;
                     req.session.admin = {
@@ -102,8 +103,9 @@ passport.use('local.signin',new LocalStrategy({
 
                 }
 
+
             }else{
-                return done(roleerr+"   :Please Contact Administrator");
+                return done(null,false,req.flash('error',"Please Contact Administrator"));
             }
         });
         //console.log(admin);

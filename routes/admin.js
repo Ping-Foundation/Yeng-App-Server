@@ -59,19 +59,18 @@ exports.doLogin = passport.authenticate('local.signin', {
 
 
 exports.index = function (req, res, next) {
-    console.log(req.session.role);
 
     if (req.session.loggedIn) {
-        res.render('adminhome-page', {
-            title: req.session.admin.email,
-            email: req.session.admin.email,
-            adminID:
-            req.session.admin._id, login: "true",
-            rlNews:req.session.role.News,
-            rlAdmin:req.session.role.Admin,
-            rlSyllabus:req.session.role.Syllabus,
-            rlRole:req.session.role.Role,
-        });
+            res.render('adminhome-page', {
+                title: req.session.admin.email,
+                email: req.session.admin.email,
+                adminID:
+                req.session.admin._id, login: "true",
+                rlNews: req.session.role.News,
+                rlAdmin: req.session.role.Admin,
+                rlSyllabus: req.session.role.Syllabus,
+                rlRole: req.session.role.Role,
+            });
     } else {
         res.redirect('/');
     }
@@ -190,8 +189,8 @@ exports.delete = function (req, res) {
 
 };
 exports.details = function (req, res, next) {
-    var objAdminRoleName;
     admin.findById(req.params.id, function (err, admin) {
+        var objAdminRoleName;
         role.findOne({_id:admin.UserRole_id},function (err,adminRole) {
             if(!err) {
 
