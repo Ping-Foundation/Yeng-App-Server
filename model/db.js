@@ -33,11 +33,11 @@ var adminSchema = new mongoose.Schema({
     LastName:String,
     Email: {type: String, unique:true},
     Mobile:Number,
-    Role:String,
     Password:String,
     CreatedOn: { type: Date, default: Date.now },
     ModifiedOn: Date,
-    LastLogin: Date
+    LastLogin: Date,
+    UserRole_id:String
 });
 var newsSchema = new mongoose.Schema({
     Tittle: String,
@@ -63,8 +63,18 @@ var seedSchema=new mongoose.Schema({
     _id:mongoose.Schema.Types.Mixed
 });
 
+var roleSchema=new mongoose.Schema({
+    RoleName:String,
+    Description:String,
+    News_and_Updates:Number,
+    Admin_Management:Number,
+    Syllabus:Number,
+    Manage_Role:Number
+})
+
 
 mongoose.model( 'admin', adminSchema );
 mongoose.model( 'news', newsSchema);
 mongoose.model('syllabus_pdf',syllabusSchema);
+mongoose.model('UserRole',roleSchema);
 mongoose.model('test',seedSchema);

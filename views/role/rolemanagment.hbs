@@ -1,0 +1,34 @@
+<h2>{{heading}}</h2>
+<p></p>
+<table class="table table-striped">
+    <tr>
+            <button onclick="fnccratenewRole()"  class="btn btn-primary">Create New +</button>
+
+    </tr>
+    <tr>
+        <div class="container">
+
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>RoleName</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each Roles}}
+                <tr>
+                    <td>{{this.RoleName}}</td>
+                    <td>{{this.Description}}</td>
+                    <td><button type="submit" class="btn btn-primary">Edit</button>
+                        <button type="submit" class="btn btn-primary">Delete</button>
+                    </td>
+                </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </tr>
+</table>
+<script src="/js/role.js"></script>

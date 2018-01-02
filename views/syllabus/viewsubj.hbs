@@ -41,9 +41,9 @@
     <div id="middle"></div>
     <div class="row">
         {{#each Fldr}}
-            <div class="col-sm-12 col-md-6">
+            <div class="col-sm-12 col-md-4">
                 <div class="thumbnail">
-                    <button style="border:0px;width: 100%" value="{{this}}" onclick="btnel(this)" >
+                    <button class="folder" value="{{this}}" onclick="btnel(this)" >
                         <div class="caption" >
                             <h3 class="text-center"  >{{this}}</h3>
                         </div>
@@ -53,7 +53,7 @@
                             <span class="glyphicon glyphicon-trash pull-left" style="font-size:20px; margin-top: -5px"></span>
                         </form >
                         <a >
-                            <button type="submit"   class="glyphicon glyphicon-edit pull-right" style="font-size:20px; margin-top: -5px;background: none;border: 0px;"></button>
+                            <button type="submit" value="{{this}}" onclick="editElPlage(this)" class="glyphicon glyphicon-edit pull-right" style="font-size:20px; margin-top: -5px;background: none;border: 0px;"></button>
                         </a>
                     </div>
                 </div>
@@ -77,54 +77,31 @@
 
     {{#each this.files}}
 
-                <div class="thumbnail">
-                    <div class="stbody">
-
-                        <button target="_self" value="{{this}}"  onClick="dnldpdf(this)" class="stimg" >
-                        </button>
-                        <div id="objsub" class="sttext">
-                            {{this}}
-                        </div>
-                        <div class="sttime">Click icon for download</div>
-
-                    </div>
+        <div class="col-sm-12 col-md-6">
+            <div class="thumbnail">
+                <button target="_self" value="{{this}}"  onClick="dnldpdf(this)" class="stimg" >
+                </button>
+                <div class="caption" >
+                    <h3 class="text-center"  >{{this}}</h3>
                 </div>
-
-
-
-            <!--<div class="col-sm-8 col-md-12">
-                    <div class="thumbnail">
-                        <div class="col-sm-8 col-md-12">
-                            <div class="pdf-icon">
-                            </div>
-                        </div>
-                        <div class="col-sm-8 col-md-12">
-                            <div class="pdf-name-area">
-                                {{this}}
-                            </div>
-                        </div>
-                        <!--
-                        <button style="border:0px;width: 100%" value="{{this}}" >
-                            <div class="caption" style="font-size:20px;" >
-                                {{this}}
-                            </div>
-                        </button>
-                        <div class="panel-body sy-menu"  style="height: 40px;">
-                            <form  href="#">
-                                <span class="glyphicon glyphicon-trash pull-left" style="font-size:20px; margin-top: -5px"></span>
-                            </form >
-                            <a >
-                                <button type="submit"   class="glyphicon glyphicon-edit pull-right" style="font-size:20px; margin-top: -5px;background: none;border: 0px;"></button>
-                            </a>
-                        </div>-->
+                <div class="panel-body sy-pdf-footer"  style="height: 40px;">
+                    <form  href="#">
+                        <span class="glyphicon glyphicon-trash pull-left" style="font-size:20px; margin-top: -5px"></span>
+                    </form >
+                    <a >
+                        <button type="submit"   class="glyphicon glyphicon-edit pull-right" style="font-size:20px; margin-top: -5px;background: none;border: 0px;"></button>
+                    </a>
+                </div>
+            </div>
         </div>
-        </div>
+
     {{/each}}
-
     </div>
-{{/each}}
 
+{{/each}}
 </div>
+</div>
+
 
 <script src="/js/syllabus.js"></script>
 

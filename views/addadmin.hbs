@@ -31,6 +31,14 @@
                 <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                 <input id="RePassword" type="password" class="form-control" name="RePassword" placeholder="Re-Enter Password">
             </div>
+            <div class="input-group add_admin_form">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <select name="ddlRole" id="ddlRole" class="form-control">
+                    {{#each role}}
+                        <option value="{{this._id}}">{{this.RoleName}}</option>
+                    {{/each}}
+                </select>
+            </div>
             <button type="submit" value="#{buttonText}" class="btn btn-success" id="bold">Add</button>
         </form>
     </div>

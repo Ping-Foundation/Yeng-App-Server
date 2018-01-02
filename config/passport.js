@@ -1,6 +1,7 @@
 var mongoose=require('mongoose');
 var passport=require('passport');
 var admin=mongoose.model('admin');
+var role = mongoose.model('UserRole');
 var LocalStrategy=require('passport-local').Strategy;
 
 
@@ -68,24 +69,47 @@ passport.use('local.signin',new LocalStrategy({
 
     admin.findOne({'Email':Email,'Password':Password},function (err,admin) {
         if (err){
-            console.log(err);
+            //console.log(err);
             return done(err);
         }
         if (!admin){
-            console.log("no admin");
+            //console.log("no admin");
             return done(null,false,{message:"Email and password do not match."});
         }
         /*if(!admin.validPassword(Password)){
             return done(null,false,{message:'wrong password'});
         }*/
-        console.log(admin);
-        req.session.loggedIn=true;
-        req.session.admin = {
-            "email": admin.Email,
-            "_id": admin._id,
-            "Password":admin.Password
-        };
-        return done(null,admin);
+        role.findOne({_id:admin.UserRole_id},function (roleerr,roles) {
+            if(!roleerr){
+                if(!roles){
+                    return done(null,false,req.flash('error',"Please Contact Administrator"));
+                }
+                else{
+                    req.session.roleError=false;
+                    //console.log(roles);
+                    req.session.loggedIn=true;
+                    req.session.admin = {
+                        "email": admin.Email,
+                        "_id": admin._id,
+                        "Password":admin.Password
+                    };
+                    req.session.role={
+                        "News":roles.News_and_Updates,
+                        "Admin":roles.Admin_Management,
+                        "Syllabus":roles.Syllabus,
+                        "Role":roles.Manage_Role
+                    }
+                    return done(null,admin,roles);
+
+                }
+
+
+            }else{
+                return done(null,false,req.flash('error',"Please Contact Administrator"));
+            }
+        });
+        //console.log(admin);
+
 
     });
 }));
