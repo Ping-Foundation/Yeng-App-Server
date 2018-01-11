@@ -67,6 +67,7 @@ app.get('/news/detailedview/:id',news.detailedview);
 app.get('/admin/new', admin.create);
 // Create new user form
 app.post('/admin/new', admin.doCreate);
+app.post('/admin/innew', admin.inDoCreate);
 app.get('/admin/view',admin.view);
 app.get('/admin/changepassword/:id',admin.changepassword);
 app.post('/admin/changepassword',admin.dochangepassword);
