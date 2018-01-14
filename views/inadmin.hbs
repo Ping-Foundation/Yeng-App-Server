@@ -1,0 +1,89 @@
+<div class="container ">
+    <h2>Add New Admin</h2>
+    <div class="row">
+        <div class="col-md-5 ">
+            <form id="frmAdminProfile" method="post" action="/admin/innew" class="form-group input">
+
+                <div class="input-group add_admin_form">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input id="FirstName" type="text" class="form-control" name="FirstName" placeholder="First Name">
+                </div>
+                <div class="input-group add_admin_form">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input id="FirstName" type="text" class="form-control" name="LastName" placeholder="Last Name">
+                </div>
+
+                <div class="input-group add_admin_form">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                    <input id="Email" type="email" class="form-control" name="Email" placeholder="Email">
+                </div>
+
+                <div class="input-group add_admin_form">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                    <input id="Mobile" type="text" class="form-control" name="Mobile" placeholder="Mobile">
+                </div>
+
+                <div class="input-group add_admin_form">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <input id="Password" type="password" class="form-control" name="Password" placeholder="Password">
+                </div>
+
+                <div class="input-group add_admin_form" style="margin-bottom: 25px">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                    <input id="RePassword" type="password" class="form-control" name="RePassword"
+                           placeholder="Re-Enter Password">
+                </div>
+                <button type="submit" value="#{buttonText}" class="btn btn-success" id="bold">Add</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!--
+validate form fields-->
+
+<script>
+    $(document).ready(function () {
+        $("#frmAdminProfile").validate({
+
+            rules: {
+                FirstName: {
+                    required: true,
+                    minlength: 4
+                },
+                LastName: {
+                    required: true
+                },
+                Email: {
+                    required: true,
+                    email: true
+                },
+                Mobile: {
+                    required: true,
+                    minlength: 10,
+                    maxlength: 10
+                },
+                Password: {
+                    minlength: 6
+                },
+                RePassword: {
+                    equalTo: "#Password"
+                }
+            },
+            messages: {
+                Mobile: {
+                    minlength: "Enter a valid mobile number",
+                    maxlength: "Enter a valid mobile number"
+                },
+                Password: {
+                    minlength: "Password contain atleast 6 characters"
+                },
+                RePassword: {
+                    equalTo: "Password do not match"
+                }
+            },
+            submitHandler: function (form) {
+                form.submit();
+            }
+        })
+    })
+</script>

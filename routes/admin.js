@@ -6,8 +6,29 @@ var passport = require('passport');
 
 // GET login page
 exports.login = function (req, res, next) {
-    var messages = req.flash('error');
-    res.render('login-page', {title: 'Log in', msg: messages});
+    admin.find({},function(err,objAdmin) {
+        console.log('Hello :'+objAdmin);
+        if (objAdmin=="") {
+            role.create({
+                RoleName: 'Admin',
+                Description: 'Full Access',
+                News_and_Updates: '2',
+                Admin_Management: '2',
+                Syllabus: '2',
+                Manage_Role: '2'
+            }, function (err, role) {
+                if (!err) {
+                    res.render('inadmin', {title: 'Admin Registration'});
+                }
+            });
+        }
+        else {
+            console.log('Hello');
+            var messages = req.flash('error');
+            res.render('login-page', {title: 'Log in', msg: messages});
+        }
+    });
+
 };
 /*exports.doLogin=function (req,res, next) {
     console.log("entered into doLogin");
@@ -88,6 +109,54 @@ exports.create = function (req, res) {
 
 
 };
+exports.inDoCreate=function(req,res){
+    role.findOne({RoleName:'Admin'},function(err,objRole){
+        if(!err){
+            if(objRole){
+                admin.create({
+                    FirstName: req.body.FirstName,
+                    LastName: req.body.LastName,
+                    Email: req.body.Email,
+                    Mobile: req.body.Mobile,
+                    UserRole_id: objRole._id,
+                    Password: req.body.Password,
+                    ModifiedOn: Date.now(),
+                    LastLogin: Date.now()
+                },function(err,admindata){
+                    if(!err){
+                        req.session.admin = {
+                            "email": admindata.Email,
+                            "_id": admindata._id,
+                            "Password":admindata.Password
+                        };
+                        req.session.role={
+                            "News":objRole.News_and_Updates,
+                            "Admin":objRole.Admin_Management,
+                            "Syllabus":objRole.Syllabus,
+                            "Role":objRole.Manage_Role
+                        };
+                        res.render('adminhome-page', {
+                            title: req.session.admin.email,
+                            email: req.session.admin.email,
+                            adminID:
+                            req.session.admin._id, login: "true",
+                            rlNews: req.session.role.News,
+                            rlAdmin: req.session.role.Admin,
+                            rlSyllabus: req.session.role.Syllabus,
+                            rlRole: req.session.role.Role,
+                        });
+                    }
+
+                });
+
+            }
+
+        }else{
+            res.redirect(err);
+        }
+
+    });
+}
 exports.doCreate = function (req, res) {
     admin.create({
         FirstName: req.body.FirstName,
