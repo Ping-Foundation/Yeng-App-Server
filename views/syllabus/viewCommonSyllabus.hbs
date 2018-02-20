@@ -1,0 +1,105 @@
+<style>
+    a.list-group-item {
+        height:auto;
+        min-height:75px;
+    }
+    a.list-group-item.active small {
+        color:#fff;
+    }
+    .stars {
+        margin:20px auto 1px;
+    }
+</style>
+<div class="panel breadcrumb" style="background-color: #ffffff">
+    <li><a id="rootsyllabus" href="#">Course</a></li>
+    <li><a id="rootcourse" value="{{course}}" name="course" href="#">{{course}}</a></li>
+    <li><a id="rootsem" name="sem" href="#">{{sem}}</a></li>
+    <!--<li><a id="branch" name="branch" href="#">{{branch}}</a></li>-->
+    <div class="top-bar">
+        <div class="search-container">
+            <input class="search" type="search" id="tbserch" onfocus="BindControls()" placeholder="Search">
+            <div style="margin: 8px;color: white">
+                <h4>BRANCH</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <div class="alert alert-success">
+            <strong>{{branch}}</strong> Subject Details Mention in Below.
+        </div>
+    </div>
+
+    <div class="panel-body">
+        <button class="btn col-sm-3 " id="addcommonsubject" type="button">
+            Create Subject
+        </button>
+    </div>
+    <div id="middle"></div>
+    <div class="row">
+        {{#each Fldr}}
+            <div class="col-sm-12 col-md-4">
+                <div class="thumbnail">
+                    <button class="folder" value="{{this}}" onclick="btnel(this)" >
+                        <div class="caption" >
+                            <h3 class="text-center"  >{{this}}</h3>
+                        </div>
+                    </button>
+                    <div class="panel-body sy-menu"  style="height: 40px;">
+                        <form  href="#">
+                            <span class="glyphicon glyphicon-trash pull-left" style="font-size:20px; margin-top: -5px"></span>
+                        </form >
+                        <a >
+                            <button type="submit" value="{{this}}" onclick="editElPlage(this)" class="glyphicon glyphicon-edit pull-right" style="font-size:20px; margin-top: -5px;background: none;border: 0px;"></button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+
+    </div>
+    {{#each subjData}}
+
+        <div class="input-group hide">
+            <span class="input-group-addon"><i class="fa fa-graduation-cap" aria-hidden="true"></i></span>
+            <input id="subjectParant" type="taxt" value="{{this._id}}" class="form-control" name="subjectParant"
+                   placeholder="Course Name"
+                   required="hello">
+
+        </div>
+        <img src="/images/loading.gif" class="img-responsive" id="loading_gif">
+
+
+        <div class="row">
+
+            {{#each this.files}}
+
+                <div class="col-sm-12 col-md-6">
+                    <div class="thumbnail">
+                        <button target="_self" value="{{this}}"  onClick="dnldpdf(this)" class="stimg" >
+                        </button>
+                        <div class="caption" >
+                            <h3 class="text-center"  >{{this}}</h3>
+                        </div>
+                        <div class="panel-body sy-pdf-footer"  style="height: 40px;">
+                            <form  href="#">
+                                <span class="glyphicon glyphicon-trash pull-left" style="font-size:20px; margin-top: -5px"></span>
+                            </form >
+                            <a >
+                                <button type="submit"   class="glyphicon glyphicon-edit pull-right" style="font-size:20px; margin-top: -5px;background: none;border: 0px;"></button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            {{/each}}
+        </div>
+
+    {{/each}}
+</div>
+</div>
+
+
+<script src="/js/syllabus.js"></script>
+
+

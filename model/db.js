@@ -50,6 +50,7 @@ var newsSchema = new mongoose.Schema({
 
 var syllabusSchema=new mongoose.Schema({
     _id: mongoose.Schema.Types.Mixed,
+    common:String,
     children:[String],
     files:[String]
 });

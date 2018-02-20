@@ -79,7 +79,7 @@ exports.docoursecreate = function (req, res) {
     syllabus.findOne({_id:req.body.course},function (err,data) {
         console.log(data);
         if(!data){
-            CreateCourse("Syllabus", req.body.course, req, res, path);
+            CreateCourse("Syllabus", req.body.course, req, res, path,"");
         }
         else{
             res.send('Course Alredy Exists');
@@ -221,9 +221,9 @@ exports.doaddSemester = function (req, res) {
     var semNAme = req.body.course + "_" + req.body.sem
     //var path=req.body.name+"/"+req.body.sem; // under folder name same like Sem Name no extension
     var path = req.body.course + "/" + req.body.sem;
-    CreateCourse(req.body.course, semNAme, req, res, path);
-
-
+    console.log("Sem :Common :"+semNAme+" : "+req.body.common);
+    var common =req.body.common;
+    CreateCourse(req.body.course,semNAme, req, res,path,req.body.common);
 }
 //////////////////////////////////////
 ///View Branch
@@ -240,7 +240,13 @@ exports.viewbranch = function (req, res) {
             br[i]=data.children[i].split("_")[2];
         }
         if (!err) {
-            res.render("syllabus/viewbranch", {layout: false, branchDetails: br,course:course,sem:sem});
+            if(data.common!="true"){
+                res.render("syllabus/viewbranch", {layout: false, branchDetails: br,course:course,sem:sem});
+            }
+            else{
+                res.render("syllabus/viewCommonSyllabus", {layout: false,course:course,sem:sem});
+            }
+
         }
         else {
             console.log(err);
@@ -280,7 +286,7 @@ exports.addbranch = function (req, res) {
 exports.doaddbranch = function (req, res) {
     var brname = req.body.course + "_" + req.body.sem + "_" + req.body.branch
     var path = req.body.course + "/" + req.body.sem + "/" + req.body.branch;
-    CreateCourse(req.body.course + "_" + req.body.sem, brname, req, res, path);
+    CreateCourse(req.body.course + "_" + req.body.sem, brname, req, res, path,"");
 
 }
 //////////////////////////////////////
@@ -582,7 +588,7 @@ exports.doaddElectiveFldr=function(req,res){
     syllabus.findOne({_id:id},function (err,data) {
         if(!err){
             if(!data){
-                CreateCourse(parantid,id,req,res,path);
+                CreateCourse(parantid,id,req,res,path,"");
                 //res.render('syllabus/viewsubj');
             }else{
                 res.send("Folder Name Alredy Exists !");
@@ -628,6 +634,16 @@ exports.addElectiveSub=function (req,res) {
         Folder:folder
     });
 }
+exports.addCommonSub=function (req,res) {
+    var course=req.params.link.split("_")[0];
+    var sem=req.params.link.split("_")[1];
+
+    res.render("syllabus/addCommonSub",{
+        layout:false,
+        course:course,
+        sem:sem
+    })
+}
 //////////////////////////////////////
 ///Function for upload pdf
 ///Created Date  :18-10-2017
@@ -653,14 +669,16 @@ function uploadPDF(req,res,objFileName,Path){
 ///Updated Date : 10-10-2017
 ///Created      :Abu
 //////////////////////////////////////
-function createDirectory(path, child) {
+function createDirectory(path, child,common) {
     try {
         console.log(child);
         mkdir('public/Syllabus/' + path, function (err) {
+            console.log("sem cr : "+common);
             console.log(child);
             if (!err)
                 syllabus.create({
-                    _id: child
+                    _id: child,
+                    common:common
                 });
             console.log("Created Succes");
         });
@@ -674,7 +692,7 @@ function createDirectory(path, child) {
 ///Updated Date : 25-10-2017
 ///Created      :Abu
 //////////////////////////////////////
-function CreateCourse(parant, child, req, res, path) {
+function CreateCourse(parant, child, req, res, path,common) {
     syllabus.findOne({_id: parant}, function (err, data) {
         if (!data) {
             syllabus.create({
@@ -708,7 +726,7 @@ function CreateCourse(parant, child, req, res, path) {
 
                     }, function (err, syllabus) {
                         if (!err) {
-                            createDirectory(path, child);
+                            createDirectory(path, child,common);
                             res.send('Succesflly Created')
                             //return done(null, false, {message: 'syllabus Create succes'});
                         }
