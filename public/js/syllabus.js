@@ -217,7 +217,23 @@ $(document).ready(function () {
         }else{
             document.getElementById('inpterr').style.display = "block";
         }
-    })
+    });
+    $('#addcommonsubject').on('click',function () {
+        var objCourse=document.getElementById('rootcourse').innerHTML;
+        var objSem=document.getElementById('rootsem').innerHTML;
+        var link=objCourse+"_"+objSem
+        $.ajax({
+            url:"/syllabus/course/sem/addCommon/view/"+link,
+            method:"get",
+            data:{
+                course:objCourse,
+                sem:objSem
+            },
+            success:function(data){
+                $("#body").html(data);
+            }
+        });
+    });
 
 
 });
@@ -446,35 +462,42 @@ function docr() {
             if(data!='Course Alredy Exists') {
                 for (var i = 0; i < $('#semTable input.semobj').length; i++) {
                     var sem = $('#semTable input.semobj')[i].value.trim();
+                    var Common="";
+                    if($('#semTable input.objCommon')[i].checked){
+                        Common="true";
+                    }
                     $.ajax({
                         url: "/syllabus/course/sem/new",
                         method: "post",
                         data: {
                             course: objCourse,
-                            sem: sem
+                            sem: sem,
+                            common:Common
                         },
                         success: function (data) {
                             //debugger;
                             for (var x = 0; x < $('#semTable input.semobj').length; x++) {
                                 var objsem = $('#semTable input.semobj')[x].value.trim();
                                 //debugger;
-                                for ( var y = 0; y < $('#brTable input.semobj').length; y++) {
-                                    var br = $('#brTable input.semobj')[y].value.trim();
-                                    //var ansbr = br.replace(/(^[\s]+|[\s]+$)/g, '');
-                                    //alert(br);
-                                    $.ajax({
-                                        url: "/syllabus/course/sem/branch/new",
-                                        method: "post",
-                                        data: {
-                                            course: objCourse,
-                                            sem: objsem,
-                                            branch: br
-                                        },
-                                        success: function (respone, txtStataus, jqXHR) {
-                                        }
+                                if(!$('#semTable input.objCommon')[x].checked) {
+                                    for (var y = 0; y < $('#brTable input.semobj').length; y++) {
+                                        var br = $('#brTable input.semobj')[y].value.trim();
+                                        //var ansbr = br.replace(/(^[\s]+|[\s]+$)/g, '');
+                                        //alert(br);
+                                        $.ajax({
+                                            url: "/syllabus/course/sem/branch/new",
+                                            method: "post",
+                                            data: {
+                                                course: objCourse,
+                                                sem: objsem,
+                                                branch: br
+                                            },
+                                            success: function (respone, txtStataus, jqXHR) {
+                                            }
 
-                                    });
+                                        });
 
+                                    }
                                 }
 
                             }

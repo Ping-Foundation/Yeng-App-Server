@@ -7,7 +7,7 @@ var passport = require('passport');
 // GET login page
 exports.login = function (req, res, next) {
     admin.find({},function(err,objAdmin) {
-        console.log('Hello :'+objAdmin);
+        //console.log('Hello :'+objAdmin);
         if (objAdmin=="") {
             role.create({
                 RoleName: 'Admin',

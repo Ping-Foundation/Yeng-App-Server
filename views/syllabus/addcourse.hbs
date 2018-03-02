@@ -4,7 +4,7 @@
     <li><a href="#">Create New</a></li>
     <div class="panel-body sy-menu text-center  " style="color:#ffffff;font-size: 20px;">{{titlecr}}</div>
     <div class="panel-body">
-        <div class="col-sm-8 col-md-8 thumbnail">
+        <div class="col-sm-12 col-md-12 thumbnail">
             <div class="alert alert-success" role="alert">
                 <strong id="status"></strong>
             </div>
@@ -33,6 +33,9 @@
                             </td>
                             <td>
                                 <input type='text' id="sem-first-tahbleRow" class="semobj" placeholder='ex:-S1,S2,etc'>
+                            </td>
+                            <td>
+                                <input type="checkbox" id="sm-Common" class="objCommon">
                             </td>
                         </tr>
 
@@ -116,9 +119,11 @@
 
         var cell1 = row.insertCell(1);
         cell1.innerHTML = "<input type='text' class='semobj'   placeholder=" + palceholder + " >";
+        var cell2 =row.insertCell(2)
+        cell2.innerHTML = "<input type='checkbox' class='objCommon'>";
 
-        var cell2 = row.insertCell(2);
-        cell2.innerHTML = "<input type='button' value='-' onClick='deleteRow(this)'>";
+        var cell3 = row.insertCell(3);
+        cell3.innerHTML = "<input type='button' value='-' onClick='deleteRow(this)'>";
     }
 
     function deleteRow(obj) {
