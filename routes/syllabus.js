@@ -4,7 +4,7 @@
 var mongoose = require('mongoose');
     var syllabus = mongoose.model('syllabus_pdf');
 var multer = require('multer');
-var fileUpload = require('express-fileupload')
+var fileUpload = require('express-fileupload');
 var mkdir = require('mkdirp');
 var path=require('path');
 var download=require('download-file');
@@ -244,7 +244,8 @@ exports.viewbranch = function (req, res) {
                 res.render("syllabus/viewbranch", {layout: false, branchDetails: br,course:course,sem:sem});
             }
             else{
-                res.render("syllabus/viewCommonSyllabus", {layout: false,course:course,sem:sem});
+                console.log(data);
+                res.render("syllabus/viewCommonSyllabus", {layout: false,course:course,sem:sem,data:data});
             }
 
         }
@@ -410,7 +411,7 @@ exports.doaddElSubj = function (req, res) {
     if(!req.files){
         res.send("Error Message : Selected File Empty");
     }else {
-        console.log(req.params.elSub);
+        //console.log(req.params.elSub);
         var objsm = req.params.elSub;
         var objSubjName = req.body.inputsubcode+"_"+req.body.inputsub;
         var uploadingPath = objsm.split("_")[0] + "/" + objsm.split("_")[1] + "/" + objsm.split("_")[2]+ "/" + objsm.split("_")[3];
@@ -642,6 +643,39 @@ exports.addCommonSub=function (req,res) {
         layout:false,
         course:course,
         sem:sem
+    })
+}
+exports.doAddCommonSubj=function (req,res) {
+    var course=req.params.id.split("_")[0];
+    var sem=req.params.id.split("_")[1];
+    var objSubjName = req.body.inputsubcode+"_"+req.body.inputsub;
+    var uploadingPath = course + "/" + sem;
+    syllabus.findOne({files:objSubjName},function (err,data) {
+        if(!err){
+            if(!data){
+                syllabus.update({
+                    _id:req.params.id
+                },{
+                    $addToSet: {
+                        files: objSubjName
+                    }
+
+                }, function (err, syllabus) {
+                    if (!err) {
+                        uploadPDF(req,res,objSubjName,uploadingPath)
+                    }
+                    else {
+                        res.send('Error while Uploading file :'+err);
+                    }
+                });
+
+            }else {
+                res.send('Warning :Suject Name Alredy Exists');
+            }
+        }
+        else {
+            res.send('Erro :'+err);
+        }
     })
 }
 //////////////////////////////////////
