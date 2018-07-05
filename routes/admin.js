@@ -223,11 +223,10 @@ exports.dochangepassword = function (req, res) {
                             var id = admin._id;
 
                             admin.update(
-                                {Email: req.body.id},
-                                {$set: {Password: "5555"}},
-                                function (err, data) {
+                                {Password: req.body.Password},
+                                function (err,data) {
                                     if (!err)
-                                        console.log("password changed");
+                                        console.log(req.body.upassword);
                                     console.log(data);
                                     res.redirect('/adminhome');
                                 });
