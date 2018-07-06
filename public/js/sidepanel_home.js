@@ -166,7 +166,6 @@ $(document).ready(function () {
             },
             success:function (data,txtStataus,jqXHR) {
                 console.log("succes");
-                console.log(data);
                 $("#loading_gif").hide();
                 $("#body").html(data);
                 $("#items li").css("background-color","transparent");

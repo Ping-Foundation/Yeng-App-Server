@@ -33,7 +33,7 @@
             $('#change{{this._id}}').on('click', function(){
                 $("#loading_gif").show();
                 $.ajax({
-                    url: "/admin/changepassword/{{this.Email}}",
+                    url: "/admin/changepassword/{{this._id}}",
                     method: "GET",
                     data: {
 
