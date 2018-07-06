@@ -158,6 +158,7 @@
   border-color:#fff;
   border-radius: 0;
   color:#fff;
+
 }
 .border-left{
   border-left:solid;
@@ -217,4 +218,14 @@
 }
 body{
   overflow-x: hidden;
+}
+#admin_details{
+  height: 500px;
+}
+#news_details{
+  height: 540px;
+}
+#cancel_edit{
+  float: right;
+  margin-top: -46px;
 }
