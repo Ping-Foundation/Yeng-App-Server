@@ -117,7 +117,8 @@ exports.view=function (req,res) {
 
 };
 exports.getnews=function (req,res) {
-    news.find(function(err, news) {
+    var now=new Date(Date.now());
+    news.find({"DisplayDate":{$lt:now},"EndDate":{$gte:now}},function(err, news) {
         if(!err){
             console.log(news);
             res.json(news);
@@ -125,9 +126,7 @@ exports.getnews=function (req,res) {
             console.log(err);
             res.json({"status":"error", "error":"Error finding news"});
         }
-
     })
-
 };
 exports.detailedview=function (req,res) {
     console.log(req.params.id);
