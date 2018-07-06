@@ -99,7 +99,12 @@ passport.use('local.signin',new LocalStrategy({
                         "Syllabus":roles.Syllabus,
                         "Role":roles.Manage_Role
                     }
-                    return done(null,admin,roles);
+                    admin.update(
+                        {LastLogin: Date.now()},
+                        function(){
+                            return done(null,admin,roles);
+                        });
+
 
                 }
 
