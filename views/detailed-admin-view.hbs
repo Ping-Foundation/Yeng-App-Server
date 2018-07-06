@@ -4,13 +4,17 @@
             <tr><td><h5><span id="color">Name:</span></h5></td><td><h5>{{admin.FirstName}} {{admin.LastName}}</h5></td></tr>
             <tr><td><h5><span id="color">Email:</span></h5></td><td><h5>{{admin.Email}}</h5></td></tr>
             <tr><td><h5><span id="color">Mobile:</span></h5></td><td><h5>{{admin.Mobile}}</h5></td></tr>
-            <tr><td><h5><span id="color">Role:</span></h5></td><td><h5>{{admin.RoleName}}</h5>
-               <!-- <select name="ddlRole" id="ddlRole" class="form-control" >
+            <tr><td><h5><span id="color">Role:</span></h5></td><td><h5 id="roll_name">{{RoleName}}</h5>
+                <button class="btn btn-primary" id="change_role">Change Role</button>
+                <div id="rol_sel">
+                <select name="ddlRole" id="ddlRole" class="form-control" >
                     <option value="{{admin.UserRole_id}}">{{RoleName}}</option>
                     {{#each role}}
                         <option value="{{this._id}}">{{this.RoleName}}</option>
                     {{/each}}
-                </select>-->
+                </select>
+                    <button class="btn btn-success" id="do_change_role" style="float: right">Change</button>
+                </div>
             </td></tr>
             <tr><td><h5><span id="color"> Created On: </span></h5></td><td><h5>{{admin.CreatedOn}}</h5></td></tr>
             <tr><td><h5><span id="color">Modified On: </span></h5></td><td><h5>{{admin.ModifiedOn}}</h5></td></tr>
@@ -57,5 +61,30 @@
             });
         });
         {{/each}}
+
+    $("#change_role").click(function () {
+        $("#rol_sel").show();
+        $("#change_role").hide();
+    })
+    $("#do_change_role").click(function () {
+        var role=$("#ddlRole").val();
+
+        $.ajax({
+            url:"/admin/changerole/{{admin._id}}",
+            type:"post",
+            data:{
+                'Role':role
+            },
+            success:function (data) {
+                if(data.status==true){
+                    $("#rol_sel").hide();
+                    $("#change_role").show();
+                    $("#roll_name").html(data.role);
+
+;                }
+            },
+
+        })
+    })
 
 </script>

@@ -63,7 +63,6 @@ function fnccratenewRole() {
 }
 
 function docrRole(){
-    alert("aaaa")
     var objRoleName=document.getElementById('txtRoleName').value;
     var objRoleDscription=document.getElementById('txtescription').value;
     var objnews=$('#tblRole input.subject-News:checked').val();
