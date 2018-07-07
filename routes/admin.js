@@ -223,11 +223,10 @@ exports.dochangepassword = function (req, res) {
                             var id = admin._id;
 
                             admin.update(
-                                {Email: req.body.id},
-                                {$set: {Password: "5555"}},
-                                function (err, data) {
+                                {Password: req.body.Password},
+                                function (err,data) {
                                     if (!err)
-                                        console.log("password changed");
+                                        console.log(req.body.upassword);
                                     console.log(data);
                                     res.redirect('/adminhome');
                                 });
@@ -274,13 +273,32 @@ exports.details = function (req, res, next) {
         });
         role.find({}, function (errrole, dbRole) {
             if (!err) {
-                res.render('detailed-admin-view', {'admin': admin, layout: false,role:dbRole,RoleName:objAdminRoleName});
+                console.log(objAdminRoleName)
+                res.render('detailed-admin-view', {'admin': admin, layout: false,role:dbRole,'RoleName':objAdminRoleName});
             }
             else {
                 console.log(err);
             }
         });
     });
+}
+exports.changeRole=function(req,res,next){
+    admin.findById({_id:req.params.id},function (err,done) {
+        done.update({
+            UserRole_id:req.body.Role
+        },function (err) {
+            if (!err){
+                role.findById({_id:req.body.Role},function (err,role) {
+
+                    res.json({"status":true,"role":role.RoleName});
+                })
+
+            }
+            else {
+                res.json({"status":false});
+            }
+        })
+    })
 }
 exports.logout = function (req, res, next) {
     req.session.destroy();

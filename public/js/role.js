@@ -2,6 +2,50 @@ $(document).ready(function () {
     $('#btnCreateRole').on('click',function () {
         alert("Hello");
     });
+    $("#add_roll").on('submit',function (e) {
+        e.preventDefault();
+        if ($(this).valid()) {
+            docrRole();
+        }
+    })
+    $("#add_roll").validate({
+        rules:{
+            "RollName":{
+                required:true,
+                minlength:4
+            },
+            "Discription":{
+                required:true,
+                minlength:6
+            },
+            "SubNews":{
+                required:true
+            },
+            "SubAdmin":{
+                required:true
+            },
+            "SubSyllabus":{
+                required:true
+            },
+            "SubRole":{
+                required:true
+            }
+        },
+        messages:{
+            "SubNews":{
+                required:"Select one option"
+            },
+            "SubAdmin":{
+                required:"Select one option"
+            },
+            "SubSyllabus":{
+                required:"Select one option"
+            },
+            "SubRole":{
+                required:"Select one option"
+            }
+        }
+    })
 });
 function fnccratenewRole() {
     //waitingDialog.show('Custom message');
@@ -17,6 +61,7 @@ function fnccratenewRole() {
     });
 
 }
+
 function docrRole(){
     var objRoleName=document.getElementById('txtRoleName').value;
     var objRoleDscription=document.getElementById('txtescription').value;

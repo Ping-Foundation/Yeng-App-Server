@@ -1,4 +1,5 @@
 <h5>Role</h5>
+<form id="add_roll" method="get" action="#">
 <table class="table table-striped">
     <thead>
 
@@ -7,7 +8,7 @@
     <tr >
         <td></td>
         <td>RoleName</td>
-        <td><input data-toggle="rolenameover" data-content="Role Name Requird" id="txtRoleName" type="text"></td>
+        <td><input data-toggle="rolenameover" data-content="Role Name" name="RollName" id="txtRoleName" type="text"></td>
         <td>
 
         </td>
@@ -15,7 +16,7 @@
     <tr>
         <td></td>
         <td>Description</td>
-        <td><input id="txtescription" type="text"></td>
+        <td><input name="Discription" id="txtescription" type="text"></td>
         <td></td>
     </tr>
     </tbody>
@@ -32,35 +33,35 @@
     <tbody id="tblRole">
     <tr >
         <td>News and Updates</td>
-        <td><input type="checkbox" class="subject-News" value="2"></td>
-        <td><input type="checkbox" class="subject-News" value="1"></td>
-        <td><input type="checkbox" class="subject-News" value="0"></td>
+        <td><input type="checkbox" name="SubNews" class="subject-News" value="2"></td>
+        <td><input type="checkbox" name="SubNews" class="subject-News" value="1"></td>
+        <td><input type="checkbox" name="SubNews" class="subject-News" value="0"></td>
     </tr>
     <tr class="roleRolw">
         <td>Admin Management</td>
-        <td><input type="checkbox" class="subject-admin" value="2"></td>
-        <td><input type="checkbox" class="subject-admin" value="1"></td>
-        <td><input type="checkbox" class="subject-admin" value="0"></td>
+        <td><input type="checkbox" name="SubAdmin" class="subject-admin" value="2"></td>
+        <td><input type="checkbox" name="SubAdmin" class="subject-admin" value="1"></td>
+        <td><input type="checkbox" name="SubAdmin" class="subject-admin" value="0"></td>
     </tr>
     <tr class="roleRolw">
         <td>Syllabus</td>
-        <td><input type="checkbox" class="subject-syllabus" value="2"></td>
-        <td><input type="checkbox" class="subject-syllabus" value="1"></td>
-        <td><input type="checkbox" class="subject-syllabus" value="0"></td>
+        <td><input type="checkbox" name="SubSyllabus" class="subject-syllabus" value="2"></td>
+        <td><input type="checkbox" name="SubSyllabus" class="subject-syllabus" value="1"></td>
+        <td><input type="checkbox" name="SubSyllabus" class="subject-syllabus" value="0"></td>
     </tr>
     <tr class="roleRolw">
         <td>Manage Role</td>
-        <td><input type="checkbox" class="subject-role" value="2"></td>
-        <td><input type="checkbox" class="subject-role" value="1"></td>
-        <td><input type="checkbox" class="subject-role" value="0"></td>
+        <td><input type="checkbox" name="SubRole" class="subject-role" value="2"></td>
+        <td><input type="checkbox" name="SubRole" class="subject-role" value="1"></td>
+        <td><input type="checkbox" name="SubRole" class="subject-role" value="0"></td>
     </tr>
     <tr >
         <td></td>
         <td></td>
         <td></td>
         <td>
-            <input type="button" onclick="docrRole()" value="Submit">
-            <input type="button" onclick="btnResetOnPress()" value="Reset">
+            <button type="submit" class="btn">Submit</button>
+            <input type="button" class="btn" onclick="btnResetOnPress()" value="Reset">
         </td>
     </tr>
     <tr>
@@ -77,6 +78,7 @@
     </tr>
     </tbody>
 </table>
+</form>
 <script>
     $('.subject-News').on('change', function() {
         $('.subject-News').not(this).prop('checked', false);
@@ -91,3 +93,4 @@
         $('.subject-role').not(this).prop('checked', false);
     });
 </script>
+<script src="/js/role.js"></script>

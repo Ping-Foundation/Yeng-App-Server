@@ -77,6 +77,7 @@ app.get('/admin/changepassword/:id',admin.changepassword);
 app.post('/admin/changepassword',admin.dochangepassword);
 app.get('/admin/delete/:id',admin.delete);
 app.get('/admin/details/:id',admin.details);
+app.post('/admin/changerole/:id',admin.changeRole);
 app.get('/logout',admin.logout);
 
 /*passport authentication*/
