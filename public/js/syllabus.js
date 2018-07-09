@@ -589,4 +589,31 @@ function editElPlage(objFolder) {
     //var ObjElSubName=document.getElementById('edtelSub').value;
     alert(objFolder.value);
 }
+//////////////////////////////////////
+///delete Pdf
+///Created Date  :09-07-2018
+///Updated Date : 09-07-2018
+///Created      :Abu
+//////////////////////////////////////
+function deletePDF(_id) {
+    //var ObjElSubName=document.getElementById('edtelSub').value;
+    if (confirm("Do you want to save changes?") == true) {
+        $("#loading_gif").show();
+        $.ajax({
+            url: "/syllabus/course/branch/subject/delete/" + _id.value,
+            type: "post",
+            data: {
+                //date:$('button').val()
+            }, success: function (data) {
+                alert(data);
+                location.reload();
+            }
+        });
+    } else {
+        alert('This Conformation cancel')
+    }
+
+    //document.getElementById("msg").innerHTML = userPreference;
+    // alert(_id);
+}
 

@@ -118,6 +118,7 @@ app.post('/syllabus/course/delete/:id',syllabus.doDelete);
 app.post('/syllabus/course/sem/branc/addElectiveFldr/:fldrName',syllabus.doaddElectiveFldr);
 app.post('/role/admin/doaddRole/:rolname',roles.doaddRole)
 app.post('/syllabus/course/sem/addcommonsubj/:id',syllabus.doAddCommonSubj)
+app.post('/syllabus/course/branch/subject/delete/:file',syllabus.removeFile)
 
 
 
