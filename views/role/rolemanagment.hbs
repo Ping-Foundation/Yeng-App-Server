@@ -21,8 +21,8 @@
                 <tr>
                     <td>{{this.RoleName}}</td>
                     <td>{{this.Description}}</td>
-                    <td><button type="submit" class="btn btn-primary">Edit</button>
-                        <button type="submit" class="btn btn-primary">Delete</button>
+                    <td><button type="submit" class="btn btn-primary" value="{{this._id}}">Edit</button>
+                        <button type="submit" class="btn btn-danger role_del" value="{{this._id}}">Delete</button>
                     </td>
                 </tr>
                 {{/each}}

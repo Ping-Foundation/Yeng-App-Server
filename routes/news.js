@@ -179,9 +179,12 @@ exports.delete=function (req,res) {
                  console.log(err);
                  return res.redirect('/news?error=deleting');
              }else {
-                 fs.unlink(news.AttachmentPath);
+                 if (fs.existsSync(news.AttachmentPath)) {
+                     fs.unlink(news.AttachmentPath);
+                 }
+
                  console.log("news deleted");
-                 res.redirect('/adminhome')
+                 res.redirect('/adminhome');
              }
 
          })
