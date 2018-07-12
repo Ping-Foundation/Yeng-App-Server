@@ -679,6 +679,16 @@ exports.doAddCommonSubj=function (req,res) {
         }
     })
 }
+exports.removeFile = function (req,res) {
+    var fileName = req.params.file;
+    console.log(req.params.file);
+    syllabus.update(
+        {files:fileName},
+        { $pull:{files:req.params.file}},function (err,daba) {
+        if(err) throw err;
+        res.send(req.params.file+ 'successfully deleted')
+    })
+}
 //////////////////////////////////////
 ///Function for upload pdf
 ///Created Date  :18-10-2017

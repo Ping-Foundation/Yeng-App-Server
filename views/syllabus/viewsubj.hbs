@@ -50,7 +50,7 @@
                     </button>
                     <div class="panel-body sy-menu"  style="height: 40px;">
                         <form  href="#">
-                            <span class="glyphicon glyphicon-trash pull-left" style="font-size:20px; margin-top: -5px"></span>
+                            <span  class="glyphicon glyphicon-trash pull-left" style="font-size:20px; margin-top: -5px"></span>
                         </form >
                         <a >
                             <button type="submit" value="{{this}}" onclick="editElPlage(this)" class="glyphicon glyphicon-edit pull-right" style="font-size:20px; margin-top: -5px;background: none;border: 0px;"></button>
@@ -85,9 +85,9 @@
                     <h3 class="text-center"  >{{this}}</h3>
                 </div>
                 <div class="panel-body sy-pdf-footer"  style="height: 40px;">
-                    <form  href="#">
-                        <span class="glyphicon glyphicon-trash pull-left" style="font-size:20px; margin-top: -5px"></span>
-                    </form >
+                    <a >
+                        <button value="{{this}}" onclick="deletePDF(this)"  class="glyphicon glyphicon-trash pull-left" style="font-size:20px; margin-top: -5px"></button>
+                    </a >
                     <a >
                         <button type="submit"   class="glyphicon glyphicon-edit pull-right" style="font-size:20px; margin-top: -5px;background: none;border: 0px;"></button>
                     </a>
