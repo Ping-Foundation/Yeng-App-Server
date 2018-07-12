@@ -46,6 +46,11 @@ $(document).ready(function () {
             }
         }
     })
+
+    $(".role_del").click(function () {
+        var id=$(this).val();
+        alert(id);
+    })
 });
 function fnccratenewRole() {
     //waitingDialog.show('Custom message');
