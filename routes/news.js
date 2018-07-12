@@ -117,7 +117,7 @@ exports.view=function (req,res) {
 
 };
 exports.getnews=function (req,res) {
-    var now=new Date(Date.now());
+    var now=Date.now();
     news.find({"DisplayDate":{$lt:now},"EndDate":{$gte:now}},function(err, news) {
         if(!err){
             console.log(news);
