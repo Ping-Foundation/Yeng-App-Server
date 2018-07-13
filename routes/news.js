@@ -21,13 +21,15 @@ exports.add=function (req,res) {
 };
 exports.doAdd=function (req,res) {
     console.log("add news");
-
+        var display=new Date(req.body.DisplayDate);
+        var end=new Date(req.body.EndDate);
+        console.log(display);
         news.create({
             Tittle: req.body.Tittle,
             News:req.body.News,
             CreatedOn: Date.now(),
-            DisplayDate:req.body.DisplayDate,
-            EndDate:req.body.EndDate
+            DisplayDate:display,
+            EndDate:end
         },function (err,news) {
             if (err){
                 console.log(err);
@@ -118,7 +120,9 @@ exports.view=function (req,res) {
 };
 exports.getnews=function (req,res) {
     var now=new Date(Date.now());
-    var now=now.toUTCString();
+    console.log(now);
+    now=now.toUTCString();
+    console.log(now);
     news.find({"DisplayDate":{$lt:now},"EndDate":{$gt:now}},function(err, news) {
         if(!err){
             res.json(news);
@@ -233,11 +237,12 @@ var doEditSave = function(req, res, err, news,attachment) {
         console.log(err);
         res.redirect( '/user?error=finding');
     } else {
+
         news.Tittle = req.body.Tittle;
         news.News = req.body.News;
         news.modifiedOn = Date.now();
-        news.DisplayDate=req.body.DisplayDate;
-        news.EndDate=req.body.EndDate;
+        news.DisplayDate=new Date(req.body.DisplayDate);
+        news.EndDate=new Date(req.body.EndDate);
         news.save(
             function (err, news) {
                 if (attachment){
@@ -252,6 +257,7 @@ var doEditSave = function(req, res, err, news,attachment) {
                     })
 
                 }
+                else onEditSave (req, res, err, news);
 
             }
         );
