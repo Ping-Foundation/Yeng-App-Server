@@ -117,10 +117,10 @@ exports.view=function (req,res) {
 
 };
 exports.getnews=function (req,res) {
-    var now=Date.now();
-    news.find({"DisplayDate":{$lt:now},"EndDate":{$gte:now}},function(err, news) {
+    var now=new Date(Date.now());
+    var now=now.toUTCString();
+    news.find({"DisplayDate":{$lt:now},"EndDate":{$gt:now}},function(err, news) {
         if(!err){
-            console.log(news);
             res.json(news);
         }else{
             console.log(err);
