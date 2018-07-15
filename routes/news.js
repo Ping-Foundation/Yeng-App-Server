@@ -21,8 +21,8 @@ exports.add=function (req,res) {
 };
 exports.doAdd=function (req,res) {
     console.log("add news");
-        var display=Date(req.body.DisplayDate);
-        var end=Date(req.body.EndDate);
+        var display=req.body.DisplayDate;
+        var end=req.body.EndDate;
         console.log(display);
         news.create({
             Tittle: req.body.Tittle,
