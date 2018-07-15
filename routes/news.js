@@ -122,7 +122,7 @@ exports.view=function (req,res) {
 exports.getnews=function (req,res) {
     var now=new Date(Date.now());
     console.log(now);
-    var now=now+now.getTimezoneOffset();
+    var now=now+330;
     now=now.toLocaleString()
     console.log(now)
     news.find({"DisplayDate":{$lt:now},"EndDate":{$gt:now}},function(err, news) {
