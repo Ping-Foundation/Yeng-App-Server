@@ -122,9 +122,9 @@ exports.view=function (req,res) {
 exports.getnews=function (req,res) {
     var now=new Date(Date.now());
     console.log(now);
-    var now=now+330;
-    now=now.toLocaleString()
-    console.log(now)
+    var demo=new Date("Jul 15 2018 16:19:11");
+
+    console.log(demo)
     news.find({"DisplayDate":{$lt:now},"EndDate":{$gt:now}},function(err, news) {
         if(!err){
             res.json(news);
