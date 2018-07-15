@@ -21,8 +21,8 @@ exports.add=function (req,res) {
 };
 exports.doAdd=function (req,res) {
     console.log("add news");
-        var display=req.body.DisplayDate;
-        var end=req.body.EndDate;
+        var display=new Date(req.body.DisplayDate);
+        var end=new Date(req.body.EndDate);
         console.log(display);
         news.create({
             Tittle: req.body.Tittle,
@@ -120,7 +120,6 @@ exports.view=function (req,res) {
 };
 exports.getnews=function (req,res) {
     var now=new Date();
-    now=now.toLocaleString();
     console.log(now);
     //now=now.toUTCString();
     console.log(now);
