@@ -23,6 +23,8 @@ exports.doAdd=function (req,res) {
     console.log("add news");
         var display=new Date(req.body.DisplayDate);
         var end=new Date(req.body.EndDate);
+        console.log(req.body.DisplayDate);
+        console.log(new Date(req.body.DisplayDate));
         news.create({
             Tittle: req.body.Tittle,
             News:req.body.News,
@@ -38,7 +40,6 @@ exports.doAdd=function (req,res) {
                     var uploadFile = req.files.NewsAttachment;
                     var fileName = news._id + ".pdf";
                     var path = "public/news";
-                    console.log(path + fileName);
                     var source = path + "/" + fileName;
                     uploadFile.mv(path + "/" + fileName, function (err, data) {
                         news.AttachmentPath = source;
@@ -118,8 +119,9 @@ exports.view=function (req,res) {
 
 };
 exports.getnews=function (req,res) {
-    var now=new Date();
-    console.log(now);
+    var now=new Date(Date.now());
+    console.log(now.toLocaleString());
+
     //now=now.toUTCString();
     console.log(now);
     news.find({"DisplayDate":{$lt:now},"EndDate":{$gt:now}},function(err, news) {
