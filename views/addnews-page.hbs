@@ -35,10 +35,14 @@
 
     <script type="text/javascript">
         $(function () {
-            $('#display_date').datetimepicker();
+            $('#display_date').datetimepicker({
+                format:"YYYY/MM/DD HH:mm"
+            });
         });
         $(function () {
-            $('#end_date').datetimepicker();
+            $('#end_date').datetimepicker({
+                format:"YYYY/MM/DD HH:mm"
+            });
         });
     </script>
 

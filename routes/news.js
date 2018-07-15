@@ -23,7 +23,6 @@ exports.doAdd=function (req,res) {
     console.log("add news");
         var display=new Date(req.body.DisplayDate);
         var end=new Date(req.body.EndDate);
-        console.log(display);
         news.create({
             Tittle: req.body.Tittle,
             News:req.body.News,
