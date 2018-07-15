@@ -26,7 +26,6 @@ exports.doAdd=function (req,res) {
 
         console.log(req.body.DisplayDate);
         console.log(new Date(req.body.DisplayDate));
-        console.log(d);
         news.create({
             Tittle: req.body.Tittle,
             News:req.body.News,
@@ -122,10 +121,10 @@ exports.view=function (req,res) {
 };
 exports.getnews=function (req,res) {
     var now=new Date(Date.now());
-    now=now.toLocaleString()
     console.log(now);
-    //now=now.toUTCString();
-    console.log(new Date(now));
+    var now=now+now.getTimezoneOffset();
+    now=now.toLocaleString()
+    console.log(now)
     news.find({"DisplayDate":{$lt:now},"EndDate":{$gt:now}},function(err, news) {
         if(!err){
             res.json(news);
