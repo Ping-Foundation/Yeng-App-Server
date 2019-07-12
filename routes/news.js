@@ -47,7 +47,7 @@ exports.doAdd=function (req,res) {
                         news.AttachmentName = fileName;
                         news.save(function (err, data) {
                             if (err) {
-                               console.log("err on file");
+                               console.log("err  found on file");
                                console.log(err);
                             }
                             else {
