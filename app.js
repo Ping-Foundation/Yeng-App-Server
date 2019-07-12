@@ -120,7 +120,7 @@ app.post('/role/admin/doaddRole/:rolname',roles.doaddRole)
 app.post('/syllabus/course/sem/addcommonsubj/:id',syllabus.doAddCommonSubj)
 app.post('/syllabus/course/branch/subject/delete/:file',syllabus.removeFile)
 
-
+//
 
 
 // catch 404 and forward to error handler
@@ -155,6 +155,6 @@ app.use(function(err, req, res, next) {
 });
 
 
-
+//Meghna Madhu Nair
 
 module.exports = app;
