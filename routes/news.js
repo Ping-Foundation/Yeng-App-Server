@@ -19,7 +19,7 @@ exports.add=function (req,res) {
 
     res.render("addnews-page",{layout:false});
 };
-exports.doAdd=function (req,res) {
+exports.doAdd=function (req,res) {//sreelakshmigopakumar
     console.log("add news");
         var display=new Date(req.body.DisplayDate);
         var end=new Date(req.body.EndDate);
