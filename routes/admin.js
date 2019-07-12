@@ -23,7 +23,7 @@ exports.login = function (req, res, next) {
             });
         }
         else {
-            console.log('Hello');
+            console.log('Hello Engineer');
             var messages = req.flash('error');
             res.render('login-page', {title: 'Log in', msg: messages});
         }
