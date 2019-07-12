@@ -25,7 +25,7 @@ exports.doaddRole=function (req,res) {
                         News_and_Updates: req.body.objnews,
                         Admin_Management: req.body.objadmin,
                         Syllabus: req.body.objSyllabus,
-                        Manage_Role: req.body.objRole
+                        Manage_Role: req.body.objRole//sheena kallaravalickal
                     }, function (err, role) {
                         if (!err) {
                             res.send("1");
