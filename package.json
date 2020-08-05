@@ -13,7 +13,7 @@
     "debug": "~2.2.0",
     "download-file": "^0.1.5",
     "express": "^4.13.4",
-    "express-fileupload": "^0.3.0",
+    "express-fileupload": "^1.1.9",
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.3",
     "express-validator": "^3.2.1",
