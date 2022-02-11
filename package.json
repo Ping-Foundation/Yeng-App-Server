@@ -14,7 +14,7 @@
     "download-file": "^0.1.5",
     "express": "^4.13.4",
     "express-fileupload": "^0.3.0",
-    "express-handlebars": "^3.0.0",
+    "express-handlebars": "^5.3.1",
     "express-session": "^1.15.3",
     "express-validator": "^3.2.1",
     "fs": "0.0.1-security",
