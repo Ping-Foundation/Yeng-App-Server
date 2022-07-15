@@ -16,7 +16,7 @@ passport.deserializeUser(function (id,done) {
 
 passport.use('local.signup',new LocalStrategy({
     usernameField:'Email',
-    passwordField:'Eassword',
+    passwordField:'Password',
     passReqToCallback:true
 },function (req,email,password,done) {
     req.checkBody('email','Invalid Email').notEmpty().isEmail();
@@ -56,7 +56,7 @@ passport.use('local.signin',new LocalStrategy({
     passReqToCallback:true
 },function (req,Email,Password,done) {
     req.checkBody('Email','Invalid Email').notEmpty().isEmail();
-    req.checkBody('Eassword','Invalid password').notEmpty();
+    req.checkBody('Password','Invalid password').notEmpty();
     /*var errors=req.getValidationResult();
     console.log(errors);
     if(errors){
